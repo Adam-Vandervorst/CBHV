@@ -1,0 +1,5 @@
+.idea
+results
+cmake-build-debug
+CMakeLists.txt
+amalgamate.sh
