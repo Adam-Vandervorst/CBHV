@@ -4,23 +4,23 @@
 
 using word_t = uint64_t;
 
-#if DIMENSION/64 > 65536
+#if DIMENSION/64 >= 65536
 using word_iter_t = uint32_t;
-#elif DIMENSION/64 > 256
+#elif DIMENSION/64 >= 256
 using word_iter_t = uint16_t;
 #else
 using word_iter_t = uint8_t;
 #endif
 
-#if DIMENSION/8 > 65536
+#if DIMENSION/8 >= 65536
 using byte_iter_t = uint32_t;
-#elif DIMENSION/8 > 256
+#elif DIMENSION/8 >= 256
 using byte_iter_t = uint16_t;
 #else
 using byte_iter_t = uint8_t;
 #endif
 
-#if DIMENSION > 65536
+#if DIMENSION >= 65536
 using bit_iter_t = uint32_t;
 #else
 using bit_iter_t = uint16_t;
