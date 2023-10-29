@@ -128,8 +128,8 @@ uint64_t byte_bits_permutation_invert(uint64_t p) {
     return r;
 }
 
-uint64_t rand_byte_bits_permutation(uint32_t seed) {
-    std::minstd_rand0 perm_rng(seed);
+uint64_t rand_byte_bits_permutation(int64_t seed) {
+    std::mt19937_64 perm_rng(seed);
 
     uint8_t p[8] = {0, 1, 2, 3, 4, 5, 6, 7};
 
@@ -138,8 +138,8 @@ uint64_t rand_byte_bits_permutation(uint32_t seed) {
     return *((uint64_t *) p);
 }
 
-void permute_byte_bits_into_shuffle(word_t *x, int32_t perm_id, word_t *target) {
-    if (perm_id == 0) {
+void permute_byte_bits_into_shuffle(word_t *x, int64_t perm, word_t *target) {
+    if (perm == 0) {
         memcpy(target, x, BYTES);
         return;
     }
@@ -147,8 +147,8 @@ void permute_byte_bits_into_shuffle(word_t *x, int32_t perm_id, word_t *target) 
     uint8_t *x_bytes = (uint8_t *) x;
     uint8_t *target_bytes = (uint8_t *) target;
 
-    uint64_t byte_perm = rand_byte_bits_permutation(abs(perm_id));
-    if (perm_id < 0) byte_perm = byte_bits_permutation_invert(byte_perm);
+    uint64_t byte_perm = rand_byte_bits_permutation(abs(perm));
+    if (perm < 0) byte_perm = byte_bits_permutation_invert(byte_perm);
 
     for (byte_iter_t i = 0; i < BYTES; ++i)
         target_bytes[i] = permute_single_byte_bits(x_bytes[i], byte_perm);
@@ -164,8 +164,8 @@ uint64_t byte_bits_permutation_matrix(uint64_t packed_indices) {
 }
 
 #if __GFNI__
-void permute_byte_bits_into_gfni(word_t *x, int32_t perm_id, word_t *target) {
-    if (perm_id == 0) {
+void permute_byte_bits_into_gfni(word_t *x, int64_t perm, word_t *target) {
+    if (perm == 0) {
         memcpy(target, x, BYTES);
         return;
     }
@@ -173,8 +173,8 @@ void permute_byte_bits_into_gfni(word_t *x, int32_t perm_id, word_t *target) {
     __m512i *x_vec = (__m512i *) x;
     __m512i *target_vec = (__m512i *) target;
 
-    uint64_t byte_perm = rand_byte_bits_permutation(abs(perm_id));
-    if (perm_id < 0) byte_perm = byte_bits_permutation_invert(byte_perm);
+    uint64_t byte_perm = rand_byte_bits_permutation(abs(perm));
+    if (perm < 0) byte_perm = byte_bits_permutation_invert(byte_perm);
     uint64_t byte_perm_matrix = byte_bits_permutation_matrix(byte_perm);
     __m512i byte_perm_matrices = _mm512_set1_epi64(byte_perm_matrix);
 
@@ -210,8 +210,8 @@ __m512i word_bits_permutation_invert(__m512i p) {
     return _mm512_loadu_si512(r_array);
 }
 
-__m512i rand_word_bits_permutation(uint32_t seed) {
-    std::minstd_rand0 perm_rng(seed);
+__m512i rand_word_bits_permutation(int64_t seed) {
+    std::mt19937_64 perm_rng(seed);
 
     uint8_t p [64];
     for (uint8_t i = 0; i < 64; ++i)
@@ -222,11 +222,11 @@ __m512i rand_word_bits_permutation(uint32_t seed) {
     return _mm512_loadu_si512(p);
 }
 
-void permute_word_bits_into(word_t * x, int32_t perm_id, word_t * target) {
-    if (perm_id == 0) {memcpy(target, x, BYTES); return;}
+void permute_word_bits_into(word_t * x, int64_t perm, word_t * target) {
+    if (perm == 0) {memcpy(target, x, BYTES); return;}
 
-    __m512i word_perm = rand_word_bits_permutation(abs(perm_id));
-    if (perm_id < 0) word_perm = word_bits_permutation_invert(word_perm);
+    __m512i word_perm = rand_word_bits_permutation(abs(perm));
+    if (perm < 0) word_perm = word_bits_permutation_invert(word_perm);
 
     for (word_iter_t i = 0; i < WORDS; ++i)
         target[i] = permute_single_word_bits(x[i], word_perm);
@@ -243,8 +243,8 @@ void apply_word_permutation_into(word_t *x, word_iter_t *word_permutation, word_
     }
 }
 
-void rand_word_permutation_into(uint32_t seed, word_iter_t *p) {
-    std::minstd_rand0 perm_rng(seed);
+void rand_word_permutation_into(int64_t seed, word_iter_t *p) {
+    std::mt19937_64 perm_rng(seed);
 
     for (word_iter_t i = 0; i < WORDS; ++i)
         p[i] = i;
@@ -252,7 +252,7 @@ void rand_word_permutation_into(uint32_t seed, word_iter_t *p) {
     std::shuffle(p, p + WORDS, perm_rng);
 }
 
-void permute_words_into(word_t *x, int32_t perm, word_t *target) {
+void permute_words_into(word_t *x, int64_t perm, word_t *target) {
     assert(x != target);
     if (perm == 0) {
         memcpy(target, x, BYTES);
@@ -280,8 +280,8 @@ void apply_byte_permutation_into(word_t *x, byte_iter_t *byte_permutation, word_
     }
 }
 
-void rand_byte_permutation_into(uint32_t seed, byte_iter_t *p) {
-    std::minstd_rand0 perm_rng(seed);
+void rand_byte_permutation_into(int64_t seed, byte_iter_t *p) {
+    std::mt19937_64 perm_rng(seed);
 
     for (byte_iter_t i = 0; i < BYTES; ++i)
         p[i] = i;
@@ -289,7 +289,7 @@ void rand_byte_permutation_into(uint32_t seed, byte_iter_t *p) {
     std::shuffle(p, p + BYTES, perm_rng);
 }
 
-void permute_bytes_into(word_t *x, int32_t perm, word_t *target) {
+void permute_bytes_into(word_t *x, int64_t perm, word_t *target) {
     assert(x != target);
     if (perm == 0) {
         memcpy(target, x, BYTES);
@@ -303,7 +303,7 @@ void permute_bytes_into(word_t *x, int32_t perm, word_t *target) {
     else apply_byte_permutation_into<true>(x, p, target);
 }
 
-void permute_into(word_t *x, int32_t perm, word_t *target) {
+void permute_into(word_t *x, int64_t perm, word_t *target) {
 #if __AVX512BW__
     permute_words_into(x, perm, target);
     permute_word_bits_into(target, perm, target);
@@ -313,7 +313,7 @@ void permute_into(word_t *x, int32_t perm, word_t *target) {
 #endif
 }
 
-word_t * permute(word_t *x, int32_t perm) {
+word_t * permute(word_t *x, int64_t perm) {
     word_t *r = empty();
 #if __AVX512BW__
     permute_words_into(x, perm, r);

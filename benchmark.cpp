@@ -12,24 +12,24 @@ using namespace std;
 #define MAJ_INPUT_HYPERVECTOR_COUNT 1000001
 #define INPUT_HYPERVECTOR_COUNT 100
 
-#define THRESHOLD
-#define MAJ
-#define RAND
-#define RAND2
-#define RANDOM
+//#define THRESHOLD
+//#define MAJ
+//#define RAND
+//#define RAND2
+//#define RANDOM
 #define PERMUTE
-#define ROLL
-#define ACTIVE
-#define HAMMING
-#define INVERT
-#define SWAP_HALVES
-#define REHASH
-#define AND
-#define OR
-#define XOR
-#define SELECT
-#define MAJ3
-#define TERNARY
+//#define ROLL
+//#define ACTIVE
+//#define HAMMING
+//#define INVERT
+//#define SWAP_HALVES
+//#define REHASH
+//#define AND
+//#define OR
+//#define XOR
+//#define SELECT
+//#define MAJ3
+//#define TERNARY
 
 uint64_t hash_combine(uint64_t h, uint64_t k) {
     static constexpr uint64_t kM = 0xc6a4a7935bd1e995ULL;
@@ -312,14 +312,14 @@ float random_benchmark(bool display, bool keep_in_cache, float base_frac, bool r
     return mean_test_time;
 }
 
-template<void F(word_t*, int32_t, word_t*), bool in_place, int different_permutations>
+template<void F(word_t*, int64_t, word_t*), bool in_place, int different_permutations>
 pair<float, float> permute_benchmark(bool display) {
     const int test_count = INPUT_HYPERVECTOR_COUNT * different_permutations * 2;
 
     bool correct = true;
     double permute_test_time = 0.;
     double unpermute_test_time = 0.;
-    int perms [different_permutations];
+    int64_t perms [different_permutations];
     for (size_t i = 0; i < different_permutations; ++i)
         perms[i] = i;
 
