@@ -26,7 +26,7 @@ int main() {
     word_t *ps[N];
     for (size_t i = 0; i < N; ++i) {
         ps[i] = bhv::empty();
-        bhv::roll_word_bits_into(rs[i], 42, ps[i]);
+        bhv::permute_into(rs[i], 42, ps[i]);
     }
 
     auto t2 = chrono::high_resolution_clock::now();
@@ -34,7 +34,7 @@ int main() {
 
     for (size_t i = 0; i < N; ++i) {
         word_t tmp [WORDS];
-        bhv::roll_word_bits_into(ps[i], -42, tmp);
+        bhv::permute_into(ps[i], -42, tmp);
         assert(bhv::eq(rs[i], tmp));
     }
 
