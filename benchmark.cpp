@@ -13,11 +13,12 @@ using namespace std;
 #define INPUT_HYPERVECTOR_COUNT 100
 
 //#define THRESHOLD
-//#define MAJ
+#define MAJ
+#define PARITY
 //#define RAND
 //#define RAND2
 //#define RANDOM
-#define PERMUTE
+//#define PERMUTE
 //#define ROLL
 //#define ACTIVE
 //#define HAMMING
@@ -128,7 +129,8 @@ float threshold_benchmark(size_t n, size_t threshold, float af, bool display, bo
     return mean_test_time;
 }
 
-float majority_benchmark(size_t n, bool display, bool keep_in_cache) {
+template <void F(word_t **, size_t, word_t *), void FC(word_t **, size_t, word_t *)>
+float nary_benchmark(size_t n, bool display, bool keep_in_cache) {
     //For the simple cases, like 3 vectors, we want a lot of tests to get a reliable number
     //but allocating 2,000 vectors * 10,000 tests starts to exceed resident memory and we end
     //up paying disk swap penalties.  Therefore we do fewer tests in the case with more hypervectors
@@ -159,7 +161,7 @@ float majority_benchmark(size_t n, bool display, bool keep_in_cache) {
         word_t *m = result_buffer + (io_buf_idx * BYTES / sizeof(word_t));
         word_t **rs = inputs[io_buf_idx];
 
-        bhv::true_majority_into(rs, n, m);
+        F(rs, n, m);
 
         checksum = integrate(checksum, summary(m));
     }
@@ -173,7 +175,7 @@ float majority_benchmark(size_t n, bool display, bool keep_in_cache) {
             word_t *m = result_buffer + (io_buf_idx * BYTES / sizeof(word_t));
             word_t **rs = inputs[io_buf_idx];
 
-            bhv::threshold_into_reference(rs, n, n/2, m);
+            FC(rs, n, m);
 
             val_checksum = integrate(val_checksum, summary(m));
         }
@@ -628,20 +630,25 @@ void fixed_roll(word_t *x, word_t *target) {
 
 inline void simulated_select(word_t *x, word_t *y, word_t *z, word_t *target) {
     bhv::dynamic_ternary_into_reference(x, y, z, target, 0xca);
-};
+}
 
 inline void simulated_maj3(word_t *x, word_t *y, word_t *z, word_t *target) {
     bhv::dynamic_ternary_into_reference(x, y, z, target, 0xe8);
-};
+}
 
 inline void simulated_any(word_t *x, word_t *y, word_t *z, word_t *target) {
     bhv::dynamic_ternary_into_reference(x, y, z, target, 0b11111110);
-};
+}
 
 void __attribute__ ((noinline)) any_via_threshold(word_t *x, word_t *y, word_t *z, word_t *target) {
     word_t *xs [3] = {x, y, z};
     bhv::threshold_into(xs, 3, 0, target);
-};
+}
+
+inline void simulated_majority(word_t ** xs, size_t size, word_t *target) {
+    bhv::threshold_into_reference<uint32_t>(xs, size, size/2, target);
+}
+
 
 template <void F(word_t*)>
 void nondestructive_unary(word_t *x, word_t *target) {
@@ -1002,92 +1009,180 @@ int main() {
         total += random_benchmark(true, false, p);
     cout << "total: " << total << endl;
 #endif
+#ifdef PARITY
+    //Run one throw-away test to make sure the OS is ready to give us full resource
+
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(3, false, false);
+
+    cout << "*-= PARITY =-*" << endl;
+    cout << "*-= IN CACHE TESTS =-*" << endl;
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(3, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(5, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(7, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(9, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(11, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(15, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(17, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(19, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(21, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(23, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(25, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(27, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(39, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(47, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(55, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(63, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(73, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(77, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(79, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(81, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(85, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(89, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(91, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(109, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(175, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(201, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(255, true, true);
+
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(257, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(385, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(511, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(667, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(881, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(945, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(1021, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(2001, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(5001, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(9999, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(10003, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(20001, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(200001, true, true);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(1000001, true, true);
+
+    cout << "*-= OUT OF CACHE TESTS =-*" << endl;
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(3, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(5, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(7, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(9, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(11, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(27, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(39, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(47, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(55, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(63, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(73, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(77, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(79, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(81, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(85, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(89, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(91, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(109, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(175, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(201, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(255, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(257, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(313, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(385, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(511, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(667, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(881, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(945, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(1021, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(2001, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(5001, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(9999, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(10003, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(20001, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(200001, true, false);
+    nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(1000001, true, false);
+#endif
 #ifdef MAJ
     //Run one throw-away test to make sure the OS is ready to give us full resource
-    majority_benchmark(3, false, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(3, false, false);
 
     cout << "*-= MAJ =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
-    majority_benchmark(3, true, true);
-    majority_benchmark(5, true, true);
-    majority_benchmark(7, true, true);
-    majority_benchmark(9, true, true);
-    majority_benchmark(11, true, true);
-    majority_benchmark(15, true, true);
-    majority_benchmark(17, true, true);
-    majority_benchmark(19, true, true);
-    majority_benchmark(21, true, true);
-    majority_benchmark(23, true, true);
-    majority_benchmark(25, true, true);
-    majority_benchmark(27, true, true);
-    majority_benchmark(39, true, true);
-    majority_benchmark(47, true, true);
-    majority_benchmark(55, true, true);
-    majority_benchmark(63, true, true);
-    majority_benchmark(73, true, true);
-    majority_benchmark(77, true, true);
-    majority_benchmark(79, true, true);
-    majority_benchmark(81, true, true);
-    majority_benchmark(85, true, true);
-    majority_benchmark(89, true, true);
-    majority_benchmark(91, true, true);
-    majority_benchmark(109, true, true);
-    majority_benchmark(175, true, true);
-    majority_benchmark(201, true, true);
-    majority_benchmark(255, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(3, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(5, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(7, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(9, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(11, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(15, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(17, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(19, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(21, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(23, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(25, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(27, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(39, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(47, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(55, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(63, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(73, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(77, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(79, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(81, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(85, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(89, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(91, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(109, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(175, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(201, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(255, true, true);
 
-    majority_benchmark(257, true, true);
-    majority_benchmark(385, true, true);
-    majority_benchmark(511, true, true);
-    majority_benchmark(667, true, true);
-    majority_benchmark(881, true, true);
-    majority_benchmark(945, true, true);
-    majority_benchmark(1021, true, true);
-    majority_benchmark(2001, true, true);
-    majority_benchmark(5001, true, true);
-    majority_benchmark(9999, true, true);
-    majority_benchmark(10003, true, true);
-    majority_benchmark(20001, true, true);
-    majority_benchmark(200001, true, true);
-    majority_benchmark(1000001, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(257, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(385, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(511, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(667, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(881, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(945, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(1021, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(2001, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(5001, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(9999, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(10003, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(20001, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(200001, true, true);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(1000001, true, true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
-    majority_benchmark(3, true, false);
-    majority_benchmark(5, true, false);
-    majority_benchmark(7, true, false);
-    majority_benchmark(9, true, false);
-    majority_benchmark(11, true, false);
-    majority_benchmark(27, true, false);
-    majority_benchmark(39, true, false);
-    majority_benchmark(47, true, false);
-    majority_benchmark(55, true, false);
-    majority_benchmark(63, true, false);
-    majority_benchmark(73, true, false);
-    majority_benchmark(77, true, false);
-    majority_benchmark(79, true, false);
-    majority_benchmark(81, true, false);
-    majority_benchmark(85, true, false);
-    majority_benchmark(89, true, false);
-    majority_benchmark(91, true, false);
-    majority_benchmark(109, true, false);
-    majority_benchmark(175, true, false);
-    majority_benchmark(201, true, false);
-    majority_benchmark(255, true, false);
-    majority_benchmark(257, true, false);
-    majority_benchmark(313, true, false);
-    majority_benchmark(385, true, false);
-    majority_benchmark(511, true, false);
-    majority_benchmark(667, true, false);
-    majority_benchmark(881, true, false);
-    majority_benchmark(945, true, false);
-    majority_benchmark(1021, true, false);
-    majority_benchmark(2001, true, false);
-    majority_benchmark(5001, true, false);
-    majority_benchmark(9999, true, false);
-    majority_benchmark(10003, true, false);
-    majority_benchmark(20001, true, false);
-    majority_benchmark(200001, true, false);
-    majority_benchmark(1000001, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(3, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(5, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(7, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(9, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(11, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(27, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(39, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(47, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(55, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(63, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(73, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(77, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(79, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(81, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(85, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(89, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(91, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(109, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(175, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(201, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(255, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(257, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(313, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(385, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(511, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(667, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(881, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(945, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(1021, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(2001, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(5001, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(9999, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(10003, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(20001, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(200001, true, false);
+    nary_benchmark<bhv::true_majority_into, simulated_majority>(1000001, true, false);
 #endif
 #ifdef THRESHOLD
     threshold_benchmark(3, 0, .5, false, false);

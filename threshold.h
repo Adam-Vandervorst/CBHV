@@ -1,7 +1,7 @@
 
 /// @brief A generic implementation for (exclusive) threshold_into, that can use any size counter
 template<typename N>
-void threshold_into_reference(word_t ** xs, size_t size, N threshold, word_t *dst) {
+void threshold_into_reference(word_t ** xs, size_t size, N threshold, word_t *target) {
 
     N totals[BITS];
     memset(totals, 0, BITS*sizeof(N));
@@ -25,7 +25,7 @@ void threshold_into_reference(word_t ** xs, size_t size, N threshold, word_t *ds
             if (threshold < totals[offset + bit_id])
                 word |= 1UL << bit_id;
         }
-        dst[word_id] = word;
+        target[word_id] = word;
     }
 }
 

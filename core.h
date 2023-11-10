@@ -141,6 +141,8 @@ namespace bhv {
 
     #include "random.h"
 
+    #include "parity.h"
+
     #include "threshold.h"
 
     #include "majority.h"
