@@ -51,6 +51,28 @@ void weighted_threshold_into_naive(word_t **xs, N *weights, size_t size, N thres
     }
 }
 
+#if __AVX512BW__
+void factor_threshold_into_byte_avx512(word_t **xs, uint8_t *weights, size_t size, uint8_t threshold, word_t *target) {
+    __m512i totals[WORDS];
+    memset(totals, 0, WORDS*sizeof(__m512i));
+
+    for (size_t i = 0; i < size; ++i) {
+        uint8_t w = weights[i];
+        __m512i vw = _mm512_set1_epi8(w);
+        word_t *x = xs[i];
+
+        for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
+            totals[word_id] = _mm512_mask_add_epi8(totals[word_id], x[word_id], totals[word_id], vw);
+        }
+    }
+
+    __m512i vthreshold = _mm512_set1_epi8(threshold);
+    for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
+        target[word_id] = _mm512_cmpgt_epu8_mask(totals[word_id], vthreshold);
+    }
+}
+#endif
+
 // VPDPBUSD would wreak havoc here
 
 
