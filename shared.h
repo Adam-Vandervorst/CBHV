@@ -34,4 +34,7 @@ using bit_word_iter_t = uint8_t;
 #define BYTES (BITS / 8)
 #define WORDS (BITS / BITS_PER_WORD)
 
+#define unlikely(expr) __builtin_expect(!!(expr), 0)
+#define likely(expr) __builtin_expect(!!(expr), 1)
+
 #endif //BHV_CONSTANTS_H

@@ -13,8 +13,9 @@ using namespace std;
 #define INPUT_HYPERVECTOR_COUNT 100
 
 //#define THRESHOLD
-#define MAJ
-#define PARITY
+#define WEIGHTED_THRESHOLD
+//#define MAJ
+//#define PARITY
 //#define RAND
 //#define RAND2
 //#define RANDOM
@@ -649,6 +650,21 @@ inline void simulated_majority(word_t ** xs, size_t size, word_t *target) {
     bhv::threshold_into_reference<uint32_t>(xs, size, size/2, target);
 }
 
+template <typename N, void F(word_t **, N *, size_t, N, word_t *)>
+inline void simulated_majority_iota_factors(word_t **xs, size_t size, word_t *target) {
+    std::vector<N> factors(size);
+    std::iota(factors.begin(), factors.end(), (N)0);
+    F(xs, factors.data(), size, size*(size-1)/2, target);
+}
+
+template <typename N, void F(word_t **, N *, size_t, N, word_t *)>
+inline void simulated_majority_uniform_distribution(word_t **xs, size_t size, word_t *target) {
+    std::vector<N> weights(size);
+    for (size_t i = 0; i < size; ++i)
+        weights[i] = (N)(1./(double_t)size);
+    F(xs, weights.data(), size, size/2, target);
+}
+
 
 template <void F(word_t*)>
 void nondestructive_unary(word_t *x, word_t *target) {
@@ -1184,6 +1200,14 @@ int main() {
     nary_benchmark<bhv::true_majority_into, simulated_majority>(200001, true, false);
     nary_benchmark<bhv::true_majority_into, simulated_majority>(1000001, true, false);
 #endif
+#ifdef WEIGHTED_THRESHOLD
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_naive<uint8_t>>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(3, false, false);
+    // FIXME silly slow
+    cout << "*-= WEIGHTED_THRESHOLD =-*" << endl;
+    cout << "*-= IN CACHE TESTS =-*" << endl;
+    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_naive<uint8_t>>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(3, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(3, true, true);
+#endif
 #ifdef THRESHOLD
     threshold_benchmark(3, 0, .5, false, false);
 
@@ -1226,6 +1250,5 @@ int main() {
     for (uint8_t i = 0; i < 12; ++i) for (uint8_t j = 0; j < i; ++j) {
         threshold_benchmark(i, j, .5, true, true);
     }
-
 #endif
 }

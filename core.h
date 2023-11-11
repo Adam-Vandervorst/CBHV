@@ -147,6 +147,8 @@ namespace bhv {
 
     #include "majority.h"
 
+    #include "weighted_threshold.h"
+
     #include "representative.h"
 
     #include "window.h"
