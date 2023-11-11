@@ -61,20 +61,30 @@ void factor_threshold_into_byte_avx512(word_t **xs, uint8_t *weights, size_t siz
         __m512i vw = _mm512_set1_epi8(w);
         word_t *x = xs[i];
 
-        for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
+        for (word_iter_t word_id = 0; word_id < WORDS; ++word_id)
             totals[word_id] = _mm512_mask_add_epi8(totals[word_id], x[word_id], totals[word_id], vw);
-        }
     }
 
     __m512i vthreshold = _mm512_set1_epi8(threshold);
-    for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
+    for (word_iter_t word_id = 0; word_id < WORDS; ++word_id)
         target[word_id] = _mm512_cmpgt_epu8_mask(totals[word_id], vthreshold);
+}
+
+void factor_threshold_into_byte_avx512_transpose(word_t **xs, uint8_t *weights, size_t size, uint8_t threshold, word_t *target) {
+    __m512i vthreshold = _mm512_set1_epi8(threshold);
+    std::vector<__m512i> vweights(size);
+
+    for (size_t i = 0; i < size; ++i)
+        vweights[i] = _mm512_set1_epi8(weights[i]);
+
+    for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
+        __m512i total = _mm512_setzero_si512();
+        for (size_t i = 0; i < size; ++i)
+            total = _mm512_mask_add_epi8(total, xs[i][word_id], total, vweights[i]);
+        target[word_id] = _mm512_cmpgt_epu8_mask(total, vthreshold);
     }
 }
 #endif
-
-// VPDPBUSD would wreak havoc here
-
 
 void factor_threshold_into(word_t **xs, uint32_t *weights, size_t size, uint64_t threshold, word_t *target) {
     uint64_t max_result = 0;
