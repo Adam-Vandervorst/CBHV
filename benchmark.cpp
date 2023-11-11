@@ -662,7 +662,7 @@ inline void simulated_majority_uniform_distribution(word_t **xs, size_t size, wo
     std::vector<N> weights(size);
     for (size_t i = 0; i < size; ++i)
         weights[i] = (N)(1./(double_t)size);
-    F(xs, weights.data(), size, size/2, target);
+    F(xs, weights.data(), size, (N)size/2, target);
 }
 
 
@@ -1204,19 +1204,39 @@ int main() {
 //    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_naive<uint8_t>>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(3, false, false);
     // FIXME silly slow
     cout << "*-= WEIGHTED_THRESHOLD =-*" << endl;
+    cout << "*-= FACTORS =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
 //    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_naive<uint8_t>>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(3, true, true);
 //    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(3, true, true);
-    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(3, true, true);
-    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512_transpose>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(3, true, true);
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(3, true, true);
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512_transpose>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(3, true, true);
+//
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_naive<uint8_t>>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(10, true, true);
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(10, true, true);
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512_transpose>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(10, true, true);
+//
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_naive<uint8_t>>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(20, true, true);
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(20, true, true);
+//    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512_transpose>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(20, true, true);
+    cout << "*-= DISTRIBUTION =-*" << endl;
+    cout << "*-= IN CACHE TESTS =-*" << endl;
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(3, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(3, true, true);
 
-    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_naive<uint8_t>>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(10, true, true);
-    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(10, true, true);
-    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512_transpose>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(10, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10, true, true);
 
-    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_naive<uint8_t>>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(20, true, true);
-    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(20, true, true);
-    nary_benchmark<simulated_majority_iota_factors<uint8_t, bhv::factor_threshold_into_byte_avx512_transpose>, simulated_majority_iota_factors<uint8_t, bhv::weighted_threshold_into_reference<uint8_t>>>(20, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(20, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(20, true, true);
+
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(100, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(100, true, true);
+
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(1000, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(1000, true, true);
+
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10000, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10000, true, true);
 #endif
 #ifdef THRESHOLD
     threshold_benchmark(3, 0, .5, false, false);
