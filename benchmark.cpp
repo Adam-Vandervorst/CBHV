@@ -94,10 +94,10 @@ float closest_benchmark(size_t n, bool display, bool keep_in_cache) {
 
     const char *validation_status = (correct ? "equiv: v, " : "equiv: x, ");
 
-    float mean_test_time = (float) chrono::duration_cast<chrono::nanoseconds>(t2 - t1).count() / (float) test_count;
+    double mean_test_time = (double) chrono::duration_cast<chrono::nanoseconds>(t2 - t1).count() / (double) test_count;
     if (display)
         cout << n << " hypervectors, " << validation_status << "in_cache: " << keep_in_cache << ", total: " << mean_test_time / 1000.0
-             << "µs, normalized: " << mean_test_time / (float) n << "ns/vec" << endl;
+             << "µs, normalized: " << mean_test_time / (double) n << "ns/vec" << endl;
 
     //Clean up our mess
     for (size_t i = 0; i < input_output_count; i++) {
@@ -1340,9 +1340,9 @@ int main() {
     cout << "*-= CLOSEST =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
     for (size_t i = 1; i <= 1000000; i *= 10)
-        closest_benchmark<bhv::closest_reference>(i, true, true);
+        closest_benchmark<bhv::closest>(i, true, true);
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     for (size_t i = 1; i <= 1000000; i *= 10)
-        closest_benchmark<bhv::closest_reference>(i, true, false);
+        closest_benchmark<bhv::closest>(i, true, false);
 #endif
 }

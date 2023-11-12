@@ -3,6 +3,11 @@
 
 #include <bit>
 #include <functional>
+#ifdef _OPENMP
+#include <omp.h>
+#else
+#include <execution>
+#endif
 #include <random>
 #include <cstring>
 #include <cassert>
