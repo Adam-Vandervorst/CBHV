@@ -157,6 +157,8 @@ namespace bhv {
 
     #include "hash.h"
 
+    #include "lookup.h"
+
     #include "optimization.h"
 }
 #endif //BHV_CORE_H
