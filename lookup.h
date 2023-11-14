@@ -67,3 +67,108 @@ size_t closest(word_t **xs, size_t size, word_t *x) {
         return closest_execution(xs, size, x);
 #endif
 }
+
+#include "pq.h"
+
+struct Element {
+    size_t index;
+    bit_iter_t distance;
+
+    bool operator<(const Element &rhs) const {
+        return distance > rhs.distance;
+    }
+
+    bool operator>(const Element &rhs) const {
+        return rhs < *this;
+    }
+
+    bool operator<=(const Element &rhs) const {
+        return !(rhs < *this);
+    }
+
+    bool operator>=(const Element &rhs) const {
+        return !(*this < rhs);
+    }
+};
+
+void top_into_reference(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
+    assert(size >= k);
+
+    fixed_size_priority_queue<Element> heap(k);
+
+    for (size_t i = 0; i < size; ++i)
+        heap.push(Element{i, hamming(xs[i], x)});
+
+    for (size_t i = 0; i < k; ++i) {
+        target[i] = heap.top().index;
+        heap.pop();
+    }
+}
+
+#ifdef _OPENMP
+void top_into_omp(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
+    assert(size >= k);
+
+    int num_threads;
+    #pragma omp parallel
+    {
+        #pragma omp single
+        num_threads = omp_get_num_threads();
+    }
+
+    std::vector<fixed_size_priority_queue<Element>> heaps;
+    for (size_t t = 0; t < num_threads; ++t)
+        heaps.push_back(fixed_size_priority_queue<Element>(k));
+
+    #pragma omp parallel
+    {
+        int thread_id = omp_get_thread_num();
+        fixed_size_priority_queue<Element>& heap = heaps[thread_id];
+
+        #pragma omp for nowait
+        for (size_t i = 0; i < size; ++i) {
+            int dist = hamming(xs[i], x);
+            heap.push(Element{i, dist});
+        }
+    }
+
+    // Merge heaps
+    fixed_size_priority_queue<Element> final_heap(k);
+    for (auto& heap : heaps) {
+        while (!heap.empty()) {
+            final_heap.push(heap.top());
+            heap.pop();
+        }
+    }
+
+    // Extract final top k elements
+    for (size_t i = 0; i < k; ++i) {
+        target[i] = final_heap.top().index;
+        final_heap.pop();
+    }
+}
+#else
+void top_into_execution_sort(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
+    assert(size >= k);
+
+    bit_iter_t *distances = (bit_iter_t *)malloc(sizeof(bit_iter_t) * size);
+    size_t *indices = (size_t *)malloc(sizeof(size_t) * size);
+
+    std::iota(indices, indices + size, 0);
+
+    std::transform(std::execution::par_unseq, xs, xs + size, distances, [&x](word_t * x_) { return hamming(x, x_); });
+
+    std::partial_sort_copy(indices, indices + size, target, target + k, [&distances](size_t i, size_t j) { return distances[i] < distances[j]; });
+}
+#endif
+
+void top_into(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
+    if (size < 500)
+        return top_into_reference(xs, size, x, k, target);
+    else
+#ifdef _OPENMP
+        return top_into_omp(xs, size, x, k, target);
+#else
+        return top_into_execution_sort(xs, size, x, k, target);
+#endif
+}

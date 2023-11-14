@@ -3,6 +3,8 @@
 
 #include <bit>
 #include <functional>
+#include <queue>
+#include <ranges>
 #ifdef _OPENMP
 #include <omp.h>
 #else
@@ -33,13 +35,13 @@ namespace bhv {
     template<word_t W>
     word_t *const_bhv() {
         static word_t x[WORDS];
-        for (word_t &i: x) i = W;
+        for (size_t i = 0; i < WORDS; ++i) x[i] = W;
         return x;
     }
 
-    word_t *ZERO = const_bhv<0>();
-    word_t *ONE = const_bhv<ONE_WORD>();
-    word_t *HALF = const_bhv<HALF_WORD>();
+    static word_t *ZERO = const_bhv<0>();
+    static word_t *ONE = const_bhv<ONE_WORD>();
+    static word_t *HALF = const_bhv<HALF_WORD>();
 
     std::mt19937_64 rng;
 
