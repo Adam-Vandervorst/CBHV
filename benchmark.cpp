@@ -12,7 +12,8 @@ using namespace std;
 #define MAJ_INPUT_HYPERVECTOR_COUNT 1000001
 #define INPUT_HYPERVECTOR_COUNT 100
 
-#define TOP
+#define WITHIN
+//#define TOP
 //#define CLOSEST
 //#define THRESHOLD
 //#define WEIGHTED_THRESHOLD
@@ -59,6 +60,74 @@ uint64_t hash_combine(uint64_t h, uint64_t k) {
 #define integrate(t, h) hash_combine((t), (h))
 #endif
 
+template <vector<size_t> F(word_t **, size_t, word_t *, bit_iter_t)>
+void within_benchmark(size_t n, size_t k, bit_iter_t d, bool display, bool keep_in_cache) {
+    //For the simple cases, like 3 vectors, we want a lot of tests to get a reliable number
+    //but allocating 2,000 vectors * 10,000 tests starts to exceed resident memory and we end
+    //up paying disk swap penalties.  Therefore we do fewer tests in the case with more hypervectors
+    const size_t test_count = MAJ_INPUT_HYPERVECTOR_COUNT / n;
+    const size_t input_output_count = (keep_in_cache ? 1 : test_count);
+
+    std::uniform_int_distribution<size_t> target_gen(0, n-1);
+
+    //Init n random vectors for each test
+    word_t ***inputs = (word_t***)malloc(sizeof(word_t**) * input_output_count);
+    word_t **queries = (word_t**)malloc(sizeof(word_t*) * input_output_count);
+    size_t **targets = (size_t**)malloc(sizeof(size_t*) * input_output_count);
+    for (size_t i = 0; i < input_output_count; i++) {
+        word_t **rs = (word_t **) malloc(sizeof(word_t **) * n);
+        size_t *target = (size_t *) malloc(sizeof(size_t) * k);
+        vector<size_t> range(n);
+        std::iota(range.begin(), range.end(), 0);
+        std::sample(range.begin(), range.end(), target, k, bhv::rng);
+
+        word_t *t = bhv::rand();
+        for (size_t j = 0; j < n; ++j)
+            rs[j] = bhv::rand();
+
+        for (size_t j = 0; j < k; ++j) {
+            bhv::permute_into(t, 0, rs[target[j]]);
+            for (bit_iter_t b = 0; b < d/2; ++b)
+                bhv::toggle(rs[target[j]], b);
+        }
+
+        free(t);
+
+        inputs[i] = rs;
+        targets[i] = target;
+        queries[i] = rs[target[0]];
+    }
+
+    bool correct = true;
+
+    auto t1 = chrono::high_resolution_clock::now();
+    for (size_t i = 0; i < test_count; ++i) {
+        const size_t io_buf_idx = (keep_in_cache ? 0 : i);
+
+        vector<size_t> res = F(inputs[io_buf_idx], n, queries[io_buf_idx], d);
+
+        correct &= std::is_permutation(targets[io_buf_idx], targets[io_buf_idx] + k, res.begin(), res.end());
+    }
+    auto t2 = chrono::high_resolution_clock::now();
+
+    const char *validation_status = (correct ? "correct: v" : "correct: x");
+
+    double mean_test_time = (double) chrono::duration_cast<chrono::nanoseconds>(t2 - t1).count() / (double) test_count;
+    if (display)
+        cout << n << " hypervectors, " << validation_status << ", k: " << k << ", in_cache: " << keep_in_cache << ", total: " << mean_test_time / 1000.0
+             << "µs, normalized: " << mean_test_time / (double) n << "ns/vec" << endl;
+
+    for (size_t i = 0; i < input_output_count; i++) {
+        word_t **rs = inputs[i];
+        for (size_t j = 0; j < n; ++j)
+            free(rs[j]);
+        free(rs);
+        free(targets[i]);
+    }
+    free(inputs);
+    free(targets);
+    free(queries);
+}
 
 template <void F(word_t **, size_t, word_t *, size_t, size_t *)>
 void top_benchmark(size_t n, size_t k, bool display, bool keep_in_cache) {
@@ -1430,5 +1499,14 @@ int main() {
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     for (size_t i = 10; i <= 1000000; i *= 10)
         top_benchmark<bhv::top_into>(i, 5, true, false);
+#endif
+#ifdef WITHIN
+    cout << "*-= WITHIN =-*" << endl;
+    cout << "*-= IN CACHE TESTS =-*" << endl;
+    for (size_t i = 100; i <= 1000000; i *= 10)
+        within_benchmark<bhv::within_into>(i, 50, BITS/4, true, true);
+    cout << "*-= OUT OF CACHE TESTS =-*" << endl;
+    for (size_t i = 100; i <= 1000000; i *= 10)
+        within_benchmark<bhv::within_into>(i, 50, BITS/4, true, false);
 #endif
 }

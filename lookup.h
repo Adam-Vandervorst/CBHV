@@ -156,7 +156,7 @@ void top_into_execution_sort(word_t **xs, size_t size, word_t *x, size_t k, size
 
     std::iota(indices, indices + size, 0);
 
-    std::transform(std::execution::par_unseq, xs, xs + size, distances, [&x](word_t * x_) { return hamming(x, x_); });
+    std::transform(std::execution::par_unseq, xs, xs + size, distances, [x](word_t * x_) { return hamming(x, x_); });
 
     std::partial_sort_copy(indices, indices + size, target, target + k, [&distances](size_t i, size_t j) { return distances[i] < distances[j]; });
 }
@@ -170,5 +170,78 @@ void top_into(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
         return top_into_omp(xs, size, x, k, target);
 #else
         return top_into_execution_sort(xs, size, x, k, target);
+#endif
+}
+
+std::vector<size_t> within_into_reference(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+    std::vector<size_t> ys;
+
+    for (size_t i = 0; i < size; ++i)
+        if (hamming(xs[i], x) <= d)
+            ys.push_back(i);
+
+    return ys;
+}
+
+#ifdef _OPENMP
+std::vector<size_t> within_into_omp(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+    int num_threads;
+    #pragma omp parallel
+    {
+        #pragma omp single
+        num_threads = omp_get_num_threads();
+    }
+
+    std::vector<std::vector<size_t>> ys_private(num_threads);
+
+    #pragma omp parallel
+    {
+        int thread_id = omp_get_thread_num();
+
+        #pragma omp for schedule(dynamic) nowait
+        for (size_t i = 0; i < size; ++i) {
+            if (hamming(xs[i], x) <= d) {
+                ys_private[thread_id].push_back(i);
+            }
+        }
+    }
+
+    // Calculate total size to reserve memory
+    size_t total_size = 0;
+    for (const auto& vec : ys_private) {
+        total_size += vec.size();
+    }
+
+    std::vector<size_t> ys;
+    ys.reserve(total_size);
+
+    // Merge all vectors into one
+    for (const auto& vec : ys_private) {
+        ys.insert(ys.end(), vec.begin(), vec.end());
+    }
+
+    return ys;
+}
+#else
+std::vector<size_t> within_into_execution(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+    std::vector<size_t> indices(size);
+
+    std::iota(indices.begin(), indices.end(), 0);
+
+    indices.erase(std::remove_if(std::execution::par_unseq, indices.begin(), indices.end(), [xs, x, d](size_t i){ return hamming(x, xs[i]) > d; }),
+                  indices.end());
+
+    return indices;
+}
+#endif
+
+std::vector<size_t> within_into(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+    if (size < 2000)
+        return within_into_reference(xs, size, x, d);
+    else
+#ifdef _OPENMP
+        return within_into_omp(xs, size, x, d);
+#else
+        return within_into_execution(xs, size, x, d);
 #endif
 }
