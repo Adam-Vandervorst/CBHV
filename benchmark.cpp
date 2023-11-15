@@ -13,8 +13,8 @@ using namespace std;
 #define INPUT_HYPERVECTOR_COUNT 100
 
 #define WITHIN
-//#define TOP
-//#define CLOSEST
+#define TOP
+#define CLOSEST
 //#define THRESHOLD
 //#define WEIGHTED_THRESHOLD
 //#define MAJ

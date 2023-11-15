@@ -58,7 +58,7 @@ size_t closest_execution(word_t **xs, size_t size, word_t *x) {
 #endif
 
 size_t closest(word_t **xs, size_t size, word_t *x) {
-    if (size < 1000)
+    if (size < 2000)
         return closest_reference(xs, size, x);
     else
 #ifdef _OPENMP
@@ -163,7 +163,7 @@ void top_into_execution_sort(word_t **xs, size_t size, word_t *x, size_t k, size
 #endif
 
 void top_into(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
-    if (size < 500)
+    if (size < 2000)
         return top_into_reference(xs, size, x, k, target);
     else
 #ifdef _OPENMP
