@@ -173,7 +173,7 @@ void top_into(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
 #endif
 }
 
-std::vector<size_t> within_into_reference(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+std::vector<size_t> within_reference(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
     std::vector<size_t> ys;
 
     for (size_t i = 0; i < size; ++i)
@@ -184,7 +184,7 @@ std::vector<size_t> within_into_reference(word_t **xs, size_t size, word_t *x, b
 }
 
 #ifdef _OPENMP
-std::vector<size_t> within_into_omp(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+std::vector<size_t> within_omp(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
     int num_threads;
     #pragma omp parallel
     {
@@ -223,7 +223,7 @@ std::vector<size_t> within_into_omp(word_t **xs, size_t size, word_t *x, bit_ite
     return ys;
 }
 #else
-std::vector<size_t> within_into_execution(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+std::vector<size_t> within_execution(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
     std::vector<size_t> indices(size);
 
     std::iota(indices.begin(), indices.end(), 0);
@@ -235,13 +235,13 @@ std::vector<size_t> within_into_execution(word_t **xs, size_t size, word_t *x, b
 }
 #endif
 
-std::vector<size_t> within_into(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+std::vector<size_t> within(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
     if (size < 2000)
-        return within_into_reference(xs, size, x, d);
+        return within_reference(xs, size, x, d);
     else
 #ifdef _OPENMP
-        return within_into_omp(xs, size, x, d);
+        return within_omp(xs, size, x, d);
 #else
-        return within_into_execution(xs, size, x, d);
+        return within_execution(xs, size, x, d);
 #endif
 }

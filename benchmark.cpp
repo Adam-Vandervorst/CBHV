@@ -1504,9 +1504,9 @@ int main() {
     cout << "*-= WITHIN =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
     for (size_t i = 100; i <= 1000000; i *= 10)
-        within_benchmark<bhv::within_into>(i, 50, BITS/4, true, true);
+        within_benchmark<bhv::within>(i, 50, BITS/4, true, true);
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     for (size_t i = 100; i <= 1000000; i *= 10)
-        within_benchmark<bhv::within_into>(i, 50, BITS/4, true, false);
+        within_benchmark<bhv::within>(i, 50, BITS/4, true, false);
 #endif
 }
