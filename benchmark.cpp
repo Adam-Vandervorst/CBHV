@@ -1496,11 +1496,11 @@ int main() {
     cout << "*-= PARALLEL =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
     closest_benchmark<bhv::closest_parallel>(100000, false, true);
-    for (size_t i = 1; i <= 1000000; i *= 10)
+    for (size_t i = 1000; i <= 1000000; i *= 10)
         closest_benchmark<bhv::closest_parallel>(i, true, true);
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     closest_benchmark<bhv::closest_parallel>(100000, false, false);
-    for (size_t i = 1; i <= 1000000; i *= 10)
+    for (size_t i = 1000; i <= 1000000; i *= 10)
         closest_benchmark<bhv::closest_parallel>(i, true, false);
 #endif
 #ifdef TOP
@@ -1517,11 +1517,11 @@ int main() {
     cout << "*-= PARALLEL =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
     top_benchmark<bhv::top_into_parallel>(100000, 5, false, true);
-    for (size_t i = 10; i <= 1000000; i *= 10)
+    for (size_t i = 1000; i <= 1000000; i *= 10)
         top_benchmark<bhv::top_into_parallel>(i, 5, true, true);
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     top_benchmark<bhv::top_into_parallel>(100000, 5, false, false);
-    for (size_t i = 10; i <= 1000000; i *= 10)
+    for (size_t i = 1000; i <= 1000000; i *= 10)
         top_benchmark<bhv::top_into_parallel>(i, 5, true, false);
 #endif
 #ifdef WITHIN
@@ -1538,11 +1538,11 @@ int main() {
     cout << "*-= PARALLEL =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
     within_benchmark<bhv::within_parallel>(100000, 50, BITS/4, false, true);
-    for (size_t i = 100; i <= 1000000; i *= 10)
+    for (size_t i = 1000; i <= 1000000; i *= 10)
         within_benchmark<bhv::within_parallel>(i, 50, BITS/4, true, true);
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     within_benchmark<bhv::within_parallel>(100000, 50, BITS/4, false, false);
-    for (size_t i = 100; i <= 1000000; i *= 10)
+    for (size_t i = 1000; i <= 1000000; i *= 10)
         within_benchmark<bhv::within_parallel>(i, 50, BITS/4, true, false);
 #endif
 }
