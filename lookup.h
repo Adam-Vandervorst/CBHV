@@ -13,6 +13,7 @@ size_t closest_reference(word_t **xs, size_t size, word_t *x) {
     return index;
 }
 
+#define closest closest_reference
 
 #ifdef _OPENMP
 size_t closest_omp(word_t **xs, size_t size, word_t *x) {
@@ -24,7 +25,7 @@ size_t closest_omp(word_t **xs, size_t size, word_t *x) {
         bit_iter_t local_distance = BITS + 1;
         size_t local_index = -1;
 
-#pragma omp for nowait
+#pragma omp for schedule(static) nowait
         for (size_t i = 0; i < size; ++i) {
             bit_iter_t d = hamming(xs[i], x);
             if (d < local_distance) {
@@ -45,7 +46,7 @@ size_t closest_omp(word_t **xs, size_t size, word_t *x) {
     return index;
 }
 #else
-size_t closest_execution(word_t **xs, size_t size, word_t *x) {
+size_t closest_execution_parmin(word_t **xs, size_t size, word_t *x) {
     bit_iter_t *distances = (bit_iter_t *)malloc(sizeof(bit_iter_t) * size);
 
     std::transform(std::execution::par_unseq, xs, xs + size, distances, [&x](word_t * x_) { return hamming(x, x_); });
@@ -57,16 +58,12 @@ size_t closest_execution(word_t **xs, size_t size, word_t *x) {
 }
 #endif
 
-size_t closest(word_t **xs, size_t size, word_t *x) {
-    if (size < 2000)
-        return closest_reference(xs, size, x);
-    else
 #ifdef _OPENMP
-        return closest_omp(xs, size, x);
+#define closest_parallel closest_omp
 #else
-        return closest_execution(xs, size, x);
+#define closest_parallel closest_execution_parmin
 #endif
-}
+
 
 #include "pq.h"
 
@@ -105,6 +102,8 @@ void top_into_reference(word_t **xs, size_t size, word_t *x, size_t k, size_t* t
     }
 }
 
+#define top_into top_into_reference
+
 #ifdef _OPENMP
 void top_into_omp(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
     assert(size >= k);
@@ -125,7 +124,7 @@ void top_into_omp(word_t **xs, size_t size, word_t *x, size_t k, size_t* target)
         int thread_id = omp_get_thread_num();
         fixed_size_priority_queue<Element>& heap = heaps[thread_id];
 
-        #pragma omp for nowait
+        #pragma omp for schedule(static) nowait
         for (size_t i = 0; i < size; ++i) {
             int dist = hamming(xs[i], x);
             heap.push(Element{i, dist});
@@ -162,16 +161,11 @@ void top_into_execution_sort(word_t **xs, size_t size, word_t *x, size_t k, size
 }
 #endif
 
-void top_into(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
-    if (size < 2000)
-        return top_into_reference(xs, size, x, k, target);
-    else
 #ifdef _OPENMP
-        return top_into_omp(xs, size, x, k, target);
+#define top_into_parallel top_into_omp
 #else
-        return top_into_execution_sort(xs, size, x, k, target);
+#define top_into_parallel top_into_execution_sort
 #endif
-}
 
 std::vector<size_t> within_reference(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
     std::vector<size_t> ys;
@@ -182,6 +176,8 @@ std::vector<size_t> within_reference(word_t **xs, size_t size, word_t *x, bit_it
 
     return ys;
 }
+
+#define within within_reference
 
 #ifdef _OPENMP
 std::vector<size_t> within_omp(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
@@ -198,7 +194,7 @@ std::vector<size_t> within_omp(word_t **xs, size_t size, word_t *x, bit_iter_t d
     {
         int thread_id = omp_get_thread_num();
 
-        #pragma omp for schedule(dynamic) nowait
+        #pragma omp for schedule(static) nowait
         for (size_t i = 0; i < size; ++i) {
             if (hamming(xs[i], x) <= d) {
                 ys_private[thread_id].push_back(i);
@@ -223,7 +219,7 @@ std::vector<size_t> within_omp(word_t **xs, size_t size, word_t *x, bit_iter_t d
     return ys;
 }
 #else
-std::vector<size_t> within_execution(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+std::vector<size_t> within_execution_remove(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
     std::vector<size_t> indices(size);
 
     std::iota(indices.begin(), indices.end(), 0);
@@ -235,13 +231,8 @@ std::vector<size_t> within_execution(word_t **xs, size_t size, word_t *x, bit_it
 }
 #endif
 
-std::vector<size_t> within(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
-    if (size < 2000)
-        return within_reference(xs, size, x, d);
-    else
 #ifdef _OPENMP
-        return within_omp(xs, size, x, d);
+#define within_parallel within_omp
 #else
-        return within_execution(xs, size, x, d);
+#define within_parallel within_execution_remove
 #endif
-}
