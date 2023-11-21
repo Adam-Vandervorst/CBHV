@@ -15,6 +15,57 @@ size_t closest_reference(word_t **xs, size_t size, word_t *x) {
 
 #define closest closest_reference
 
+struct Element {
+    size_t index;
+    bit_iter_t distance;
+
+    bool operator<(const Element &rhs) const {
+        return distance > rhs.distance;
+    }
+
+    bool operator>(const Element &rhs) const {
+        return rhs < *this;
+    }
+
+    bool operator<=(const Element &rhs) const {
+        return !(rhs < *this);
+    }
+
+    bool operator>=(const Element &rhs) const {
+        return !(*this < rhs);
+    }
+};
+
+void top_into_reference(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
+    assert(size >= k);
+
+    fixed_size_priority_queue<Element> heap(k);
+
+    for (size_t i = 0; i < size; ++i)
+        heap.push(Element{i, hamming(xs[i], x)});
+
+    for (size_t i = 0; i < k; ++i) {
+        target[i] = heap.top().index;
+        heap.pop();
+    }
+}
+
+#define top_into top_into_reference
+
+std::vector<size_t> within_reference(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+    std::vector<size_t> ys;
+
+    for (size_t i = 0; i < size; ++i)
+        if (hamming(xs[i], x) <= d)
+            ys.push_back(i);
+
+    return ys;
+}
+
+#define within within_reference
+
+
+#ifndef NOPARALLELISM
 #ifdef _OPENMP
 size_t closest_omp(word_t **xs, size_t size, word_t *x) {
     bit_iter_t distance = BITS + 1;
@@ -64,45 +115,6 @@ size_t closest_execution_parmin(word_t **xs, size_t size, word_t *x) {
 #define closest_parallel closest_execution_parmin
 #endif
 
-
-#include "pq.h"
-
-struct Element {
-    size_t index;
-    bit_iter_t distance;
-
-    bool operator<(const Element &rhs) const {
-        return distance > rhs.distance;
-    }
-
-    bool operator>(const Element &rhs) const {
-        return rhs < *this;
-    }
-
-    bool operator<=(const Element &rhs) const {
-        return !(rhs < *this);
-    }
-
-    bool operator>=(const Element &rhs) const {
-        return !(*this < rhs);
-    }
-};
-
-void top_into_reference(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
-    assert(size >= k);
-
-    fixed_size_priority_queue<Element> heap(k);
-
-    for (size_t i = 0; i < size; ++i)
-        heap.push(Element{i, hamming(xs[i], x)});
-
-    for (size_t i = 0; i < k; ++i) {
-        target[i] = heap.top().index;
-        heap.pop();
-    }
-}
-
-#define top_into top_into_reference
 
 #ifdef _OPENMP
 void top_into_omp(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
@@ -167,17 +179,6 @@ void top_into_execution_sort(word_t **xs, size_t size, word_t *x, size_t k, size
 #define top_into_parallel top_into_execution_sort
 #endif
 
-std::vector<size_t> within_reference(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
-    std::vector<size_t> ys;
-
-    for (size_t i = 0; i < size; ++i)
-        if (hamming(xs[i], x) <= d)
-            ys.push_back(i);
-
-    return ys;
-}
-
-#define within within_reference
 
 #ifdef _OPENMP
 std::vector<size_t> within_omp(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
@@ -236,3 +237,4 @@ std::vector<size_t> within_execution_remove(word_t **xs, size_t size, word_t *x,
 #else
 #define within_parallel within_execution_remove
 #endif
+#endif // NOPARALLELISM

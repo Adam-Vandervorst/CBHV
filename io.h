@@ -1,7 +1,3 @@
-#include <cstdio>
-#include <cstdlib>
-
-
 word_t** load_pbm(FILE* file, size_t* n_elements) {
     char header[2];
     fread(header, 1, 2, file);

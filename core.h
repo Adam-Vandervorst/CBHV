@@ -1,21 +1,26 @@
 #ifndef BHV_CORE_H
 #define BHV_CORE_H
 
-#include <bit>
-#include <functional>
-#include <queue>
-#include <ranges>
+#ifndef NOPARALLELISM
 #ifdef _OPENMP
 #include <omp.h>
 #else
 #include <execution>
 #endif
+#endif
+#include <bit>
+#include <functional>
+#include <queue>
+#include <ranges>
 #include <random>
-#include <cstring>
-#include <cassert>
 #include <algorithm>
-#include <immintrin.h>
+#include <cstring>
+#include <cstdio>
+#include <cstdlib>
+#include <cassert>
+#include "immintrin.h"
 #include "shared.h"
+#include "pq.h"
 #ifdef __AVX2__
 #include "simdpcg.h"
 #endif
