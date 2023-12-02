@@ -12,11 +12,12 @@ using namespace std;
 #define MAJ_INPUT_HYPERVECTOR_COUNT 1000001
 #define INPUT_HYPERVECTOR_COUNT 100
 
-#define WITHIN
-#define TOP
-#define CLOSEST
+//#define WITHIN
+//#define TOP
+//#define CLOSEST
 //#define THRESHOLD
 //#define WEIGHTED_THRESHOLD
+//#define INVERSE
 //#define MAJ
 //#define PARITY
 //#define RAND
@@ -25,7 +26,7 @@ using namespace std;
 //#define PERMUTE
 //#define ROLL
 //#define ACTIVE
-#define HAMMING
+//#define HAMMING
 //#define INVERT
 //#define SWAP_HALVES
 //#define REHASH
@@ -67,8 +68,6 @@ void within_benchmark(size_t n, size_t k, bit_iter_t d, bool display, bool keep_
     //up paying disk swap penalties.  Therefore we do fewer tests in the case with more hypervectors
     const size_t test_count = MAJ_INPUT_HYPERVECTOR_COUNT / n;
     const size_t input_output_count = (keep_in_cache ? 1 : test_count);
-
-    std::uniform_int_distribution<size_t> target_gen(0, n-1);
 
     //Init n random vectors for each test
     word_t ***inputs = (word_t***)malloc(sizeof(word_t**) * input_output_count);
@@ -137,8 +136,6 @@ void top_benchmark(size_t n, size_t k, bool display, bool keep_in_cache) {
     const size_t test_count = MAJ_INPUT_HYPERVECTOR_COUNT / n;
     const size_t input_output_count = (keep_in_cache ? 1 : test_count);
 
-    std::uniform_int_distribution<size_t> target_gen(0, n-1);
-
     //Init n random vectors for each test
     word_t ***inputs = (word_t***)malloc(sizeof(word_t**) * input_output_count);
     word_t **queries = (word_t**)malloc(sizeof(word_t*) * input_output_count);
@@ -200,6 +197,7 @@ void top_benchmark(size_t n, size_t k, bool display, bool keep_in_cache) {
     free(inputs);
     free(targets);
     free(queries);
+    free(result_buffer);
 }
 
 
@@ -517,8 +515,8 @@ pair<float, float> permute_benchmark(bool display) {
     const int test_count = INPUT_HYPERVECTOR_COUNT * different_permutations * 2;
 
     bool correct = true;
-    double permute_test_time = 0.;
-    double unpermute_test_time = 0.;
+    double permute_test_time;
+    double unpermute_test_time;
     int64_t perms [different_permutations];
     for (size_t i = 0; i < different_permutations; ++i)
         perms[i] = i;
@@ -724,6 +722,8 @@ float unary_benchmark(bool display,  bool keep_in_cache) {
     if (display)
         cout << "equiv " << ((checksum == val_checksum) ? "v" : "x") << ", total: " << mean_test_time / 1000.0 << "µs" << endl;
 
+    free(result_buffer);
+
     return mean_test_time;
 }
 
@@ -769,6 +769,8 @@ float binary_benchmark(bool display,  bool keep_in_cache) {
     float mean_test_time = (float) chrono::duration_cast<chrono::nanoseconds>(t2 - t1).count() / (float) test_count;
     if (display)
         cout << "equiv " << ((checksum == val_checksum) ? "v" : "x") << ", total: " << mean_test_time / 1000.0 << "µs" << endl;
+
+    free(result_buffer);
 
     return mean_test_time;
 }
@@ -820,6 +822,8 @@ float ternary_benchmark(bool display,  bool keep_in_cache) {
     float mean_test_time = (float) chrono::duration_cast<chrono::nanoseconds>(t2 - t1).count() / (float) test_count;
     if (display)
         cout << "equiv " << ((checksum == val_checksum) ? "v" : "x") << ", total: " << mean_test_time / 1000.0 << "µs" << endl;
+
+    free(result_buffer);
 
     return mean_test_time;
 }
