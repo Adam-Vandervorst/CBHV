@@ -15,6 +15,7 @@ using namespace std;
 //#define WITHIN
 //#define TOP
 //#define CLOSEST
+#define REPRESENTATIVE
 //#define THRESHOLD
 //#define WEIGHTED_THRESHOLD
 //#define INVERSE
@@ -1319,7 +1320,6 @@ int main() {
     nary_benchmark<bhv::parity_into, bhv::parity_into_reference>(1000001, true, false);
 #endif
 #ifdef MAJ
-    //Run one throw-away test to make sure the OS is ready to give us full resource
     nary_benchmark<bhv::true_majority_into, simulated_majority>(3, false, false);
 
     cout << "*-= MAJ =-*" << endl;
@@ -1485,6 +1485,19 @@ int main() {
     for (uint8_t i = 0; i < 12; ++i) for (uint8_t j = 0; j < i; ++j) {
         threshold_benchmark(i, j, .5, true, true);
     }
+#endif
+#ifdef REPRESENTATIVE
+    nary_benchmark<bhv::representative_into, bhv::representative_into>(3, false, false);
+
+    cout << "*-= REPRESENTATIVE =-*" << endl;
+    cout << "*-= IN CACHE TESTS =-*" << endl;
+    for (size_t i = 1; i < 100000; i = i < 10 ? i+1 : (size_t)(i*2.71828))
+        nary_benchmark<bhv::representative_into, bhv::representative_into>(i, true, true);
+
+    cout << "*-= OUT OF CACHE TESTS =-*" << endl;
+    for (size_t i = 1; i < 100000; i = i < 10 ? i+1 : (size_t)(i*2.71828))
+        nary_benchmark<bhv::representative_into, bhv::representative_into>(i, true, false);
+
 #endif
 #ifdef CLOSEST
     cout << "*-= CLOSEST =-*" << endl;
