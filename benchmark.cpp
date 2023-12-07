@@ -1491,13 +1491,12 @@ int main() {
 
     cout << "*-= REPRESENTATIVE =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
-    for (size_t i = 1; i < 100000; i = i < 10 ? i+1 : (size_t)(i*2.71828))
+    for (size_t i = 1; i < 100000; i = i < 10 ? i+1 : (size_t)(i*1.111))
         nary_benchmark<bhv::representative_into, bhv::representative_into>(i, true, true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
-    for (size_t i = 1; i < 100000; i = i < 10 ? i+1 : (size_t)(i*2.71828))
+    for (size_t i = 1; i < 100000; i = i < 10 ? i+1 : (size_t)(i*1.111))
         nary_benchmark<bhv::representative_into, bhv::representative_into>(i, true, false);
-
 #endif
 #ifdef CLOSEST
     cout << "*-= CLOSEST =-*" << endl;

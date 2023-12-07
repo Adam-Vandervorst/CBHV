@@ -13,18 +13,74 @@ void representative_into_bitcount_reference(word_t **xs, size_t size, word_t *ta
 }
 
 #ifdef __AVX2__
+constexpr uint8_t reachable_binary(uint8_t p, uint8_t d, uint8_t circ, uint8_t n) {
+    if (d > circ)
+        return 0;
+
+    uint8_t power_factor = 1 << (circ - d);
+    uint8_t lower = p * power_factor;
+    uint8_t upper = (lower + power_factor < n) ? lower + power_factor : n;
+
+    uint8_t diff = upper - lower;
+    return (lower < n) ? diff : 0;
+}
+
+// Recursion is slow? Not if you do it compiletime! (now compiletime is slow)
+template<uint8_t p, uint8_t d, uint8_t circ, uint8_t n>
+word_t* representative_into_recursive_avx2_inner(word_t **vs, word_t **rs) {
+    constexpr uint8_t L0 = reachable_binary(p << 1, d + 1, circ, n);
+    constexpr uint8_t L1 = reachable_binary(1 | (p << 1), d + 1, circ, n);
+
+    if constexpr (L0 != 0 and L1 != 0) {
+        static word_t node [WORDS];
+        word_t * cond;
+        if constexpr (L0 == L1) cond = rs[d];
+        else { random_into(node, L1 / (L0 + L1)); cond = node; }
+
+        select_into(cond,
+            representative_into_recursive_avx2_inner<1 | (p << 1), d + 1, circ, n>(vs, rs),
+            representative_into_recursive_avx2_inner<p << 1, d + 1, circ, n>(vs, rs), node);
+        return node;
+    } else if constexpr (L0 != 0) {
+        return representative_into_recursive_avx2_inner<p << 1, d + 1, circ, n>(vs, rs);
+    } else if constexpr (L1 != 0) {
+        return representative_into_recursive_avx2_inner<1 | (p << 1), d + 1, circ, n>(vs, rs);
+    } else {
+        return vs[p];
+    }
+}
+
+template <uint8_t n>
+void representative_into_recursive_avx2(word_t **xs, word_t *target) {
+    constexpr uint8_t circumscribed = 64 - __builtin_clzll(n - 1);
+
+    word_t rs_buf [circumscribed][WORDS];
+    word_t *rs [circumscribed];
+
+    for (size_t i = 0; i < circumscribed; ++i) {
+        rand_into(rs_buf[i]);
+        rs[i] = rs_buf[i];
+    }
+
+    word_t* res = representative_into_recursive_avx2_inner<0, 0, circumscribed, n>(xs, rs);
+
+    memcpy(target, res, BYTES);
+}
+
 // Looks fancy but is quite slow
 template <size_t circumscribed>
 void representative_into_btree_array_avx2(word_t **xs, size_t n, word_t *target) {
     constexpr size_t size = 2 << circumscribed;
     __m256i arr [size];
+    __m256i rs [circumscribed];
     size_t lows [size];
     size_t highs [size];
     uint8_t to;
     float correction;
 
-
     for (word_iter_t word_id = 0; word_id < WORDS; word_id += 4) {
+        for (size_t i = 0; i < circumscribed; ++i)
+            rs[i] = avx2_pcg32_random_r(&avx2_key);
         for (size_t i = size - 1; i > 0; --i) {
             if (size - n <= i) {
                 arr[i] = _mm256_loadu_si256((__m256i *) (xs[size - i - 1] + word_id));
@@ -39,11 +95,10 @@ void representative_into_btree_array_avx2(word_t **xs, size_t n, word_t *target)
                     lows[i] = lows[2*i + 1];
                     highs[i] = highs[2*i];
 
-                    uint64_t instr = instruction_upto((float)db/(float)(da + db), &to, &correction, 0.001);
+                    uint64_t instr = instruction_upto((float)db/(float)(da + db), &to, &correction, 0.002);
 
-                    // TODO only needs to be generated once per level of the tree
-                    // The level of the tree can be calculated to be `smallest_power2_larger_than(2*i + 1) - 2`
-                    __m256i cond = avx2_pcg32_random_r(&avx2_key);
+                    size_t sp = 62 - __builtin_clzll(2*i + 1);
+                    __m256i cond = rs[sp];
 
                     for (uint8_t i = to - 1; i < to; --i) {
                         if ((instr & (1ULL << i)) >> i)
@@ -140,6 +195,7 @@ void representative_into_counters_avx2(word_t ** xs, uint32_t size, word_t* dst)
     }
 }
 
+// uselessly biased for low number of range
 __m256i random8_fastrange_avx2(uint8_t range) {
     __m256i r = _mm256_set1_epi16(range);
 
@@ -170,10 +226,52 @@ __m256i random8_fastrange_avx2(uint8_t range) {
     return out;
 }
 
+// uselessly slow
+__m256i random8_range_avx2(uint8_t range) {
+    __m256i sample;
+
+    uint8_t k = 64 - __builtin_clzll(range - 1);
+    uint8_t M = (1 << k) - ((1 << k) % range);
+
+    __m256i M_simd = _mm256_set1_epi8(M);
+    __m256i onetwentyeight_simd = _mm256_set1_epi8(128);
+    __m256i range_simd = _mm256_set1_epi8(range + 128);
+
+    __m256i out = _mm256_set1_epi8(0);
+    uint32_t mask = 0;
+
+    while (mask != 0xffffffff) {
+        sample = avx2_pcg32_random_r(&avx2_key);
+
+        __m256i lt = _mm256_cmpgt_epi8(range_simd, _mm256_sub_epi8(sample, onetwentyeight_simd));
+
+        mask |= _mm256_movemask_epi8(lt);
+
+        // could be sped up a lot by using modulo rejection sampling, especially for very low range
+        // __m256i valid = compiletime_rem_epi8_avx2(sample, range); // a lookup table of functions with fixed divisor
+        // __m256i valid = _mm256_rem_epi8(sample, range_simd); // this is only provided by the Intel compiler and not even that much faster than the above
+
+        // this is stupendously wasteful, because here the *position* matters, not just if it was successfully generated
+        // maybe https://www.felixcloutier.com/x86/vpmultishiftqb to the rescue
+        out = _mm256_blendv_epi8(out, sample, lt);
+    }
+
+    return out;
+}
+
+// quite slow
+__m256i random8_range_emulated(uint8_t range) {
+    static std::uniform_int_distribution<uint8_t> distr(0, range - 1);
+
+    return _mm256_set_epi8(
+        distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng),
+        distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng),
+        distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng),
+        distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng));
+}
 
 void representative_into_byte_counters_avx2(word_t **xs, size_t size, word_t *target) {
     const __m256i one_twenty_eight = _mm256_set1_epi8((char)128);
-    // __m256i threshold_simd = _mm256_set1_epi8(((signed char)threshold) - 128);
     uint8_t* dst_bytes = (uint8_t*)target;
 
     for (size_t byte_offset = 0; byte_offset < BYTES; byte_offset += 32) {
@@ -189,7 +287,7 @@ void representative_into_byte_counters_avx2(word_t **xs, size_t size, word_t *ta
         //Do the threshold test, and compose out output bits
         __m256i out_bits;
         for (int i=0; i<8; i++) {
-            __m256i rand_thresholds = random8_fastrange_avx2(size);
+            __m256i rand_thresholds = random8_range_emulated(size);
             rand_thresholds = _mm256_sub_epi32(rand_thresholds, one_twenty_eight); // offset that used to be one threshold_simd
 
             __m256i adjusted_counts = _mm256_sub_epi8(out_counts[i], one_twenty_eight);
@@ -235,10 +333,36 @@ void representative_into_avx2(word_t **xs, size_t size, word_t *target) {
     if (size == 0) rand_into(target);
     else if (size == 1) memcpy(target, xs[0], BYTES);
     else if (size == 2) { word_t r[WORDS]; rand_into(r); select_into(r, xs[0], xs[1], target); }
-    // else if (size <= 4) representative_into_btree_array_avx2<2>(xs, size, target);
-    // else if (size <= 8) representative_into_btree_array_avx2<3>(xs, size, target);
-    // else if (size <= 16) representative_into_btree_array_avx2<4>(xs, size, target);
-    // else if (size <= 32) representative_into_btree_array_avx2<5>(xs, size, target);
+    else if (size == 3) representative_into_recursive_avx2<3>(xs, target);
+    else if (size == 4) representative_into_recursive_avx2<4>(xs, target);
+    else if (size == 5) representative_into_recursive_avx2<5>(xs, target);
+    else if (size == 6) representative_into_recursive_avx2<6>(xs, target);
+    else if (size == 7) representative_into_recursive_avx2<7>(xs, target);
+    else if (size == 8) representative_into_recursive_avx2<8>(xs, target);
+    else if (size == 9) representative_into_recursive_avx2<9>(xs, target);
+    else if (size == 10) representative_into_recursive_avx2<10>(xs, target);
+    else if (size == 11) representative_into_recursive_avx2<11>(xs, target);
+    else if (size == 12) representative_into_recursive_avx2<12>(xs, target);
+    else if (size == 13) representative_into_recursive_avx2<13>(xs, target);
+    else if (size == 14) representative_into_recursive_avx2<14>(xs, target);
+    else if (size == 15) representative_into_recursive_avx2<15>(xs, target);
+    else if (size == 16) representative_into_recursive_avx2<16>(xs, target);
+    else if (size == 17) representative_into_recursive_avx2<17>(xs, target);
+    else if (size == 18) representative_into_recursive_avx2<18>(xs, target);
+    else if (size == 19) representative_into_recursive_avx2<19>(xs, target);
+    else if (size == 20) representative_into_recursive_avx2<20>(xs, target);
+    else if (size == 21) representative_into_recursive_avx2<21>(xs, target);
+    else if (size == 22) representative_into_recursive_avx2<22>(xs, target);
+    else if (size == 23) representative_into_recursive_avx2<23>(xs, target);
+    else if (size == 24) representative_into_recursive_avx2<24>(xs, target);
+    else if (size == 25) representative_into_recursive_avx2<25>(xs, target);
+    else if (size == 26) representative_into_recursive_avx2<26>(xs, target);
+    else if (size == 27) representative_into_recursive_avx2<27>(xs, target);
+    else if (size == 28) representative_into_recursive_avx2<28>(xs, target);
+    else if (size == 29) representative_into_recursive_avx2<29>(xs, target);
+    else if (size == 30) representative_into_recursive_avx2<30>(xs, target);
+    else if (size == 31) representative_into_recursive_avx2<31>(xs, target);
+    else if (size == 32) representative_into_recursive_avx2<32>(xs, target);
     else if (size <= 255) representative_into_byte_counters_avx2(xs, size, target);
     else if (size <= 2000) representative_into_counters_avx2(xs, size, target);
     else representative_into_bitcount_reference(xs, size, target);
