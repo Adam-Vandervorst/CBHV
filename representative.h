@@ -35,7 +35,7 @@ word_t* representative_into_recursive_avx2_inner(word_t **vs, word_t **rs) {
         static word_t node [WORDS];
         word_t * cond;
         if constexpr (L0 == L1) cond = rs[d];
-        else { random_into(node, L1 / (L0 + L1)); cond = node; }
+        else { random_into(node, (float)L1/(float)(L0 + L1)); cond = node; }
 
         select_into(cond,
             representative_into_recursive_avx2_inner<1 | (p << 1), d + 1, circ, n>(vs, rs),
@@ -67,60 +67,6 @@ void representative_into_recursive_avx2(word_t **xs, word_t *target) {
     memcpy(target, res, BYTES);
 }
 
-// Looks fancy but is quite slow
-template <size_t circumscribed>
-void representative_into_btree_array_avx2(word_t **xs, size_t n, word_t *target) {
-    constexpr size_t size = 2 << circumscribed;
-    __m256i arr [size];
-    __m256i rs [circumscribed];
-    size_t lows [size];
-    size_t highs [size];
-    uint8_t to;
-    float correction;
-
-    for (word_iter_t word_id = 0; word_id < WORDS; word_id += 4) {
-        for (size_t i = 0; i < circumscribed; ++i)
-            rs[i] = avx2_pcg32_random_r(&avx2_key);
-        for (size_t i = size - 1; i > 0; --i) {
-            if (size - n <= i) {
-                arr[i] = _mm256_loadu_si256((__m256i *) (xs[size - i - 1] + word_id));
-                lows[i] = size - i - 1;
-                highs[i] = size - i;
-            } else if (2*i + 1 < size) {
-                if (lows[2*i] != 0) {
-                    // Not sure if we should intermix this with the AVX logic or not, likely dependent on `n`
-                    size_t da = highs[2*i] - lows[2*i];
-                    size_t db = highs[2*i + 1] - lows[2*i + 1];
-
-                    lows[i] = lows[2*i + 1];
-                    highs[i] = highs[2*i];
-
-                    uint64_t instr = instruction_upto((float)db/(float)(da + db), &to, &correction, 0.002);
-
-                    size_t sp = 62 - __builtin_clzll(2*i + 1);
-                    __m256i cond = rs[sp];
-
-                    for (uint8_t i = to - 1; i < to; --i) {
-                        if ((instr & (1ULL << i)) >> i)
-                            cond = _mm256_or_si256(cond, avx2_pcg32_random_r(&avx2_key));
-                        else
-                            cond = _mm256_and_si256(cond, avx2_pcg32_random_r(&avx2_key));
-                    }
-
-                    __m256i when1 = arr[2*i + 1];
-                    __m256i when0 = arr[2*i];
-                    arr[i] = when0 ^ (cond & (when0 ^ when1));
-                } else {
-                    lows[i] = lows[2*i + 1];
-                    highs[i] = highs[2*i + 1];
-                    arr[i] = arr[2*i + 1];
-                }
-            }
-        }
-        _mm256_storeu_si256((__m256i *) (target + word_id), arr[1]);
-    }
-}
-
 __m256i random32_range(int range) {
     __m256i bits = avx2_pcg32_random_r(&avx2_key);
     // Convert random bits into FP32 number in [ 1 .. 2 ) interval
@@ -136,7 +82,7 @@ __m256i random32_range(int range) {
     return _mm256_cvttps_epi32(val);
 }
 
-void representative_into_counters_avx2(word_t ** xs, uint32_t size, word_t* dst) {
+void representative_into_counters_avx2(word_t ** xs, size_t size, word_t* dst) {
     const __m256i signed_compare_adjustment = _mm256_set1_epi32(0x80000000);
     uint8_t* dst_bytes = (uint8_t*)dst;
     uint32_t counters[BITS];
@@ -191,7 +137,7 @@ void representative_into_counters_avx2(word_t ** xs, uint32_t size, word_t* dst)
             (uint8_t)_pext_u64(maj_words[2], 0x0000000100000001) << 4 |
             (uint8_t)_pext_u64(maj_words[3], 0x0000000100000001) << 6;
 
-        *((uint16_t*)(dst_bytes + i)) = maj_bytes;
+        *((uint8_t*)(dst_bytes + i)) = maj_bytes;
     }
 }
 
@@ -220,7 +166,7 @@ __m256i random8_fastrange_avx2(uint8_t range) {
 
 
     lr = _mm256_srli_epi16(lr, 8);
-    __m256i m = _mm256_set_epi8(0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff, 0, 0xff);
+    __m256i m = _mm256_set_epi8(0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1);
     __m256i out = _mm256_blendv_epi8(hr, lr, m);
 
     return out;
@@ -233,7 +179,7 @@ __m256i random8_range_avx2(uint8_t range) {
     uint8_t k = 64 - __builtin_clzll(range - 1);
     uint8_t M = (1 << k) - ((1 << k) % range);
 
-    __m256i M_simd = _mm256_set1_epi8(M);
+    // __m256i M_simd = _mm256_set1_epi8(M);
     __m256i onetwentyeight_simd = _mm256_set1_epi8(128);
     __m256i range_simd = _mm256_set1_epi8(range + 128);
 
@@ -288,7 +234,7 @@ void representative_into_byte_counters_avx2(word_t **xs, size_t size, word_t *ta
         __m256i out_bits;
         for (int i=0; i<8; i++) {
             __m256i rand_thresholds = random8_range_emulated(size);
-            rand_thresholds = _mm256_sub_epi32(rand_thresholds, one_twenty_eight); // offset that used to be one threshold_simd
+            rand_thresholds = _mm256_sub_epi8(rand_thresholds, one_twenty_eight);
 
             __m256i adjusted_counts = _mm256_sub_epi8(out_counts[i], one_twenty_eight);
             __m256i maj_bits_vec = _mm256_cmpgt_epi8(adjusted_counts, rand_thresholds);
@@ -302,22 +248,6 @@ void representative_into_byte_counters_avx2(word_t **xs, size_t size, word_t *ta
 }
 #endif
 
-
-//word_t * n_representatives_impl(word_t ** xs, size_t size) {
-//    word_t * x = zero();
-//
-//    std::uniform_int_distribution<size_t> gen(0, size - 1);
-//    for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
-//        word_t word = 0;
-//        for (bit_word_iter_t bit_id = 0; bit_id < BITS_PER_WORD; ++bit_id) {
-//            size_t x_id = gen(rng);
-//            word |=  1UL << (xs[x_id][word_id] >> bit_id) & 1;
-//        }
-//        x[word_id] = word;
-//    }
-//
-//    return x;
-//}
 
 /// @brief For each dimension, samples a bit from xs into target
 void representative_into_reference(word_t **xs, size_t size, word_t *target) {
@@ -364,7 +294,7 @@ void representative_into_avx2(word_t **xs, size_t size, word_t *target) {
     else if (size == 31) representative_into_recursive_avx2<31>(xs, target);
     else if (size == 32) representative_into_recursive_avx2<32>(xs, target);
     else if (size <= 255) representative_into_byte_counters_avx2(xs, size, target);
-    else if (size <= 2000) representative_into_counters_avx2(xs, size, target);
+    else if (size <= 2000) representative_into_counters_avx2(xs, size, target); // TODO could get away with 16 bit counters
     else representative_into_bitcount_reference(xs, size, target);
 }
 #endif
