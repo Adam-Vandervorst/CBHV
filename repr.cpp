@@ -32,24 +32,29 @@ void analyze(int arity) {
 
 int main() {
     cout << "rec" << endl;
-    // analyze<bhv::representative_into_avx2>(3);
-    // analyze<bhv::representative_into_avx2>(4);
-    // analyze<bhv::representative_into_avx2>(5);
-    // analyze<bhv::representative_into_avx2>(8);
-    analyze<bhv::representative_into_avx2>(133);
+    analyze<bhv::representative_into_avx2>(3);
+    analyze<bhv::representative_into_avx2>(4);
+    analyze<bhv::representative_into_avx2>(5);
+    analyze<bhv::representative_into_avx2>(8);
+    // analyze<bhv::representative_into_avx2>(133);
     cout << "byte counter" << endl;
-    // analyze<bhv::representative_into_byte_counters_avx2>(3);
-    // analyze<bhv::representative_into_byte_counters_avx2>(4);
-    // analyze<bhv::representative_into_byte_counters_avx2>(5);
-    // analyze<bhv::representative_into_byte_counters_avx2>(8);
-    analyze<bhv::representative_into_byte_counters_avx2>(133);
+    analyze<bhv::representative_into_byte_counters_avx2>(3);
+    analyze<bhv::representative_into_byte_counters_avx2>(4);
+    analyze<bhv::representative_into_byte_counters_avx2>(5);
+    analyze<bhv::representative_into_byte_counters_avx2>(8);
+    // analyze<bhv::representative_into_byte_counters_avx2>(133);
     cout << "reference" << endl;
-    // analyze<bhv::representative_into_bitcount_reference>(3);
-    // analyze<bhv::representative_into_bitcount_reference>(4);
-    // analyze<bhv::representative_into_bitcount_reference>(5);
-    // analyze<bhv::representative_into_bitcount_reference>(8);
-    analyze<bhv::representative_into_bitcount_reference>(133);
-    // analyze<bhv::representative_into_counters_avx2>(260);
+    analyze<bhv::representative_into_sampling_reference>(3);
+    analyze<bhv::representative_into_sampling_reference>(4);
+    analyze<bhv::representative_into_sampling_reference>(5);
+    analyze<bhv::representative_into_sampling_reference>(8);
+    // analyze<bhv::representative_into_sampling_reference>(133);
+    cout << "sampling avx" << endl;
+    analyze<bhv::representative_into_sampling_avx2>(3);
+    analyze<bhv::representative_into_sampling_avx2>(4);
+    analyze<bhv::representative_into_sampling_avx2>(5);
+    analyze<bhv::representative_into_sampling_avx2>(8);
+
     // cout << "counters32" << endl;
     // analyze<bhv::representative_into_counters_avx2>(260);
 }

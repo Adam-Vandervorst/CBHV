@@ -1,5 +1,5 @@
 /// @brief Plain C implementation of representative sampling
-void representative_into_bitcount_reference(word_t **xs, size_t size, word_t *target) {
+void representative_into_sampling_reference(word_t **xs, size_t size, word_t *target) {
     std::uniform_int_distribution<size_t> gen(0, size - 1);
     for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
         word_t word = 0;
@@ -80,6 +80,28 @@ __m256i random32_range(int range) {
     val = _mm256_fmsub_ps(val, rf, rf);
 
     return _mm256_cvttps_epi32(val);
+}
+
+void representative_into_sampling_avx2(word_t **xs, size_t size, word_t *target) {
+    uint8_t* dst_bytes = (uint8_t*)target;
+
+    for (size_t byte_id = 0; byte_id < BYTES; ++byte_id) {
+        uint32_t buf [8];
+        uint8_t b = 0;
+
+        _mm256_store_si256((__m256i*)buf, random32_range(size));
+
+        b |= ((uint8_t *)xs[buf[0]])[byte_id] & 0b10000000;
+        b |= ((uint8_t *)xs[buf[1]])[byte_id] & 0b01000000;
+        b |= ((uint8_t *)xs[buf[2]])[byte_id] & 0b00100000;
+        b |= ((uint8_t *)xs[buf[3]])[byte_id] & 0b00010000;
+        b |= ((uint8_t *)xs[buf[4]])[byte_id] & 0b00001000;
+        b |= ((uint8_t *)xs[buf[5]])[byte_id] & 0b00000100;
+        b |= ((uint8_t *)xs[buf[6]])[byte_id] & 0b00000010;
+        b |= ((uint8_t *)xs[buf[7]])[byte_id] & 0b00000001;
+
+        dst_bytes[byte_id] = b;
+    }
 }
 
 void representative_into_counters_avx2(word_t ** xs, size_t size, word_t* dst) {
@@ -177,7 +199,7 @@ __m256i random8_range_avx2(uint8_t range) {
     __m256i sample;
 
     uint8_t k = 64 - __builtin_clzll(range - 1);
-    uint8_t M = (1 << k) - ((1 << k) % range);
+    // uint8_t M = (1 << k) - ((1 << k) % range);
 
     // __m256i M_simd = _mm256_set1_epi8(M);
     __m256i onetwentyeight_simd = _mm256_set1_epi8(128);
@@ -216,6 +238,7 @@ __m256i random8_range_emulated(uint8_t range) {
         distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng), distr(rng));
 }
 
+// Statistics shows it's not quite correct yet
 void representative_into_byte_counters_avx2(word_t **xs, size_t size, word_t *target) {
     const __m256i one_twenty_eight = _mm256_set1_epi8((char)128);
     uint8_t* dst_bytes = (uint8_t*)target;
@@ -254,7 +277,7 @@ void representative_into_reference(word_t **xs, size_t size, word_t *target) {
     if (size == 0) rand_into(target);
     else if (size == 1) memcpy(target, xs[0], BYTES);
     else if (size == 2) { word_t r[WORDS]; rand_into(r); select_into(r, xs[0], xs[1], target); }
-    else representative_into_bitcount_reference(xs, size, target);
+    else representative_into_sampling_reference(xs, size, target);
 }
 
 
@@ -293,9 +316,9 @@ void representative_into_avx2(word_t **xs, size_t size, word_t *target) {
     else if (size == 30) representative_into_recursive_avx2<30>(xs, target);
     else if (size == 31) representative_into_recursive_avx2<31>(xs, target);
     else if (size == 32) representative_into_recursive_avx2<32>(xs, target);
-    else if (size <= 255) representative_into_byte_counters_avx2(xs, size, target);
-    else if (size <= 2000) representative_into_counters_avx2(xs, size, target); // TODO could get away with 16 bit counters
-    else representative_into_bitcount_reference(xs, size, target);
+    // else if (size <= 255) representative_into_byte_counters_avx2(xs, size, target);
+    // else if (size <= 2000) representative_into_counters_avx2(xs, size, target); // TODO could get away with 16 bit counters
+    else representative_into_sampling_avx2(xs, size, target);
 }
 #endif
 
