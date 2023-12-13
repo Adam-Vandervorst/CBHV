@@ -144,6 +144,17 @@ namespace bhv {
         d[i/BITS_PER_WORD] ^= (1ULL << (i % BITS_PER_WORD));
     }
 
+    inline void level_into(size_t l, word_t *target) {
+        uint8_t *target_bytes = (uint8_t*)target;
+
+        size_t needed = (l + 7) / 8;
+        size_t full = l / 8;
+        size_t start = full + (full < needed);
+
+        memset(target_bytes, 0xFF, full);
+        if (full < needed) target_bytes[full] = (1 << (l % 8)) - 1;
+        if (start < BYTES) memset(target_bytes + start, 0x00, BYTES - start);
+    }
 
     #include "io.h"
 

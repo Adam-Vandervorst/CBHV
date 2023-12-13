@@ -1,3 +1,4 @@
+#include <cassert>
 #include <chrono>
 #include <iostream>
 #include <random>
@@ -204,6 +205,25 @@ void test_opt_centroid() {
     cout << test_time << " seconds" << endl;
 }
 
+void test_active_equal() {
+    for (size_t i = 0; i <= DIMENSION; ++i) {
+        word_t v [WORDS];
+        bhv::level_into(i, v);
+        assert(bhv::active(v) == i);
+
+        bool f = false;
+        for (size_t j = 0; j < DIMENSION; ++j) {
+            if (bhv::get(v, j) != (j < i)) {
+                cout << j << "," << endl;
+                f = true;
+            }
+        }
+        if (f)
+            cout << endl << "at " << i << endl;
+    }
+
+}
+
 int main() {
-    test_opt_centroid();
+    test_active_equal();
 }
