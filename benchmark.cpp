@@ -12,31 +12,31 @@ using namespace std;
 #define MAJ_INPUT_HYPERVECTOR_COUNT 1000001
 #define INPUT_HYPERVECTOR_COUNT 100
 
-//#define WITHIN
-//#define TOP
-//#define CLOSEST
+#define WITHIN
+#define TOP
+#define CLOSEST
 #define REPRESENTATIVE
-//#define THRESHOLD
-//#define WEIGHTED_THRESHOLD
-//#define INVERSE
-//#define MAJ
-//#define PARITY
-//#define RAND
-//#define RAND2
-//#define RANDOM
-//#define PERMUTE
-//#define ROLL
-//#define ACTIVE
-//#define HAMMING
-//#define INVERT
-//#define SWAP_HALVES
-//#define REHASH
-//#define AND
-//#define OR
-//#define XOR
-//#define SELECT
-//#define MAJ3
-//#define TERNARY
+#define THRESHOLD
+#define WEIGHTED_THRESHOLD
+#define INVERSE
+#define MAJ
+#define PARITY
+#define RAND
+#define RAND2
+#define RANDOM
+#define PERMUTE
+#define ROLL
+#define ACTIVE
+#define HAMMING
+#define INVERT
+#define SWAP_HALVES
+#define REHASH
+#define AND
+#define OR
+#define XOR
+#define SELECT
+#define MAJ3
+#define TERNARY
 
 uint64_t hash_combine(uint64_t h, uint64_t k) {
     static constexpr uint64_t kM = 0xc6a4a7935bd1e995ULL;
@@ -835,6 +835,11 @@ void fixed_roll(word_t *x, word_t *target) {
     return roll(x, o, target);
 }
 
+template<void F(word_t*, int32_t, word_t*)>
+void roll_as_permute(word_t *x, int64_t p, word_t *target) {
+    return F(x, (int32_t)p, target);
+}
+
 inline void simulated_select(word_t *x, word_t *y, word_t *z, word_t *target) {
     bhv::dynamic_ternary_into_reference(x, y, z, target, 0xca);
 }
@@ -1106,7 +1111,7 @@ int main() {
 #endif
 #endif
 #ifdef ROLL
-    permute_benchmark<bhv::roll_words_into, false, 100>(false);
+    permute_benchmark<roll_as_permute<bhv::roll_words_into>, false, 100>(false);
 
     cout << "*-= ROLL WORDS =-*" << endl;
     // FIXME roll_words_into doesn't work in place yet!
@@ -1116,9 +1121,9 @@ int main() {
 //    permute_benchmark<bhv::roll_words_into, true, 100>(true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
-    permute_benchmark<bhv::roll_words_into, false, 100>(true);
-    permute_benchmark<bhv::roll_words_into, false, 100>(true);
-    permute_benchmark<bhv::roll_words_into, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_words_into>, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_words_into>, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_words_into>, false, 100>(true);
 
     cout << "*-= ROLL BYTES =-*" << endl;
 //    cout << "*-= IN CACHE TESTS =-*" << endl;
@@ -1127,31 +1132,31 @@ int main() {
 //    permute_benchmark<bhv::roll_bytes_into, true, 100>(true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
-    permute_benchmark<bhv::roll_bytes_into, false, 100>(true);
-    permute_benchmark<bhv::roll_bytes_into, false, 100>(true);
-    permute_benchmark<bhv::roll_bytes_into, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bytes_into>, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bytes_into>, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bytes_into>, false, 100>(true);
 
     cout << "*-= ROLL WORD BITS =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
-    permute_benchmark<bhv::roll_word_bits_into, true, 100>(true);
-    permute_benchmark<bhv::roll_word_bits_into, true, 100>(true);
-    permute_benchmark<bhv::roll_word_bits_into, true, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_word_bits_into>, true, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_word_bits_into>, true, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_word_bits_into>, true, 100>(true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
-    permute_benchmark<bhv::roll_word_bits_into, false, 100>(true);
-    permute_benchmark<bhv::roll_word_bits_into, false, 100>(true);
-    permute_benchmark<bhv::roll_word_bits_into, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_word_bits_into>, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_word_bits_into>, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_word_bits_into>, false, 100>(true);
 
     cout << "*-= ROLL BITS =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
-    permute_benchmark<bhv::roll_bits_into_reference, true, 100>(true);
-    permute_benchmark<bhv::roll_bits_into_composite, true, 100>(true);
-    permute_benchmark<bhv::roll_bits_into_single_pass, true, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bits_into_reference>, true, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bits_into_composite>, true, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bits_into_single_pass>, true, 100>(true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
-    permute_benchmark<bhv::roll_bits_into_reference, false, 100>(true);
-    permute_benchmark<bhv::roll_bits_into_composite, false, 100>(true);
-    permute_benchmark<bhv::roll_bits_into_single_pass, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bits_into_reference>, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bits_into_composite>, false, 100>(true);
+    permute_benchmark<roll_as_permute<bhv::roll_bits_into_single_pass>, false, 100>(true);
 
     unary_benchmark<fixed_roll<-1022, bhv::roll_bits_into_reference>, fixed_roll<-1022, bhv::roll_bits_into_composite>>(true, false);
     unary_benchmark<fixed_roll<-1022, bhv::roll_bits_into_reference>, fixed_roll<-1022, bhv::roll_bits_into_single_pass>>(true, false);
@@ -1426,22 +1431,22 @@ int main() {
     cout << "*-= DISTRIBUTION =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
     nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(3, true, true);
-    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(3, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(3, true, true);
 
     nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10, true, true);
-    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10, true, true);
 
     nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(20, true, true);
-    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(20, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(20, true, true);
 
     nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(100, true, true);
-    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(100, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(100, true, true);
 
     nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(1000, true, true);
-    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(1000, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(1000, true, true);
 
     nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_naive<float_t>>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10000, true, true);
-    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into_float_avx512>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10000, true, true);
+    nary_benchmark<simulated_majority_uniform_distribution<float_t, bhv::distribution_threshold_into>, simulated_majority_uniform_distribution<float_t, bhv::weighted_threshold_into_reference<float_t>>>(10000, true, true);
 #endif
 #ifdef THRESHOLD
     threshold_benchmark(3, 0, .5, false, false);
