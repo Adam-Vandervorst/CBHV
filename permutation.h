@@ -2,6 +2,26 @@ constexpr uint32_t smod(int32_t x, uint32_t m) {
     return ((x % m) + m) % m;
 }
 
+void swap_even_odd_into_reference(word_t* x, word_t* target) {
+    for (size_t i = 0; i < WORDS; ++i)
+        target[i] = ((x[i] & EVEN_WORD) << 1) | ((x[i] & ODD_WORD) >> 1);
+}
+
+#if __GFNI__
+void swap_even_odd_into_gfni(word_t* x, word_t* target) {
+    for (size_t i = 0; i < DIMENSION/512; ++i) {
+        __m512i matrix = _mm512_set1_epi64(0b0000001000000001000010000000010000100000000100001000000001000000);
+        __m512i res = _mm512_gf2p8affine_epi64_epi8(_mm512_loadu_si512((__m512i*)x + i), matrix, 0);
+        _mm512_storeu_si512((__m512i*)target + i, res);
+    }
+}
+#endif
+
+#if __GFNI__
+#define swap_even_odd_into swap_even_odd_into_gfni
+#else
+#define swap_even_odd_into swap_even_odd_into_reference
+#endif
 
 void roll_bytes_into(word_t *x, int32_t d, word_t *target) {
     if (d == 0) {

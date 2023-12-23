@@ -32,10 +32,9 @@
 
 
 namespace bhv {
-    constexpr word_t ONE_WORD = std::numeric_limits<word_t>::max();
-    constexpr bit_word_iter_t HALF_BITS_PER_WORD = BITS_PER_WORD / 2;
-    constexpr word_t HALF_WORD = ONE_WORD << HALF_BITS_PER_WORD;
-    constexpr word_t OTHER_HALF_WORD = ~HALF_WORD;
+    constexpr word_t ONE_WORD = 0xffffffffffffffff;
+    constexpr word_t EVEN_WORD = 0x5555555555555555;
+    constexpr word_t ODD_WORD = 0xaaaaaaaaaaaaaaaa;
 
     template<word_t W>
     word_t *const_bhv() {
@@ -46,7 +45,8 @@ namespace bhv {
 
     static word_t *ZERO = const_bhv<0>();
     static word_t *ONE = const_bhv<ONE_WORD>();
-    static word_t *HALF = const_bhv<HALF_WORD>();
+    static word_t *EVEN = const_bhv<EVEN_WORD>();
+    static word_t *ODD = const_bhv<ODD_WORD>();
 
     std::mt19937_64 rng;
 
@@ -62,86 +62,65 @@ namespace bhv {
 
     word_t *one() {
         word_t *x = empty();
-        for (word_iter_t i = 0; i < WORDS; ++i) {
-            x[i] = ONE_WORD;
-        }
+        memset(x, 0xff, BYTES);
         return x;
-    }
-
-    word_t *half() {
-        word_t *x = empty();
-        for (word_iter_t i = 0; i < WORDS; ++i) {
-            x[i] = HALF_WORD;
-        }
-        return x;
-    }
-
-    void swap_halves_into(word_t *x, word_t *target) {
-        for (word_iter_t i = 0; i < WORDS; ++i) {
-            target[i] = ((x[i] & HALF_WORD) >> HALF_BITS_PER_WORD) | ((x[i] & OTHER_HALF_WORD) << HALF_BITS_PER_WORD);
-        }
     }
 
     bool eq(word_t *x, word_t *y) {
-        for (word_iter_t i = 0; i < WORDS; ++i) {
+        for (word_iter_t i = 0; i < WORDS; ++i)
             if (x[i] != y[i])
                 return false;
-        }
         return true;
     }
 
     void xor_into(word_t *x, word_t *y, word_t *target) {
-        for (word_iter_t i = 0; i < WORDS; ++i) {
+        for (word_iter_t i = 0; i < WORDS; ++i)
             target[i] = x[i] ^ y[i];
-        }
     }
 
     void and_into(word_t *x, word_t *y, word_t *target) {
-        for (word_iter_t i = 0; i < WORDS; ++i) {
+        for (word_iter_t i = 0; i < WORDS; ++i)
             target[i] = x[i] & y[i];
-        }
     }
 
     void or_into(word_t *x, word_t *y, word_t *target) {
-        for (word_iter_t i = 0; i < WORDS; ++i) {
+        for (word_iter_t i = 0; i < WORDS; ++i)
             target[i] = x[i] | y[i];
-        }
     }
 
     void invert_into(word_t *x, word_t *target) {
-        for (word_iter_t i = 0; i < WORDS; ++i) {
+        for (word_iter_t i = 0; i < WORDS; ++i)
             target[i] = ~x[i];
-        }
     }
 
-    void unpack_into(word_t *data, bool *target) {
+    void unpack_into(word_t *x, bool *target_bits) {
         for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
             bit_iter_t offset = word_id * BITS_PER_WORD;
-            word_t word = data[word_id];
+            word_t word = x[word_id];
             for (bit_word_iter_t bit_id = 0; bit_id < BITS_PER_WORD; ++bit_id) {
-                target[offset + bit_id] = word & (1ULL << bit_id);
+                target_bits[offset + bit_id] = (word >> bit_id) & 1;
             }
         }
     }
 
-    void pack_into(bool *data, word_t *target) {
+    void pack_into(bool *bits, word_t *target) {
         for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
             bit_iter_t offset = word_id * BITS_PER_WORD;
             word_t word = 0;
             for (bit_word_iter_t bit_id = 0; bit_id < BITS_PER_WORD; ++bit_id) {
-                if (data[offset + bit_id])
+                if (bits[offset + bit_id])
                     word |= 1ULL << bit_id;
             }
             target[word_id] = word;
         }
     }
 
-    inline bool get(word_t *d, bit_iter_t i) {
-        return (d[i/BITS_PER_WORD] >> (i % BITS_PER_WORD)) & 1;
+    inline bool get(word_t *x, bit_iter_t i) {
+        return (x[i/BITS_PER_WORD] >> (i % BITS_PER_WORD)) & 1;
     }
 
-    inline void toggle(word_t *d, bit_iter_t i) {
-        d[i/BITS_PER_WORD] ^= (1ULL << (i % BITS_PER_WORD));
+    inline void toggle(word_t *x, bit_iter_t i) {
+        x[i/BITS_PER_WORD] ^= (1ULL << (i % BITS_PER_WORD));
     }
 
     inline void level_into(size_t l, word_t *target) {

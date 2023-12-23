@@ -224,6 +224,31 @@ void test_active_equal() {
 
 }
 
+void test_swap_even_odd() {
+    uint64_t v1[DIMENSION/64];
+    uint64_t v1_swapped[DIMENSION/64];
+    uint64_t v1_swapped_twice[DIMENSION/64];
+
+    uint64_t v1_swapped_gfni[DIMENSION/64];
+    uint64_t v1_swapped_twice_gfni[DIMENSION/64];
+
+    bhv::rand_into(v1);
+
+    bhv::swap_even_odd_into(v1, v1_swapped);
+    bhv::swap_even_odd_into(v1_swapped, v1_swapped_twice);
+
+    // bhv::swap_even_odd_into_avx512(v1, v1_swapped_gfni);
+    // bhv::swap_even_odd_into_avx512(v1_swapped_gfni, v1_swapped_twice_gfni);
+
+    std::cout << bhv::to_string(v1) << std::endl;
+    std::cout << bhv::to_string(v1_swapped) << std::endl;
+    // std::cout << bhv::to_string(v1_swapped_gfni) << std::endl;
+    std::cout << bhv::to_string(v1_swapped_twice) << std::endl;
+    // std::cout << bhv::to_string(v1_swapped_twice_gfni) << std::endl;
+    std::cout << bhv::eq(v1, v1_swapped_twice) << std::endl;
+    // std::cout << bhv::eq(v1, v1_swapped_twice_gfni) << std::endl;
+}
+
 int main() {
-    test_active_equal();
+    test_swap_even_odd();
 }

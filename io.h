@@ -11,7 +11,7 @@ word_t** load_pbm(FILE* file, size_t* n_elements) {
     word_t **hvs = (word_t **)malloc(n*sizeof(word_t *));
 
     for (int i = 0; i < n; ++i) {
-        hvs[i] = bhv::empty();
+        hvs[i] = empty();
         fread(hvs[i], 1, BYTES, file);
     }
 
@@ -26,4 +26,14 @@ void save_pbm(FILE* file, word_t** data, size_t n_elements) {
 
     for (size_t i = 0; i < n_elements; ++i)
         fwrite(data[i], 1, BYTES, file);
+}
+
+
+std::string to_string(uint64_t *x) {
+    char viz [DIMENSION + 1];
+    viz[DIMENSION] = '\0';
+    unpack_into(x, (bool*)viz);
+    for (size_t i = 0; i < DIMENSION; ++i)
+        viz[i] += '0';
+    return std::string(viz);
 }

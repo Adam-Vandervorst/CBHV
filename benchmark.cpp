@@ -29,7 +29,7 @@ using namespace std;
 #define ACTIVE
 #define HAMMING
 #define INVERT
-#define SWAP_HALVES
+#define EVEN_ODD
 #define REHASH
 #define AND
 #define OR
@@ -1005,19 +1005,19 @@ int main() {
     unary_benchmark<bhv::rehash_into, bhv::rehash_into>(true, false);
     unary_benchmark<bhv::rehash_into, bhv::rehash_into>(true, false);
 #endif
-#ifdef SWAP_HALVES
-    unary_benchmark<bhv::swap_halves_into, bhv::swap_halves_into>(false, true);
+#ifdef EVEN_ODD
+    unary_benchmark<bhv::swap_even_odd_into, bhv::swap_even_odd_into_reference>(false, true);
 
     cout << "*-= SWAP_HALVES =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
-    unary_benchmark<bhv::swap_halves_into, bhv::swap_halves_into>(true, true);
-    unary_benchmark<bhv::swap_halves_into, bhv::swap_halves_into>(true, true);
-    unary_benchmark<bhv::swap_halves_into, bhv::swap_halves_into>(true, true);
+    unary_benchmark<bhv::swap_even_odd_into, bhv::swap_even_odd_into_reference>(true, true);
+    unary_benchmark<bhv::swap_even_odd_into, bhv::swap_even_odd_into_reference>(true, true);
+    unary_benchmark<bhv::swap_even_odd_into, bhv::swap_even_odd_into_reference>(true, true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
-    unary_benchmark<bhv::swap_halves_into, bhv::swap_halves_into>(true, false);
-    unary_benchmark<bhv::swap_halves_into, bhv::swap_halves_into>(true, false);
-    unary_benchmark<bhv::swap_halves_into, bhv::swap_halves_into>(true, false);
+    unary_benchmark<bhv::swap_even_odd_into, bhv::swap_even_odd_into_reference>(true, false);
+    unary_benchmark<bhv::swap_even_odd_into, bhv::swap_even_odd_into_reference>(true, false);
+    unary_benchmark<bhv::swap_even_odd_into, bhv::swap_even_odd_into_reference>(true, false);
 #endif
 #ifdef INVERT
     unary_benchmark<bhv::invert_into, bhv::invert_into>(false, true);
