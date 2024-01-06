@@ -7,36 +7,35 @@
 using namespace std;
 
 #define DO_VALIDATION true
-#define SLOPPY_VALIDATION true
+#define SLOPPY_VALIDATION false
 
 #define MAJ_INPUT_HYPERVECTOR_COUNT 1000001
 #define INPUT_HYPERVECTOR_COUNT 100
 
-#define WITHIN
-#define TOP
-#define CLOSEST
-#define REPRESENTATIVE
-#define THRESHOLD
-#define WEIGHTED_THRESHOLD
-#define INVERSE
-#define MAJ
-#define PARITY
-#define RAND
-#define RAND2
-#define RANDOM
-#define PERMUTE
+//#define WITHIN
+//#define TOP
+//#define CLOSEST
+//#define REPRESENTATIVE
+//#define THRESHOLD
+//#define WEIGHTED_THRESHOLD
+//#define MAJ
+//#define PARITY
+//#define RAND
+//#define RAND2
+//#define RANDOM
+//#define PERMUTE
 #define ROLL
-#define ACTIVE
-#define HAMMING
-#define INVERT
-#define EVEN_ODD
-#define REHASH
-#define AND
-#define OR
-#define XOR
-#define SELECT
-#define MAJ3
-#define TERNARY
+//#define ACTIVE
+//#define HAMMING
+//#define INVERT
+//#define EVEN_ODD
+//#define REHASH
+//#define AND
+//#define OR
+//#define XOR
+//#define SELECT
+//#define MAJ3
+//#define TERNARY
 
 uint64_t hash_combine(uint64_t h, uint64_t k) {
     static constexpr uint64_t kM = 0xc6a4a7935bd1e995ULL;
@@ -548,8 +547,11 @@ pair<float, float> permute_benchmark(bool display) {
         permute_test_time = (double) chrono::duration_cast<chrono::nanoseconds>(t2 - t1).count();
         unpermute_test_time = (double) chrono::duration_cast<chrono::nanoseconds>(t3 - t2).count();
 
-        for (size_t i = 0; i < INPUT_HYPERVECTOR_COUNT; ++i)
+        for (size_t i = 0; i < INPUT_HYPERVECTOR_COUNT; ++i) {
+            if (!bhv::eq(final[i], initial[i]))
+                std::cout << "failed " << i << ", " << perms[i] << std::endl;
             correct &= bhv::eq(final[i], initial[i]);
+        }
 
         for (size_t i = 0; i < INPUT_HYPERVECTOR_COUNT; ++i) {
             free(initial[i]);
@@ -594,9 +596,11 @@ pair<float, float> permute_benchmark(bool display) {
         permute_test_time = (double) chrono::duration_cast<chrono::nanoseconds>(t2 - t1).count();
         unpermute_test_time = (double) chrono::duration_cast<chrono::nanoseconds>(t3 - t2).count();
 
-        for (size_t i = 0; i < INPUT_HYPERVECTOR_COUNT; ++i)
+        for (size_t i = 0; i < INPUT_HYPERVECTOR_COUNT; ++i) {
+            if (!bhv::eq(forward[i][0], backward[i][0]))
+                std::cout << "failed " << i << ", " << perms[i] << std::endl;
             correct &= bhv::eq(forward[i][0], backward[i][0]);
-
+        }
         for (size_t i = 0; i < INPUT_HYPERVECTOR_COUNT; ++i) {
             for (size_t j = 0; j < different_permutations; ++j) free(forward[i][j]);
             for (size_t j = 0; j < different_permutations - 1; ++j) free(backward[i][j]); // -1, don't double free
@@ -1116,9 +1120,9 @@ int main() {
     cout << "*-= ROLL WORDS =-*" << endl;
     // FIXME roll_words_into doesn't work in place yet!
 //    cout << "*-= IN CACHE TESTS =-*" << endl;
-//    permute_benchmark<bhv::roll_words_into, true, 100>(true);
-//    permute_benchmark<bhv::roll_words_into, true, 100>(true);
-//    permute_benchmark<bhv::roll_words_into, true, 100>(true);
+//    permute_benchmark<roll_as_permute<bhv::roll_words_into>, true, 100>(true);
+//    permute_benchmark<roll_as_permute<bhv::roll_words_into>, true, 100>(true);
+//    permute_benchmark<roll_as_permute<bhv::roll_words_into>, true, 100>(true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     permute_benchmark<roll_as_permute<bhv::roll_words_into>, false, 100>(true);
@@ -1127,9 +1131,9 @@ int main() {
 
     cout << "*-= ROLL BYTES =-*" << endl;
 //    cout << "*-= IN CACHE TESTS =-*" << endl;
-//    permute_benchmark<bhv::roll_bytes_into, true, 100>(true);
-//    permute_benchmark<bhv::roll_bytes_into, true, 100>(true);
-//    permute_benchmark<bhv::roll_bytes_into, true, 100>(true);
+//    permute_benchmark<roll_as_permute<bhv::roll_bytes_into>, true, 100>(true);
+//    permute_benchmark<roll_as_permute<bhv::roll_bytes_into>, true, 100>(true);
+//    permute_benchmark<roll_as_permute<bhv::roll_bytes_into>, true, 100>(true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     permute_benchmark<roll_as_permute<bhv::roll_bytes_into>, false, 100>(true);
@@ -1150,16 +1154,11 @@ int main() {
     cout << "*-= ROLL BITS =-*" << endl;
     cout << "*-= IN CACHE TESTS =-*" << endl;
     permute_benchmark<roll_as_permute<bhv::roll_bits_into_reference>, true, 100>(true);
-    permute_benchmark<roll_as_permute<bhv::roll_bits_into_composite>, true, 100>(true);
-    permute_benchmark<roll_as_permute<bhv::roll_bits_into_single_pass>, true, 100>(true);
+//    permute_benchmark<roll_as_permute<bhv::roll_bits_into_single_pass>, true, 100>(true);
 
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     permute_benchmark<roll_as_permute<bhv::roll_bits_into_reference>, false, 100>(true);
-    permute_benchmark<roll_as_permute<bhv::roll_bits_into_composite>, false, 100>(true);
     permute_benchmark<roll_as_permute<bhv::roll_bits_into_single_pass>, false, 100>(true);
-
-    unary_benchmark<fixed_roll<-1022, bhv::roll_bits_into_reference>, fixed_roll<-1022, bhv::roll_bits_into_composite>>(true, false);
-    unary_benchmark<fixed_roll<-1022, bhv::roll_bits_into_reference>, fixed_roll<-1022, bhv::roll_bits_into_single_pass>>(true, false);
 #endif
 #ifdef RAND
     rand_benchmark(false, false);

@@ -140,14 +140,14 @@ void test_independent_opt() {
     cout << bhv::hamming(v_ref, v) << " |v_ref,initial|" << endl;
 
     auto close_to_ref = [v_ref](word_t *x) { return bhv::hamming(x, v_ref); };
-    bhv::opt_independent<uint64_t>(v, close_to_ref);
+    bhv::opt::independent<uint64_t>(v, close_to_ref);
 
     cout << bhv::hamming(v_ref, v) << " |v_ref,final|" << endl;
 
     auto full = bhv::one();
 
     auto half = [](word_t *x) { return abs(int64_t(bhv::active(x) - BITS/2)); };
-    bhv::opt_independent<uint64_t>(full, half);
+    bhv::opt::independent<uint64_t>(full, half);
 
     cout << bhv::active(full) << " |full_opt|  (" << BITS/2 << ")" << endl;
 }
@@ -159,7 +159,7 @@ void test_easy_search() {
     cout << bhv::hamming(v_ref, v) << " |v_ref,initial|" << endl;
 
     auto close_to_ref = [v_ref](word_t *x) { return bhv::hamming(x, v_ref); };
-    bhv::opt_linear_search<uint64_t>(v, close_to_ref);
+    bhv::opt::linear_search<uint64_t>(v, close_to_ref);
 
     cout << bhv::hamming(v_ref, v) << " |v_ref,final|" << endl;
 }
@@ -171,7 +171,9 @@ void test_harder_search() {
     auto close_to_ref = [v_ref](word_t *x) { word_t tmp [WORDS]; bhv::roll_word_bits_into(x, 12, tmp); bhv::xor_into(x, tmp, tmp); return bhv::hamming(tmp, v_ref); };
     auto t1 = chrono::high_resolution_clock::now();
 
-    bhv::opt_linear_search<uint64_t>(v, close_to_ref, 100000000);
+    bhv::opt::linear_search<uint64_t>(v, close_to_ref, 100000000, 200*BITS);
+//    bhv::opt::evolutionary_search<uint64_t, 2048*16, 512>(v, close_to_ref, 100);
+//    bhv::opt::evolutionary_search<uint64_t, 16, 3>(v, close_to_ref, 20);
 
     auto t2 = chrono::high_resolution_clock::now();
 
@@ -194,7 +196,8 @@ void test_opt_centroid() {
 //    auto min_diff = [x, y, z](word_t *a) { int64_t dx = bhv::hamming(a, x); int64_t dy = bhv::hamming(a, y); int64_t dz = bhv::hamming(a, z); return abs(dx - dy) + abs(dy - dz) + abs(dx - dz); };
 
     auto t1 = chrono::high_resolution_clock::now();
-    bhv::opt_linear_search<uint64_t>(v, min_sum, 1000000);
+    bhv::opt::linear_search<uint64_t>(v, min_sum, 1000000);
+//    bhv::opt::evolutionary_search<uint64_t, 16, 4>(v, min_sum, 5);
     auto t2 = chrono::high_resolution_clock::now();
 
     cout << min_sum(v) << " loss" << endl;
@@ -250,5 +253,7 @@ void test_swap_even_odd() {
 }
 
 int main() {
-    test_swap_even_odd();
+//    test_easy_search();
+    test_harder_search();
+//    test_opt_centroid();
 }

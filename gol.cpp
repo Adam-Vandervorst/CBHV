@@ -9,26 +9,6 @@
 using namespace std;
 
 
-word_t** load_pbm(FILE* file, size_t* n_elements) {
-    char header[2];
-    fread(header, 1, 2, file);
-    assert(header[0] == 'P' && header[1] == '4');
-
-    int dimension, n;
-    fscanf(file, "%d %d", &dimension, &n);
-    assert(dimension == BITS);
-
-    *n_elements = n;
-    static vector<uint8_t *> hvs = std::vector<uint8_t *>(n);
-
-    for (int i = 0; i < n; ++i) {
-        hvs[i] = (uint8_t *)bhv::empty();
-        fread(hvs[i], 1, BYTES, file);
-    }
-
-    return (word_t **)(hvs.data());
-}
-
 void step_into(word_t *hv, word_t *target) {
     word_t nbs [8][WORDS];
     word_t* nbs_lookup [8] = {nbs[0], nbs[1], nbs[2], nbs[3],
@@ -61,7 +41,7 @@ int main() {
     }
 
     size_t n;
-    word_t** hvs = load_pbm(file, &n);
+    word_t** hvs = bhv::load_pbm(file, &n);
     assert(n == 1001);
 
     fclose(file);

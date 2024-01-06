@@ -99,7 +99,7 @@ void random_into_reference(word_t *x, float_t p) {
 }
 
 // Note This could have an AVX-512 implementation with 512-bit float-level log and floor, and probably and equivalent to generate_canonical
-template<bool additive>
+template<int mode>
 void sparse_random_switch_into(word_t *x, float_t prob, word_t *target) {
     double inv_log_not_prob = 1. / log(1 - prob);
     size_t skip_count = floor(log(generate_canonical<float_t, 23>(rng)) * inv_log_not_prob);
@@ -107,10 +107,14 @@ void sparse_random_switch_into(word_t *x, float_t prob, word_t *target) {
     for (word_iter_t i = 0; i < WORDS; ++i) {
         word_t word = x[i];
         while (skip_count < BITS_PER_WORD) {
-            if constexpr (additive)
+            if constexpr (mode == 1)
                 word |= 1UL << skip_count;
-            else
+            else if constexpr (mode == 0)
                 word &= ~(1UL << skip_count);
+            else if constexpr (mode == -1)
+                word ^= 1UL << skip_count;
+            else
+                static_assert(mode == -1 or mode == 0 or mode == 1, "mode must be XOR, AND, or OR");
             skip_count += floor(log(generate_canonical<float_t, 23>(rng)) * inv_log_not_prob);
         }
         skip_count -= BITS_PER_WORD;

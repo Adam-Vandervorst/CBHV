@@ -24,6 +24,7 @@ void swap_even_odd_into_gfni(word_t* x, word_t* target) {
 #endif
 
 void roll_bytes_into(word_t *x, int32_t d, word_t *target) {
+    assert(x != target);
     if (d == 0) {
         memcpy(target, x, BYTES);
         return;
@@ -38,6 +39,7 @@ void roll_bytes_into(word_t *x, int32_t d, word_t *target) {
 }
 
 void roll_words_into(word_t *x, int32_t d, word_t *target) {
+    assert(x != target);
     int32_t offset = smod(d, WORDS);
 
     memcpy(target, x + offset, (WORDS - offset) * sizeof(word_t));
@@ -66,38 +68,8 @@ void roll_bits_into_reference(word_t *x, int32_t o, word_t *target) {
     pack_into(ctarget, target);
 }
 
-void roll_bits_into_composite(word_t *x, int32_t o, word_t *target) {
-    // FIXME WIP, do not use
-    if (o < 0) {
-        roll_bits_into_composite(x, BITS + o, target);
-        return;
-    }
-    if (o == 0) {
-        memcpy(target, x, BYTES);
-        return;
-    }
-
-    int32_t b = o / BITS_PER_WORD;
-    int32_t e = o % BITS_PER_WORD;
-
-    word_t c [WORDS];
-    word_t l [WORDS];
-    word_t h [WORDS];
-
-    roll_words_into(x, b, l);
-    roll_words_into(x, b + 1, h);
-
-    roll_word_bits_into(l, e, l);
-    roll_word_bits_into(h, BITS_PER_WORD-e, h);
-
-    for (word_iter_t i = 0; i < WORDS; ++i)
-        c[i] = ONE_WORD << e;
-
-    select_into(c, l, h, target);
-}
-
 void roll_bits_into_single_pass(word_t *x, int32_t o, word_t *target) {
-    // FIXME close to correct, but doesn't pass permute test
+    assert(x != target);
     if (o < 0) {
         roll_bits_into_single_pass(x, BITS + o, target);
         return;
@@ -120,18 +92,19 @@ void roll_bits_into_single_pass(word_t *x, int32_t o, word_t *target) {
 
     int32_t b = o / BITS_PER_WORD;
     int32_t e = o % BITS_PER_WORD;
+    word_t hmask = ~(0xffffffffffffffff >> e);
 
     for (word_iter_t i = 0; i < WORDS; ++i) {
         word_t l = x[smod(b + i, WORDS)];
         word_t h = x[smod(b + i + 1, WORDS)];
         word_t lo = l >> e;
         word_t ho = h << (BITS_PER_WORD - e);
-        word_t res = lo | ho;
+        word_t res = lo | (ho & hmask);
         target[i] = res;
     }
 }
 
-#define roll_bits_into roll_bits_into_reference
+#define roll_bits_into roll_bits_into_single_pass
 
 uint8_t permute_single_byte_bits(uint8_t x, uint64_t p) {
     uint64_t w = _pdep_u64(x, 0x0101010101010101);
