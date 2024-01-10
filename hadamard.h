@@ -32,7 +32,7 @@ word_t *walsh_basis[13] = {
         const_word_freq<6, 0ULL, bhv::ONE_WORD>()
 };
 
-inline void hadamard_into(uint32_t w, word_t *target) {
+void hadamard_encode_into_reference(uint32_t w, word_t *target) {
     bool bits [BITS];
 
     for (uint32_t i = 0; i < BITS; ++i) {
@@ -42,7 +42,7 @@ inline void hadamard_into(uint32_t w, word_t *target) {
     pack_into(bits, target);
 }
 
-inline void hadamard_into_basis(uint32_t w, word_t *target) {
+void hadamard_encode_into_basis(uint32_t w, word_t *target) {
     if (w == 0) {
         memset(target, -1, BYTES);
         return;
@@ -58,6 +58,22 @@ inline void hadamard_into_basis(uint32_t w, word_t *target) {
     invert_into(target, target);
 }
 
-inline uint32_t hadamard_code(word_t *target) {
+#define hadamard_encode_into hadamard_encode_into_basis
 
+void hadamard_transform_into(word_t *x, uint32_t *factors) {
+    for (uint32_t i = 0; i < BITS; ++i) {
+        word_t tmp [WORDS];
+        hadamard_encode_into(i, tmp);
+        factors[i] = hamming(tmp, x);
+    }
 }
+
+uint32_t hadamard_decode_reference(word_t *x) {
+    uint32_t walsh_spectrum [BITS];
+
+    hadamard_transform_into(x, walsh_spectrum);
+
+    return std::distance(walsh_spectrum, std::min_element(walsh_spectrum, walsh_spectrum + BITS));
+}
+
+#define hadamard_decode hadamard_decode_reference

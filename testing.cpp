@@ -258,8 +258,8 @@ void test_hadamard() {
 
     for (uint32_t i = 0; i < BITS; ++i) {
         hvs[i] = bhv::empty();
-        bhv::hadamard_into_basis(i, tmp);
-        bhv::hadamard_into(i, hvs[i]);
+        bhv::hadamard_encode_into_basis(i, tmp);
+        bhv::hadamard_encode_into_reference(i, hvs[i]);
         assert(bhv::eq(tmp, hvs[i]));
 //        bhv::swap_bits_of_byte_order_into_reference(hvs[i], hvs[i]);
     }
@@ -285,7 +285,7 @@ void test_hadamard_components() {
 
     for (uint32_t i = 0; i < 13; ++i) {
         hvs_ref[i] = bhv::empty();
-        bhv::hadamard_into(1 << i, hvs_ref[i]);
+        bhv::hadamard_encode_into(1 << i, hvs_ref[i]);
         bhv::invert_into(hvs_ref[i], hvs_ref[i]);
     }
 
@@ -322,12 +322,44 @@ void test_levels() {
     }
 }
 
+void test_hadamard_codes() {
+    for (uint32_t i = 0; i < BITS; ++i) {
+        word_t codeword [WORDS];
+        word_t noise [WORDS];
+        word_t corrupted_codeword [WORDS];
+        cout << "code" << i << endl;
+
+        bhv::hadamard_encode_into(i, codeword);
+        uint32_t reconstructed = bhv::hadamard_decode(codeword);
+        cout << reconstructed << " (noise free)" << endl;
+        assert(reconstructed == i);
+
+        bhv::random_into(noise, .1);
+        bhv::xor_into(codeword, noise, corrupted_codeword);
+        reconstructed = bhv::hadamard_decode(corrupted_codeword);
+        cout << reconstructed << " (10% noise)" << endl;
+        assert(reconstructed == i);
+
+        bhv::random_into(noise, .25);
+        bhv::xor_into(codeword, noise, corrupted_codeword);
+        reconstructed = bhv::hadamard_decode(corrupted_codeword);
+        cout << reconstructed << " (25% noise)" << endl;
+        assert(reconstructed == i);
+
+        bhv::random_into(noise, .45);
+        bhv::xor_into(codeword, noise, corrupted_codeword);
+        reconstructed = bhv::hadamard_decode(corrupted_codeword);
+        cout << reconstructed << " (45% noise)" << endl;
+        assert(reconstructed == i);
+    }
+}
 
 int main() {
 //    test_easy_search();
 //    test_harder_search();
 //    test_opt_centroid();
-    test_hadamard();
-    test_hadamard_components();
+//    test_hadamard();
+//    test_hadamard_components();
 //    test_levels();
+    test_hadamard_codes();
 }
