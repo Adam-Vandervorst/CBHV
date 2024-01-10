@@ -20,6 +20,7 @@ word_t** load_pbm(FILE* file, size_t* n_elements) {
 
 
 void save_pbm(FILE* file, word_t** data, size_t n_elements) {
+    // white are off bits
     fwrite("P4", 1, 2, file);
 
     fprintf(file, "\n%d %zu\n", BITS, n_elements);

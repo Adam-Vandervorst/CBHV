@@ -145,6 +145,8 @@ namespace bhv {
 
     #include "parity.h"
 
+    #include "hadamard.h"
+
     #include "threshold.h"
 
     #include "majority.h"

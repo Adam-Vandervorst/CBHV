@@ -252,8 +252,82 @@ void test_swap_even_odd() {
     // std::cout << bhv::eq(v1, v1_swapped_twice_gfni) << std::endl;
 }
 
+void test_hadamard() {
+    word_t *hvs[BITS];
+    word_t tmp [WORDS];
+
+    for (uint32_t i = 0; i < BITS; ++i) {
+        hvs[i] = bhv::empty();
+        bhv::hadamard_into_basis(i, tmp);
+        bhv::hadamard_into(i, hvs[i]);
+        assert(bhv::eq(tmp, hvs[i]));
+//        bhv::swap_bits_of_byte_order_into_reference(hvs[i], hvs[i]);
+    }
+
+    FILE *ofile = fopen("hadamard_table.pbm", "wb");
+    bhv::save_pbm(ofile, hvs, BITS);
+    fclose(ofile);
+
+    cout << bhv::to_string(hvs[0b110000000101]) << endl;
+
+    for (uint32_t i = 0; i < BITS; ++i) {
+        free(hvs[i]);
+    }
+}
+
+void test_hadamard_components() {
+//    uint32_t t = 3077;
+//
+//    cout << bitset<13>(t) << ", atomic: " << bitset<6>(t & 0b111111) << ", composite: " << bitset<13 - 6>(t >> 6) << std::endl;
+
+    word_t *hvs[13];
+    word_t *hvs_ref[13];
+
+    for (uint32_t i = 0; i < 13; ++i) {
+        hvs_ref[i] = bhv::empty();
+        bhv::hadamard_into(1 << i, hvs_ref[i]);
+        bhv::invert_into(hvs_ref[i], hvs_ref[i]);
+    }
+
+    FILE *ofile = fopen("hadamard_basis_test.pbm", "wb");
+    bhv::save_pbm(ofile, hvs, 13);
+    fclose(ofile);
+
+    ofile = fopen("hadamard_basis.pbm", "wb");
+    bhv::save_pbm(ofile, hvs_ref, 13);
+    fclose(ofile);
+
+    for (uint32_t i = 0; i < 13; ++i) {
+        cout << i << " eq " << bhv::eq(bhv::walsh_basis[i], hvs_ref[i]) << endl;
+//        assert(bhv::eq(hvs[i], hvs_ref[i]));
+        free(hvs_ref[i]);
+    }
+}
+
+void test_levels() {
+    word_t *hvs[BITS];
+
+    for (uint32_t i = 0; i < BITS; ++i) {
+        hvs[i] = bhv::empty();
+        bhv::level_into(i, hvs[i]);
+        bhv::swap_byte_order_inplace(hvs[i]);
+    }
+
+    FILE *ofile = fopen("level_table.pbm", "wb");
+    bhv::save_pbm(ofile, hvs, BITS);
+    fclose(ofile);
+
+    for (uint32_t i = 0; i < BITS; ++i) {
+        free(hvs[i]);
+    }
+}
+
+
 int main() {
 //    test_easy_search();
-    test_harder_search();
+//    test_harder_search();
 //    test_opt_centroid();
+    test_hadamard();
+    test_hadamard_components();
+//    test_levels();
 }
