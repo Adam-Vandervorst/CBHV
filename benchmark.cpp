@@ -6,16 +6,17 @@
 
 using namespace std;
 
-#define DO_VALIDATION true
-#define SLOPPY_VALIDATION false
+#define DO_VALIDATION false
+#define SLOPPY_VALIDATION true
 
-#define MAJ_INPUT_HYPERVECTOR_COUNT 1000001
+#define MAJ_INPUT_HYPERVECTOR_COUNT 100001
 #define INPUT_HYPERVECTOR_COUNT 100
 
 //#define WITHIN
 //#define TOP
 //#define CLOSEST
 //#define REPRESENTATIVE
+#define WEIGHTED_REPRESENTATIVE
 //#define THRESHOLD
 //#define WEIGHTED_THRESHOLD
 //#define MAJ
@@ -24,7 +25,7 @@ using namespace std;
 //#define RAND2
 //#define RANDOM
 //#define PERMUTE
-#define ROLL
+//#define ROLL
 //#define ACTIVE
 //#define HAMMING
 //#define INVERT
@@ -87,7 +88,7 @@ void within_benchmark(size_t n, size_t k, bit_iter_t d, bool display, bool keep_
         for (size_t j = 0; j < k; ++j) {
             bhv::permute_into(t, 0, rs[target[j]]);
             for (bit_iter_t b = 0; b < d/2; ++b)
-                bhv::toggle(rs[target[j]], b);
+                bhv::update(rs[target[j]], b);
         }
 
         free(t);
@@ -872,6 +873,13 @@ inline void simulated_majority_iota_factors(word_t **xs, size_t size, word_t *ta
     F(xs, factors.data(), size, size*(size-1)/2, target);
 }
 
+template <typename N, void F(word_t **, N *, size_t, word_t *)>
+inline void simulated_representative_iota_factors(word_t **xs, size_t size, word_t *target) {
+    std::vector<N> factors(size);
+    std::iota(factors.begin(), factors.end(), (N)0);
+    F(xs, factors.data(), size, target);
+}
+
 template <typename N, void F(word_t **, N *, size_t, N, word_t *)>
 inline void simulated_majority_uniform_distribution(word_t **xs, size_t size, word_t *target) {
     std::vector<N> weights(size);
@@ -880,6 +888,13 @@ inline void simulated_majority_uniform_distribution(word_t **xs, size_t size, wo
     F(xs, weights.data(), size, (N)size/2, target);
 }
 
+template <typename N, void F(word_t **, N *, size_t, word_t *)>
+inline void simulated_representative_uniform_distribution(word_t **xs, size_t size, word_t *target) {
+    std::vector<N> weights(size);
+    for (size_t i = 0; i < size; ++i)
+        weights[i] = (N)(1./(double_t)size);
+    F(xs, weights.data(), size, target);
+}
 
 template <void F(word_t*)>
 void nondestructive_unary(word_t *x, word_t *target) {
@@ -1501,6 +1516,28 @@ int main() {
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     for (size_t i = 1; i < 100000; i = i < 10 ? i+1 : (size_t)(i*1.111))
         nary_benchmark<bhv::representative_into, bhv::representative_into>(i, true, false);
+#endif
+#ifdef WEIGHTED_REPRESENTATIVE
+    nary_benchmark<simulated_representative_uniform_distribution<float_t, bhv::weighted_representative_into>, simulated_representative_uniform_distribution<float_t, bhv::weighted_representative_into>>(3, false, false);
+
+    cout << "*-= WEIGHTED_REPRESENTATIVE =-*" << endl;
+    cout << "*-= UNIFORM =-*" << endl;
+    cout << "*-= IN CACHE TESTS =-*" << endl;
+    for (size_t i = 3; i < 100000; i = i < 10 ? i+1 : (size_t)(i*1.111))
+        nary_benchmark<simulated_representative_uniform_distribution<float_t, bhv::weighted_representative_into>, simulated_representative_uniform_distribution<float_t, bhv::weighted_representative_into>>(i, true, true);
+
+    cout << "*-= OUT OF CACHE TESTS =-*" << endl;
+    for (size_t i = 3; i < 100000; i = i < 10 ? i+1 : (size_t)(i*1.111))
+        nary_benchmark<simulated_representative_uniform_distribution<float_t, bhv::weighted_representative_into>, simulated_representative_uniform_distribution<float_t, bhv::weighted_representative_into>>(i, true, false);
+
+    cout << "*-= IOTA =-*" << endl;
+    cout << "*-= IN CACHE TESTS =-*" << endl;
+    for (size_t i = 3; i < 100000; i = i < 10 ? i+1 : (size_t)(i*1.111))
+        nary_benchmark<simulated_representative_iota_factors<float_t, bhv::weighted_representative_into>, simulated_representative_iota_factors<float_t, bhv::weighted_representative_into>>(i, true, true);
+
+    cout << "*-= OUT OF CACHE TESTS =-*" << endl;
+    for (size_t i = 3; i < 100000; i = i < 10 ? i+1 : (size_t)(i*1.111))
+        nary_benchmark<simulated_representative_iota_factors<float_t, bhv::weighted_representative_into>, simulated_representative_iota_factors<float_t, bhv::weighted_representative_into>>(i, true, false);
 #endif
 #ifdef CLOSEST
     cout << "*-= CLOSEST =-*" << endl;

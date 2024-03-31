@@ -354,6 +354,169 @@ void test_hadamard_codes() {
     }
 }
 
+static void normalize(float_t* ws, size_t n) {
+    if (n == 0) return;
+    double minw = numeric_limits<double>::max();
+    double maxw = numeric_limits<double>::min();
+    for (size_t i = 0; i < n; ++i) {
+        minw = min(minw, (double)ws[i]);
+        maxw = max(maxw, (double)ws[i]);
+    }
+    if (maxw == minw) return;
+
+    for (size_t i = 0; i < n; ++i)
+        ws[i] = ((double)ws[i] - minw)/(maxw - minw);
+}
+
+static double proportional_loss(float_t* target, float_t* prediction, size_t n) {
+    double total = 0;
+    double mean_target = 0;
+    double mean_prediction = 0;
+    for (size_t i = 0; i < n; ++i) {
+        mean_target += target[i];
+        mean_prediction += prediction[i];
+    }
+    mean_target /= (double)n;
+    mean_prediction /= (double)n;
+    for (size_t i = 0; i < n; ++i) {
+        double diff = 1. - (prediction[i]/(mean_prediction + 1.) + 1.)/(target[i]/(mean_target + 1.) + 1.);
+        total += diff*diff;
+    }
+    return total;
+}
+
+static double kl_divergence(float_t* target, float_t* prediction, size_t n) {
+    double total = 0;
+    for (size_t i = 0; i < n; ++i)
+        total += target[i]*log((target[i] + .0001)/(prediction[i] + .0001));
+    return total;
+}
+
+static double mean_absolute_percentage_error(float_t* target, float_t* prediction, size_t n) {
+    double total = 0;
+    for (size_t i = 0; i < n; ++i) {
+        double diff = target[i] - prediction[i];
+        total += abs(diff);
+    }
+    return total*(100./(double)n);
+}
+
+static double mean_squared_error(float_t* target, float_t* prediction, size_t n) {
+    double total = 0;
+    for (size_t i = 0; i < n; ++i) {
+        double diff = target[i] - prediction[i];
+        total += diff*diff;
+    }
+    return total/(double)n;
+}
+
+struct metric {
+    double active_fraction = 0.;
+    double proportional_loss = 0.;
+    double kl_divergence = 0.;
+    double mean_absolute_percentage_error = 0.;
+    double mean_squared_error = 0.;
+
+    friend ostream &operator<<(ostream &os, const metric &metric) {
+        os << "af: " << metric.active_fraction << " proportional: " << metric.proportional_loss
+           << " KL-D: " << metric.kl_divergence << " MAPE: "
+           << metric.mean_absolute_percentage_error << " MSE: " << metric.mean_squared_error;
+        return os;
+    }
+
+    static metric mean(metric* ms, size_t n) {
+        metric result;
+        for (size_t i = 0; i < n; ++i) {
+            result.active_fraction += ms[i].active_fraction;
+            result.proportional_loss += ms[i].proportional_loss;
+            result.kl_divergence += ms[i].kl_divergence;
+            result.mean_absolute_percentage_error += ms[i].mean_absolute_percentage_error;
+            result.mean_squared_error += ms[i].mean_squared_error;
+        }
+        result.active_fraction /= (double)n;
+        result.proportional_loss /= (double)n;
+        result.kl_divergence /= (double)n;
+        result.mean_absolute_percentage_error /= (double)n;
+        result.mean_squared_error /= (double)n;
+
+        return result;
+    }
+};
+void test_representative(size_t domain = 21, size_t image = 100) {
+    bhv::rng.seed(107);
+    std::normal_distribution<float_t> sampler(0.);
+    word_t** hvs = (word_t**)malloc(sizeof(word_t*)*domain);
+    float_t* weights = (float_t*)malloc(sizeof(float_t)*domain);
+    float_t* recovered_weights = (float_t*)malloc(sizeof(float_t)*domain);
+    word_t** rhvs = (word_t**)malloc(sizeof(word_t*)*image);
+    metric* metrics = (metric*)malloc(sizeof(metric)*image);
+
+    for (size_t i = 0; i < domain; ++i) {
+        hvs[i] = bhv::empty();
+#if false
+        bhv::hadamard_encode_into(i + 1, hvs[i]);
+#else
+        bhv::rand_into(hvs[i]);
+#endif
+        weights[i] = 1.; //sampler(bhv::rng);
+    }
+    weights[0] = 0.;
+    normalize(weights, domain);
+    for (size_t i = 0; i < domain; ++i) cout << weights[i] << ", ";
+    cout << endl;
+
+    for (size_t i = 0; i < image; ++i) {
+        rhvs[i] = bhv::empty();
+#if true
+//        bhv::representative_into_reference(hvs, domain, rhvs[i]);
+        bhv::weighted_representative_into_reference(hvs, weights, domain, rhvs[i]);
+#elif false
+        double t = 0.;
+        for (size_t j = 0; j < domain; ++j)
+            t += weights[j];
+//        bhv::weighted_threshold_into_naive<float_t>(hvs, weights, domain, t/2, rhvs[i]);
+        bhv::true_majority_into(hvs, domain, rhvs[i]);
+#else
+        bhv::rand_into(rhvs[i]);
+        bhv::opt::independent<double>(rhvs[i], [&weights, &recovered_weights, &hvs, domain](word_t* x) {
+            for (size_t j = 0; j < domain; ++j)
+                recovered_weights[j] = 1. - (float_t) bhv::hamming(hvs[j], x) / (float_t) BITS;
+//            normalize(recovered_weights, domain);
+            return mean_absolute_percentage_error(weights, recovered_weights, domain);
+        });
+#endif
+        for (size_t j = 0; j < domain; ++j)
+            recovered_weights[j] = 1. - (float_t)bhv::hamming(hvs[j], rhvs[i])/(float_t)BITS;
+        normalize(recovered_weights, domain);
+
+        for (size_t j = 0; j < domain; ++j) cout << recovered_weights[j] << ", ";
+        cout << endl;
+
+        metric m{
+            bhv::active(rhvs[i])/(double)BITS,
+            proportional_loss(weights, recovered_weights, domain),
+            kl_divergence(weights, recovered_weights, domain),
+            mean_absolute_percentage_error(weights, recovered_weights, domain),
+            mean_squared_error(weights, recovered_weights, domain),
+        };
+
+        cout << m << endl;
+
+        metrics[i] = m;
+    }
+
+    metric avg = metric::mean(metrics, image);
+    cout << "summary: " << avg << endl;
+
+    for (size_t i = 0; i < domain; ++i) free(hvs[i]);
+    for (size_t i = 0; i < image; ++i) free(rhvs[i]);
+    free(hvs);
+    free(weights);
+    free(recovered_weights);
+    free(rhvs);
+    free(metrics);
+}
+
 int main() {
 //    test_easy_search();
 //    test_harder_search();
@@ -361,5 +524,6 @@ int main() {
 //    test_hadamard();
 //    test_hadamard_components();
 //    test_levels();
-    test_hadamard_codes();
+//    test_hadamard_codes();
+    test_representative();
 }

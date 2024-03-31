@@ -90,6 +90,7 @@ void representative_into_sampling_avx2(word_t **xs, size_t size, word_t *target)
         uint8_t b = 0;
 
         _mm256_store_si256((__m256i*)buf, random32_range(size));
+        // NOTE AVX512 could use _mm512_i32gather_epi64 and a mask to compress here
 
         b |= ((uint8_t *)xs[buf[0]])[byte_id] & 0b10000000;
         b |= ((uint8_t *)xs[buf[1]])[byte_id] & 0b01000000;

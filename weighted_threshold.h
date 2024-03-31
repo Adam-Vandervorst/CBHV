@@ -411,6 +411,7 @@ void distribution_threshold_into_float_avx2(word_t **xs, float_t *weights, size_
         __m256 vw = _mm256_set1_ps(w);
         uint8_t *x = (uint8_t *)xs[i];
 
+        // Note AVX-512 could use _mm512_mask_add_ps, omitting the lookup and doing a short at the time
         for (bit_iter_t byte_id = 0; byte_id < BYTES; ++byte_id)
             totals[byte_id] = _mm256_fmadd_ps(factors[x[byte_id]], vw, totals[byte_id]);
     }

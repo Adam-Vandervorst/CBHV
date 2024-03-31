@@ -119,8 +119,16 @@ namespace bhv {
         return (x[i/BITS_PER_WORD] >> (i % BITS_PER_WORD)) & 1;
     }
 
-    inline void toggle(word_t *x, bit_iter_t i) {
-        x[i/BITS_PER_WORD] ^= (1ULL << (i % BITS_PER_WORD));
+    template<int mode = -1>
+    inline void update(word_t *x, bit_iter_t i) {
+        if constexpr (mode == 1)
+            x[i/BITS_PER_WORD] |= (1ULL << (i % BITS_PER_WORD));
+        else if constexpr (mode == 0)
+            x[i/BITS_PER_WORD] &= ~(1ULL << (i % BITS_PER_WORD));
+        else if constexpr (mode == -1)
+            x[i/BITS_PER_WORD] ^= (1ULL << (i % BITS_PER_WORD));
+        else
+            static_assert(mode == -1 or mode == 0 or mode == 1, "mode must be XOR, AND, or OR");
     }
 
     inline void level_into(size_t l, word_t *target) {
@@ -154,6 +162,8 @@ namespace bhv {
     #include "weighted_threshold.h"
 
     #include "representative.h"
+
+    #include "weighted_representative.h"
 
     #include "window.h"
 

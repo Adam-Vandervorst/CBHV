@@ -99,7 +99,7 @@ void random_into_reference(word_t *x, float_t p) {
 }
 
 // Note This could have an AVX-512 implementation with 512-bit float-level log and floor, and probably and equivalent to generate_canonical
-template<int mode>
+template<int mode = -1>
 void sparse_random_switch_into(word_t *x, float_t prob, word_t *target) {
     double inv_log_not_prob = 1. / log(1 - prob);
     size_t skip_count = floor(log(generate_canonical<float_t, 23>(rng)) * inv_log_not_prob);

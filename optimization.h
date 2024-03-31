@@ -4,10 +4,10 @@ template <typename N>
 N independent(word_t* x, std::function<N (word_t*)> loss) {
     N best_l = loss(x);
     for (bit_iter_t i = 0; i < BITS; ++i) {
-        toggle(x, i);
+        update(x, i);
         N l = loss(x);
         if (l > best_l)
-            toggle(x, i);
+            update(x, i);
         else
             best_l = l;
     }
