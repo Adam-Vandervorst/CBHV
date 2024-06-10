@@ -9,34 +9,34 @@ using namespace std;
 #define DO_VALIDATION false
 #define SLOPPY_VALIDATION true
 
-#define MAJ_INPUT_HYPERVECTOR_COUNT 100001
+#define MAJ_INPUT_HYPERVECTOR_COUNT 1000001
 #define INPUT_HYPERVECTOR_COUNT 100
 
-//#define WITHIN
-//#define TOP
-//#define CLOSEST
-//#define REPRESENTATIVE
+#define WITHIN
+#define TOP
+#define CLOSEST
+#define REPRESENTATIVE
 #define WEIGHTED_REPRESENTATIVE
-//#define THRESHOLD
-//#define WEIGHTED_THRESHOLD
-//#define MAJ
-//#define PARITY
-//#define RAND
-//#define RAND2
-//#define RANDOM
-//#define PERMUTE
-//#define ROLL
-//#define ACTIVE
-//#define HAMMING
-//#define INVERT
-//#define EVEN_ODD
-//#define REHASH
-//#define AND
-//#define OR
-//#define XOR
-//#define SELECT
-//#define MAJ3
-//#define TERNARY
+#define THRESHOLD
+#define WEIGHTED_THRESHOLD
+#define MAJ
+#define PARITY
+#define RAND
+#define RAND2
+#define RANDOM
+#define PERMUTE
+#define ROLL
+#define ACTIVE
+#define HAMMING
+#define INVERT
+#define EVEN_ODD
+#define REHASH
+#define AND
+#define OR
+#define XOR
+#define SELECT
+#define MAJ3
+#define TERNARY
 
 uint64_t hash_combine(uint64_t h, uint64_t k) {
     static constexpr uint64_t kM = 0xc6a4a7935bd1e995ULL;

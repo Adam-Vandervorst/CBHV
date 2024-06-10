@@ -1,0 +1,83 @@
+*-= WARMUP =-*
+*-= STARTING (8661783866809963245) =-*
+*-= CLOSEST =-*
+*-= SERIAL =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.00717499µs, normalized: 7.17499ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 0.0715695µs, normalized: 7.15695ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 0.71443µs, normalized: 7.1443ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 8.69696µs, normalized: 8.69696ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 88.8878µs, normalized: 8.88878ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 2453.96µs, normalized: 24.5396ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 25114.7µs, normalized: 25.1147ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.0249495µs, normalized: 24.9495ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 0.348552µs, normalized: 34.8552ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 3.03331µs, normalized: 30.3331ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 26.4745µs, normalized: 26.4745ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 253.26µs, normalized: 25.326ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 2596.12µs, normalized: 25.9612ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 25337.8µs, normalized: 25.3378ns/vec
+*-= PARALLEL =-*
+*-= IN CACHE TESTS =-*
+1000 hypervectors, correct: v, in_cache: 1, total: 863.021µs, normalized: 863.021ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 795.453µs, normalized: 79.5453ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 296.119µs, normalized: 2.96119ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 7343.25µs, normalized: 7.34325ns/vec
+*-= OUT OF CACHE TESTS =-*
+1000 hypervectors, correct: v, in_cache: 0, total: 2203.1µs, normalized: 2203.1ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 1554.49µs, normalized: 155.449ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 3903.81µs, normalized: 39.0381ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 6994.07µs, normalized: 6.99407ns/vec
+*-= TOP =-*
+*-= SERIAL =-*
+*-= IN CACHE TESTS =-*
+10 hypervectors, correct: v, k: 5 , in_cache: 1, total: 0.183479µs, normalized: 18.3479ns/vec
+100 hypervectors, correct: v, k: 5 , in_cache: 1, total: 1.07698µs, normalized: 10.7698ns/vec
+1000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 9.71898µs, normalized: 9.71898ns/vec
+10000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 98.4485µs, normalized: 9.84485ns/vec
+100000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 2851.46µs, normalized: 28.5146ns/vec
+1000000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 30260.1µs, normalized: 30.2601ns/vec
+*-= OUT OF CACHE TESTS =-*
+10 hypervectors, correct: v, k: 5 , in_cache: 0, total: 0.502274µs, normalized: 50.2274ns/vec
+100 hypervectors, correct: v, k: 5 , in_cache: 0, total: 3.9503µs, normalized: 39.503ns/vec
+1000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 32.0978µs, normalized: 32.0978ns/vec
+10000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 306.294µs, normalized: 30.6294ns/vec
+100000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 3069.86µs, normalized: 30.6986ns/vec
+1000000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 30899.3µs, normalized: 30.8993ns/vec
+*-= PARALLEL =-*
+*-= IN CACHE TESTS =-*
+1000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 2534.51µs, normalized: 2534.51ns/vec
+10000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 781.886µs, normalized: 78.1886ns/vec
+100000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 457.169µs, normalized: 4.57169ns/vec
+1000000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 8789.49µs, normalized: 8.78949ns/vec
+*-= OUT OF CACHE TESTS =-*
+1000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 1451.7µs, normalized: 1451.7ns/vec
+10000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 1020.1µs, normalized: 102.01ns/vec
+100000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 5850.34µs, normalized: 58.5034ns/vec
+1000000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 10281.9µs, normalized: 10.2819ns/vec
+*-= WITHIN =-*
+*-= SERIAL =-*
+*-= IN CACHE TESTS =-*
+100 hypervectors, correct: v, k: 50, in_cache: 1, total: 0.843698µs, normalized: 8.43698ns/vec
+1000 hypervectors, correct: v, k: 50, in_cache: 1, total: 9.33163µs, normalized: 9.33163ns/vec
+10000 hypervectors, correct: v, k: 50, in_cache: 1, total: 92.2995µs, normalized: 9.22995ns/vec
+100000 hypervectors, correct: v, k: 50, in_cache: 1, total: 2471.02µs, normalized: 24.7102ns/vec
+1000000 hypervectors, correct: v, k: 50, in_cache: 1, total: 26542.7µs, normalized: 26.5427ns/vec
+*-= OUT OF CACHE TESTS =-*
+100 hypervectors, correct: v, k: 50, in_cache: 0, total: 3.37555µs, normalized: 33.7555ns/vec
+1000 hypervectors, correct: v, k: 50, in_cache: 0, total: 28.6348µs, normalized: 28.6348ns/vec
+10000 hypervectors, correct: v, k: 50, in_cache: 0, total: 272.269µs, normalized: 27.2269ns/vec
+100000 hypervectors, correct: v, k: 50, in_cache: 0, total: 2744.02µs, normalized: 27.4402ns/vec
+1000000 hypervectors, correct: v, k: 50, in_cache: 0, total: 27656.7µs, normalized: 27.6567ns/vec
+*-= PARALLEL =-*
+*-= IN CACHE TESTS =-*
+1000 hypervectors, correct: v, k: 50, in_cache: 1, total: 1845.5µs, normalized: 1845.5ns/vec
+10000 hypervectors, correct: v, k: 50, in_cache: 1, total: 1925.72µs, normalized: 192.572ns/vec
+100000 hypervectors, correct: v, k: 50, in_cache: 1, total: 2200.64µs, normalized: 22.0064ns/vec
+1000000 hypervectors, correct: v, k: 50, in_cache: 1, total: 17271.4µs, normalized: 17.2714ns/vec
+*-= OUT OF CACHE TESTS =-*
+1000 hypervectors, correct: v, k: 50, in_cache: 0, total: 1596.63µs, normalized: 1596.63ns/vec
+10000 hypervectors, correct: v, k: 50, in_cache: 0, total: 3518.78µs, normalized: 351.878ns/vec
+100000 hypervectors, correct: v, k: 50, in_cache: 0, total: 2801.97µs, normalized: 28.0197ns/vec
+1000000 hypervectors, correct: v, k: 50, in_cache: 0, total: 13830µs, normalized: 13.83ns/vec

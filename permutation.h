@@ -73,7 +73,7 @@ void swap_byte_order_into(word_t* x, word_t* target) {
         target_bytes[i] = x_bytes[BYTES - 1 - i];
 }
 
-#if __GFNI__
+#if __GFNI__ && __AVX512F__
 void swap_even_odd_into_gfni(word_t* x, word_t* target) {
     for (size_t i = 0; i < DIMENSION/512; ++i) {
         __m512i matrix = _mm512_set1_epi64(0b0000001000000001000010000000010000100000000100001000000001000000);
@@ -83,7 +83,7 @@ void swap_even_odd_into_gfni(word_t* x, word_t* target) {
 }
 #endif
 
-#if __GFNI__
+#if __GFNI__ && __AVX512F__
 #define swap_even_odd_into swap_even_odd_into_gfni
 #else
 #define swap_even_odd_into swap_even_odd_into_reference
@@ -222,7 +222,7 @@ uint64_t byte_bits_permutation_matrix(uint64_t packed_indices) {
     return r;
 }
 
-#if __GFNI__
+#if __GFNI__ && __AVX512F__
 void permute_byte_bits_into_gfni(word_t *x, int64_t perm, word_t *target) {
     if (perm == 0) {
         memcpy(target, x, BYTES);
@@ -245,7 +245,7 @@ void permute_byte_bits_into_gfni(word_t *x, int64_t perm, word_t *target) {
 }
 #endif
 
-#if __GFNI__
+#if __GFNI__ && __AVX512F__
 #define permute_byte_bits_into permute_byte_bits_into_gfni
 #else
 #define permute_byte_bits_into permute_byte_bits_into_shuffle

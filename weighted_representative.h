@@ -1,3 +1,4 @@
+#if __AVX2__
 __m256 randomf_range(float_t range) {
     __m256i bits = avx2_pcg32_random_r(&avx2_key);
     // Convert random bits into FP32 number in [ 1 .. 2 ) interval
@@ -12,6 +13,7 @@ __m256 randomf_range(float_t range) {
 
     return val;
 }
+#endif
 
 // DRAFT
 /*void weighted_representative_into_avx2_binsearch(word_t **xs, float_t *cum_weights, size_t size, word_t *target) {
@@ -68,7 +70,7 @@ void weighted_representative_into_reference(word_t **xs, float_t *weights, size_
     free(cum_weights);
 }
 
-
+#if __AVX2__
 void weighted_representative_into_avx2(word_t **xs, float_t *weights, size_t size, word_t *target) {
     // roughly size*BYTES fmadd's and BYTE pcg32_random's
     __m256 totals[BYTES];
@@ -91,5 +93,10 @@ void weighted_representative_into_avx2(word_t **xs, float_t *weights, size_t siz
         ((uint8_t *)target)[byte_id] = result;
     }
 }
+#endif
 
+#if __AVX2__
 #define weighted_representative_into weighted_representative_into_avx2
+#else
+#define weighted_representative_into weighted_representative_into_reference
+#endif
