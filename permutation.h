@@ -362,7 +362,7 @@ void permute_bytes_into(word_t *x, int64_t perm, word_t *target) {
     else apply_byte_permutation_into<true>(x, p, target);
 }
 
-void permute_into(word_t *x, int64_t perm, word_t *target) {
+extern "C" void permute_into(word_t *x, int64_t perm, word_t *target) {
 #if __AVX512BW__
     permute_words_into(x, perm, target);
     permute_word_bits_into(target, perm, target);

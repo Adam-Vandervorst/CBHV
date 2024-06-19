@@ -9,4 +9,6 @@ void window_into_reference(word_t **xs, size_t size, size_t b, size_t t, word_t 
     and_into(b_hv, t_hv, target);
 }
 
-#define window_into window_into_reference
+extern "C" void window_into(word_t **xs, size_t size, size_t b, size_t t, word_t *target) {
+    window_into_reference(xs, size, b, t, target);
+}

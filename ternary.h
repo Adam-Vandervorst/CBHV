@@ -21,11 +21,14 @@ void select_into_ternary_avx512(word_t *cond, word_t *when1, word_t *when0, word
 }
 #endif
 
+
+extern "C" void select_into(word_t *cond, word_t *when1, word_t *when0, word_t *target) {
 #if __AVX512F__
-#define select_into select_into_ternary_avx512
+    select_into_ternary_avx512(cond, when1, when0, target);
 #else
-#define select_into select_into_reference
+    select_into_reference(cond, when1, when0, target);
 #endif
+}
 
 #if __AVX512F__
 template <uint8_t op>
@@ -567,8 +570,10 @@ void dynamic_ternary_into_reference(word_t *x, word_t *y, word_t *z, word_t *tar
     }
 }
 
+void dynamic_ternary_into(word_t *x, word_t *y, word_t *z, word_t *target, uint8_t op) {
 #if __AVX512F__
-#define dynamic_ternary_into dynamic_ternary_into_avx512
+    dynamic_ternary_into_avx512(x, y, z, target, op);
 #else
-#define dynamic_ternary_into dynamic_ternary_into_reference
+    dynamic_ternary_into_reference(x, y, z, target, op);
 #endif
+}

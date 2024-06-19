@@ -323,8 +323,10 @@ void representative_into_avx2(word_t **xs, size_t size, word_t *target) {
 }
 #endif
 
+void representative_into(word_t **xs, size_t size, word_t *target) {
 #if __AVX2__
-#define representative_into representative_into_avx2
+    representative_into_avx2(xs, size, target);
 #else
-#define representative_into representative_into_reference
+    representative_into_reference(xs, size, target);
 #endif
+}

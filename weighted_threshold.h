@@ -425,7 +425,7 @@ void distribution_threshold_into_float_avx2(word_t **xs, float_t *weights, size_
 #endif
 
 
-void factor_threshold_into(word_t **xs, uint32_t *weights, size_t size, uint64_t threshold, word_t *target) {
+extern "C" void factor_threshold_into(word_t **xs, uint32_t *weights, size_t size, uint64_t threshold, word_t *target) {
     uint64_t max_result = 0;
     for (size_t i = 0; i < size; ++i)
         max_result += weights[i];
@@ -442,10 +442,12 @@ void factor_threshold_into(word_t **xs, uint32_t *weights, size_t size, uint64_t
         weighted_threshold_into_naive<uint64_t>(xs, (uint64_t*)weights, size, threshold, target);
 }
 
+extern "C" void distribution_threshold_into(word_t **xs, float_t *weights, size_t size, float_t threshold, word_t *target) {
 #ifdef __AVX512BW__
-#define distribution_threshold_into distribution_threshold_into_float_avx512
+    distribution_threshold_into_float_avx512(xs, weights, size, threshold, target);
 #elif __AVX2__
-#define distribution_threshold_into distribution_threshold_into_float_avx2
+    distribution_threshold_into_float_avx2(xs, weights, size, threshold, target);
 #else
-#define distribution_threshold_into weighted_threshold_into_naive<float_t>
+    weighted_threshold_into_naive<float_t>(xs, weights, size, threshold, target);
 #endif
+}

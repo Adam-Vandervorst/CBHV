@@ -13,7 +13,9 @@ size_t closest_reference(word_t **xs, size_t size, word_t *x) {
     return index;
 }
 
-#define closest closest_reference
+extern "C" size_t closest(word_t **xs, size_t size, word_t *x) {
+    return closest_reference(xs, size, x);
+}
 
 struct Element {
     size_t index;
@@ -50,7 +52,9 @@ void top_into_reference(word_t **xs, size_t size, word_t *x, size_t k, size_t* t
     }
 }
 
-#define top_into top_into_reference
+extern "C" void top_into(word_t **xs, size_t size, word_t *x, size_t k, size_t* target) {
+    top_into_reference(xs, size, x, k, target);
+}
 
 std::vector<size_t> within_reference(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
     std::vector<size_t> ys;
@@ -62,8 +66,9 @@ std::vector<size_t> within_reference(word_t **xs, size_t size, word_t *x, bit_it
     return ys;
 }
 
-#define within within_reference
-
+extern "C" std::vector<size_t> within(word_t **xs, size_t size, word_t *x, bit_iter_t d) {
+    return within_reference(xs, size, x, d);
+}
 
 #ifndef NOPARALLELISM
 #ifdef _OPENMP

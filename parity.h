@@ -52,10 +52,12 @@ void parity_into_avx512(word_t **xs, size_t size, word_t *target) {
 }
 #endif
 
+extern "C" void parity_into(word_t ** xs, size_t size, word_t *target) {
 #if __AVX512BW__
-#define parity_into parity_into_avx512
+    parity_into_avx512(xs, size, target);
 #elif __AVX2__
-#define parity_into parity_into_avx2
+    parity_into_avx2(xs, size, target);
 #else
-#define parity_into parity_into_reference
+    parity_into_reference(xs, size, target);
 #endif //#if __AVX512BW__
+}

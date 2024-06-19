@@ -66,29 +66,29 @@ namespace bhv {
         return x;
     }
 
-    bool eq(word_t *x, word_t *y) {
+    extern "C" bool eq(word_t *x, word_t *y) {
         for (word_iter_t i = 0; i < WORDS; ++i)
             if (x[i] != y[i])
                 return false;
         return true;
     }
 
-    void xor_into(word_t *x, word_t *y, word_t *target) {
+    extern "C" void xor_into(word_t *x, word_t *y, word_t *target) {
         for (word_iter_t i = 0; i < WORDS; ++i)
             target[i] = x[i] ^ y[i];
     }
 
-    void and_into(word_t *x, word_t *y, word_t *target) {
+    extern "C" void and_into(word_t *x, word_t *y, word_t *target) {
         for (word_iter_t i = 0; i < WORDS; ++i)
             target[i] = x[i] & y[i];
     }
 
-    void or_into(word_t *x, word_t *y, word_t *target) {
+    extern "C" void or_into(word_t *x, word_t *y, word_t *target) {
         for (word_iter_t i = 0; i < WORDS; ++i)
             target[i] = x[i] | y[i];
     }
 
-    void invert_into(word_t *x, word_t *target) {
+    extern "C" void invert_into(word_t *x, word_t *target) {
         for (word_iter_t i = 0; i < WORDS; ++i)
             target[i] = ~x[i];
     }

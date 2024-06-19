@@ -348,7 +348,6 @@ void threshold_into_avx512(word_t ** xs, size_t size, size_t threshold, word_t* 
 #endif //__AVX512BW__
 
 #ifdef __AVX2__
-
 template<uint8_t size, uint8_t t>
 void logic_threshold_into_avx2(word_t **xs, word_t *target) {
     constexpr uint8_t t_ = size - t - 1;
@@ -765,13 +764,16 @@ void threshold_into_avx2(word_t ** xs, size_t size, size_t threshold, word_t* ds
 }
 #endif //__AVX2__
 
+
+extern "C" void threshold_into(word_t ** xs, size_t size, uint32_t threshold, word_t *target) {
 #if __AVX512BW__
-#define threshold_into threshold_into_avx512
+    threshold_into_avx512(xs, size, threshold, target);
 #elif __AVX2__
-#define threshold_into threshold_into_avx2
+    threshold_into_avx2(xs, size, threshold, target);
 #else
-#define threshold_into threshold_into_reference<uint32_t>
+    threshold_into_reference<uint32_t>(xs, size, threshold, target);
 #endif //#if __AVX512BW__
+}
 
 /// @brief Sets each result bit high if there are more than threshold 1 bits in the corresponding bit of the input vectors
 /// @param xs array of `size` input vectors

@@ -95,8 +95,10 @@ void weighted_representative_into_avx2(word_t **xs, float_t *weights, size_t siz
 }
 #endif
 
+extern "C" void weighted_representative_into(word_t **xs, float_t *weights, size_t size, word_t *target) {
 #if __AVX2__
-#define weighted_representative_into weighted_representative_into_avx2
+    weighted_representative_into_avx2(xs, weights, size, target);
 #else
-#define weighted_representative_into weighted_representative_into_reference
+    weighted_representative_into_reference(xs, weights, size, target);
 #endif
+}

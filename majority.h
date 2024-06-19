@@ -15,7 +15,6 @@ void true_majority_into_reference(word_t **xs, size_t size, word_t *target) {
 }
 
 #if __AVX512BW__
-
 /// @brief AVX-512 implementation of Decision-Tree-Majority algorithm
 /// @note Optimal for use in the N=7 to N=89 regime.  After that, thresholding is faster
 template <uint8_t size>
@@ -165,16 +164,25 @@ void true_majority_into_avx2(word_t **xs, size_t size, word_t *target) {
 }
 #endif //__AVX2__
 
+extern "C" void majority3_into(word_t *x, word_t *y, word_t *z, word_t *target) {
 #if __AVX512BW__
-#define majority3_into majority3_into_ternary_avx512
-#define true_majority_into true_majority_into_avx512
+    majority3_into_ternary_avx512(x, y, z, target);
 #elif __AVX2__
-#define majority3_into majority3_into_avx2
-#define true_majority_into true_majority_into_avx2
+    majority3_into_avx2(x, y, z, target);
 #else
-#define majority3_into majority3_into_reference
-#define true_majority_into true_majority_into_reference
+    majority3_into_reference(x, y, z, target);
 #endif
+}
+
+extern "C" void true_majority_into(word_t **xs, size_t size, word_t *target) {
+#if __AVX512BW__
+    true_majority_into_avx512(xs, size, target);
+#elif __AVX2__
+    true_majority_into_avx2(xs, size, target);
+#else
+    true_majority_into_reference(xs, size, target);
+#endif
+}
 
 /// @brief Computes the majority value for each bit among all corresponding bits in the input vectors
 /// @param xs array of size input vectors

@@ -59,13 +59,17 @@ void rand_into_avx512(word_t * x) {
 }
 #endif
 
+
+extern "C" void rand_into(word_t *x) {
 #if __AVX512BW__
-#define rand_into rand_into_avx512
+    rand_into_avx512(x);
 #elif __AVX2__
-#define rand_into rand_into_avx2
+    rand_into_avx2(x);
 #else
-#define rand_into rand_into_reference
+    rand_into_reference(x);
 #endif
+}
+
 
 void rand2_into_reference(word_t *target, int8_t pow) {
     if (pow == 0)
@@ -252,14 +256,16 @@ void random_into_ternary_tree_avx512(word_t *x, float_t p) {
 }
 #endif
 
-#if __AVX512BW__
-#define random_into random_into_ternary_tree_avx512
-#elif __AVX2__
-#define random_into random_into_tree_sparse_avx2
-#else
-#define random_into random_into_reference
-#endif //#if __AVX512BW__
 
+extern "C" void random_into(word_t *x, float_t p) {
+#if __AVX512BW__
+    random_into_ternary_tree_avx512(x, p);
+#elif __AVX2__
+    random_into_tree_sparse_avx2(x, p);
+#else
+    random_into_reference(x, p);
+#endif //#if __AVX512BW__
+}
 
 word_t *rand() {
     word_t *x = empty();
