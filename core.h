@@ -173,6 +173,8 @@ namespace bhv {
 
     #include "lookup.h"
 
+    #include "batched_lookup.h"
+
     #include "optimization.h"
 }
 #endif //BHV_CORE_H

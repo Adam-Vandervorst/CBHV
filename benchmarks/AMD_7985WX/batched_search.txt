@@ -1,0 +1,156 @@
+*-= WARMUP =-*
+*-= STARTING (8661783866809963245) =-*
+*-= BATCHED CLOSEST =-*
+*-= BATCH SIZE 1 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.00957938µs, normalized: 9.57938ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 0.0744149µs, normalized: 7.44149ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 0.736074µs, normalized: 7.36074ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 8.57421µs, normalized: 8.57421ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 83.6945µs, normalized: 8.36945ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 2451.06µs, normalized: 24.5106ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 24604.9µs, normalized: 24.6049ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.0255763µs, normalized: 25.5763ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 0.336123µs, normalized: 33.6123ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 3.06474µs, normalized: 30.6474ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 25.3787µs, normalized: 25.3787ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 245.21µs, normalized: 24.521ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 2492.19µs, normalized: 24.9219ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 24859.4µs, normalized: 24.8594ns/vec
+*-= BATCH SIZE 2 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.0164108µs, normalized: 8.20541ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 0.126971µs, normalized: 6.34855ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 1.2657µs, normalized: 6.32852ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 12.9665µs, normalized: 6.48324ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 127.65µs, normalized: 6.38252ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 2444.5µs, normalized: 12.2225ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 28709.3µs, normalized: 14.3546ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.0267298µs, normalized: 13.3649ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 0.467383µs, normalized: 23.3692ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 3.78693µs, normalized: 18.9347ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 30.5777µs, normalized: 15.2888ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 291.129µs, normalized: 14.5564ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 2919.36µs, normalized: 14.5968ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 28100.4µs, normalized: 14.0502ns/vec
+*-= BATCH SIZE 4 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.0312402µs, normalized: 7.81006ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 0.285574µs, normalized: 7.13936ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 2.77047µs, normalized: 6.92617ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 29.6497µs, normalized: 7.41243ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 299.021µs, normalized: 7.47552ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 3567.83µs, normalized: 8.91959ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 35528.3µs, normalized: 8.88208ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.035384µs, normalized: 8.84601ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 0.836018µs, normalized: 20.9005ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 5.7318µs, normalized: 14.3295ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 36.4485µs, normalized: 9.11212ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 346.339µs, normalized: 8.65848ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 3677.55µs, normalized: 9.19388ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 37994.5µs, normalized: 9.49864ns/vec
+*-= BATCH SIZE 8 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.0584429µs, normalized: 7.30536ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 0.56253µs, normalized: 7.03163ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 5.67924µs, normalized: 7.09905ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 59.3102µs, normalized: 7.41377ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 566.295µs, normalized: 7.07869ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 5892.91µs, normalized: 7.36613ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 58849.2µs, normalized: 7.35615ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.0629085µs, normalized: 7.86357ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 1.28626µs, normalized: 16.0783ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 8.67016µs, normalized: 10.8377ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 61.0933µs, normalized: 7.63666ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 601.262µs, normalized: 7.51577ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 6404.96µs, normalized: 8.0062ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 58462.6µs, normalized: 7.30782ns/vec
+*-= BATCH SIZE 16 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.115828µs, normalized: 7.23927ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 1.12291µs, normalized: 7.0182ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 11.3464µs, normalized: 7.09153ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 115.788µs, normalized: 7.23674ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 1182.7µs, normalized: 7.39188ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 12263.8µs, normalized: 7.66489ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 157599µs, normalized: 9.84994ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.132369µs, normalized: 8.27304ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 2.18771µs, normalized: 13.6732ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 15.166µs, normalized: 9.47875ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 129.936µs, normalized: 8.12102ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 1308.95µs, normalized: 8.18096ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 13807.2µs, normalized: 8.62948ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 135988µs, normalized: 8.49925ns/vec
+*-= BATCH SIZE 32 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.233277µs, normalized: 7.28991ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 2.21366µs, normalized: 6.91768ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 22.3694µs, normalized: 6.99042ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 232.902µs, normalized: 7.27818ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 2348.36µs, normalized: 7.33863ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 26730.6µs, normalized: 8.3533ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 261394µs, normalized: 8.16856ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.347921µs, normalized: 10.8725ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 3.92139µs, normalized: 12.2543ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 29.9018µs, normalized: 9.34431ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 274.584µs, normalized: 8.58075ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 2622.11µs, normalized: 8.1941ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 26228.7µs, normalized: 8.19645ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 260688µs, normalized: 8.14649ns/vec
+*-= BATCH SIZE 64 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.468919µs, normalized: 7.32686ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 4.40303µs, normalized: 6.87973ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 45.547µs, normalized: 7.11671ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 545.147µs, normalized: 8.51792ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 5629.77µs, normalized: 8.79651ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 59450.2µs, normalized: 9.2891ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 596872µs, normalized: 9.32612ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.615333µs, normalized: 9.61459ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 7.12689µs, normalized: 11.1358ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 57.4474µs, normalized: 8.97615ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 564.485µs, normalized: 8.82008ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 6022.19µs, normalized: 9.40968ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 59436µs, normalized: 9.28688ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 621025µs, normalized: 9.70351ns/vec
+*-= BATCH SIZE 128 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.934975µs, normalized: 7.30449ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 8.82564µs, normalized: 6.89503ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 89.5502µs, normalized: 6.99611ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 1071.81µs, normalized: 8.37355ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 10802µs, normalized: 8.43905ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 112401µs, normalized: 8.78129ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 1.12833e+06µs, normalized: 8.81511ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 1.09168µs, normalized: 8.52874ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 13.5499µs, normalized: 10.5859ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 105.209µs, normalized: 8.21941ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 1126.11µs, normalized: 8.79771ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 11615.4µs, normalized: 9.0745ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 118106µs, normalized: 9.227ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 1.15445e+06µs, normalized: 9.01916ns/vec
+*-= BATCH SIZE 256 =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 1.89426µs, normalized: 7.39945ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 18.1164µs, normalized: 7.07672ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 183.681µs, normalized: 7.17505ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 2196.19µs, normalized: 8.57886ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 22331.2µs, normalized: 8.72314ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 229587µs, normalized: 8.96824ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 2.26449e+06µs, normalized: 8.84567ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 2.12572µs, normalized: 8.3036ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 26.2194µs, normalized: 10.242ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 203.73µs, normalized: 7.9582ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 2202.65µs, normalized: 8.60411ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 22948.9µs, normalized: 8.96442ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 225577µs, normalized: 8.81158ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 2.32448e+06µs, normalized: 9.08001ns/vec
