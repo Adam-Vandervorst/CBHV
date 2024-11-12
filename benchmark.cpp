@@ -13,31 +13,31 @@ using namespace std;
 #define INPUT_HYPERVECTOR_COUNT 100
 
 #define BATCHED_CLOSEST
-//#define WITHIN
-//#define TOP
-//#define CLOSEST
-//#define REPRESENTATIVE
-//#define WEIGHTED_REPRESENTATIVE
-//#define THRESHOLD
-//#define WEIGHTED_THRESHOLD
-//#define MAJ
-//#define PARITY
-//#define RAND
-//#define RAND2
-//#define RANDOM
-//#define PERMUTE
-//#define ROLL
-//#define ACTIVE
-//#define HAMMING
-//#define INVERT
-//#define EVEN_ODD
-//#define REHASH
-//#define AND
-//#define OR
-//#define XOR
-//#define SELECT
-//#define MAJ3
-//#define TERNARY
+#define WITHIN
+#define TOP
+#define CLOSEST
+#define REPRESENTATIVE
+#define WEIGHTED_REPRESENTATIVE
+#define THRESHOLD
+#define WEIGHTED_THRESHOLD
+#define MAJ
+#define PARITY
+#define RAND
+#define RAND2
+#define RANDOM
+#define PERMUTE
+#define ROLL
+#define ACTIVE
+#define HAMMING
+#define INVERT
+#define EVEN_ODD
+#define REHASH
+#define AND
+#define OR
+#define XOR
+#define SELECT
+#define MAJ3
+#define TERNARY
 
 uint64_t hash_combine(uint64_t h, uint64_t k) {
     static constexpr uint64_t kM = 0xc6a4a7935bd1e995ULL;
