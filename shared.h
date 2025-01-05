@@ -37,4 +37,14 @@ using bit_word_iter_t = uint8_t;
 #define unlikely(expr) __builtin_expect(!!(expr), 0)
 #define likely(expr) __builtin_expect(!!(expr), 1)
 
+template <typename T, T... S, typename F>
+constexpr void for_sequence(std::integer_sequence<T, S...>, F f) {
+    (static_cast<void>(f(std::integral_constant<T, S>{})), ...);
+}
+
+template<auto n, typename F>
+constexpr void for_sequence(F f) {
+    for_sequence(std::make_integer_sequence<decltype(n), n>{}, f);
+}
+
 #endif //BHV_CONSTANTS_H

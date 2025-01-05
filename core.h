@@ -103,6 +103,26 @@ namespace bhv {
         }
     }
 
+    template<int mode = -1, typename I>
+    void unpack_update_into(word_t *x, I *target_bits, uint8_t o) {
+        for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
+            bit_iter_t offset = word_id * BITS_PER_WORD;
+            word_t word = x[word_id];
+            for (bit_word_iter_t bit_id = 0; bit_id < BITS_PER_WORD; ++bit_id) {
+                if constexpr (mode == 1)
+                    target_bits[offset + bit_id] |= (I)(((word >> bit_id) & 1) << o);
+                else if constexpr (mode == 0)
+                    target_bits[offset + bit_id] &= ~(I)(((word >> bit_id) & 1) << o);
+                else if constexpr (mode == -1)
+                    target_bits[offset + bit_id] ^= (I)(((word >> bit_id) & 1) << o);
+                else if constexpr (mode == 2)
+                    target_bits[offset + bit_id] += ((word >> bit_id) & 1) ? -(I)o : (I)o;
+                else
+                    static_assert(mode == -1 or mode == 0 or mode == 1, "mode must be XOR, AND, or OR");
+            }
+        }
+    }
+
     void pack_into(bool *bits, word_t *target) {
         for (word_iter_t word_id = 0; word_id < WORDS; ++word_id) {
             bit_iter_t offset = word_id * BITS_PER_WORD;

@@ -1671,7 +1671,7 @@ int main() {
     {
         t0 = chrono::high_resolution_clock::now();
         bhv::xor_into(tree, a, to_search);
-        auto path = resonator.run(to_search, 100);
+        auto path = resonator.run_fuzzy(to_search, 100);
         std::array<size_t, 5> expect = {0, 0, 0, 2, 2};
         assert(path == expect);
         t1 = chrono::high_resolution_clock::now();
@@ -1680,7 +1680,7 @@ int main() {
     {
         t0 = chrono::high_resolution_clock::now();
         bhv::xor_into(tree, b, to_search);
-        auto path = resonator.run(to_search, 100);
+        auto path = resonator.run_fuzzy(to_search, 100);
         std::array<size_t, 5> expect = {0, 1, 0, 2, 2};
         assert(path == expect);
         t1 = chrono::high_resolution_clock::now();
@@ -1689,7 +1689,7 @@ int main() {
     {
         t0 = chrono::high_resolution_clock::now();
         bhv::xor_into(tree, c, to_search);
-        auto path = resonator.run(to_search, 100);
+        auto path = resonator.run_fuzzy(to_search, 100);
         std::array<size_t, 5> expect = {1, 1, 0, 2, 2};
         assert(path == expect);
         t1 = chrono::high_resolution_clock::now();
@@ -1698,7 +1698,7 @@ int main() {
     {
         t0 = chrono::high_resolution_clock::now();
         bhv::xor_into(tree, d, to_search);
-        auto path = resonator.run(to_search, 100);
+        auto path = resonator.run_fuzzy(to_search, 100);
         std::array<size_t, 5> expect = {1, 1, 1, 0, 2};
         assert(path == expect);
         t1 = chrono::high_resolution_clock::now();
@@ -1707,7 +1707,7 @@ int main() {
     {
         t0 = chrono::high_resolution_clock::now();
         bhv::xor_into(tree, e, to_search);
-        auto path = resonator.run(to_search, 300); // for some reason, this path is harder to recover
+        auto path = resonator.run_fuzzy(to_search, 100);
         std::array<size_t, 5> expect = {1, 1, 1, 1, 2};
         assert(path == expect);
         t1 = chrono::high_resolution_clock::now();
@@ -1716,7 +1716,7 @@ int main() {
     {
         t0 = chrono::high_resolution_clock::now();
         bhv::xor_into(tree, f, to_search);
-        auto path = resonator.run(to_search, 100);
+        auto path = resonator.run_fuzzy(to_search, 100);
         std::array<size_t, 5> expect = {0, 1, 1, 0, 0};
         assert(path == expect);
         t1 = chrono::high_resolution_clock::now();
@@ -1725,7 +1725,7 @@ int main() {
     {
         t0 = chrono::high_resolution_clock::now();
         bhv::xor_into(tree, g, to_search);
-        auto path = resonator.run(to_search, 100);
+        auto path = resonator.run_fuzzy(to_search, 100);
         std::array<size_t, 5> expect = {0, 1, 1, 0, 1};
         assert(path == expect);
         t1 = chrono::high_resolution_clock::now();
