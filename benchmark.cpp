@@ -12,32 +12,33 @@ using namespace std;
 #define MAJ_INPUT_HYPERVECTOR_COUNT 10000001
 #define INPUT_HYPERVECTOR_COUNT 100
 
-#define BATCHED_CLOSEST
-#define WITHIN
-#define TOP
-#define CLOSEST
-#define REPRESENTATIVE
-#define WEIGHTED_REPRESENTATIVE
-#define THRESHOLD
-#define WEIGHTED_THRESHOLD
-#define MAJ
-#define PARITY
-#define RAND
-#define RAND2
-#define RANDOM
-#define PERMUTE
-#define ROLL
-#define ACTIVE
-#define HAMMING
-#define INVERT
-#define EVEN_ODD
-#define REHASH
-#define AND
-#define OR
-#define XOR
-#define SELECT
-#define MAJ3
-#define TERNARY
+//#define BATCHED_CLOSEST
+//#define WITHIN
+//#define TOP
+//#define CLOSEST
+#define RESONATOR
+//#define REPRESENTATIVE
+//#define WEIGHTED_REPRESENTATIVE
+//#define THRESHOLD
+//#define WEIGHTED_THRESHOLD
+//#define MAJ
+//#define PARITY
+//#define RAND
+//#define RAND2
+//#define RANDOM
+//#define PERMUTE
+//#define ROLL
+//#define ACTIVE
+//#define HAMMING
+//#define INVERT
+//#define EVEN_ODD
+//#define REHASH
+//#define AND
+//#define OR
+//#define XOR
+//#define SELECT
+//#define MAJ3
+//#define TERNARY
 
 uint64_t hash_combine(uint64_t h, uint64_t k) {
     static constexpr uint64_t kM = 0xc6a4a7935bd1e995ULL;
@@ -1605,6 +1606,131 @@ int main() {
     cout << "*-= OUT OF CACHE TESTS =-*" << endl;
     for (size_t i = 3; i < 100000; i = i < 10 ? i+1 : (size_t)(i*1.111))
         nary_benchmark<simulated_representative_iota_factors<float_t, bhv::weighted_representative_into>, simulated_representative_iota_factors<float_t, bhv::weighted_representative_into>>(i, true, false);
+#endif
+#ifdef RESONATOR
+    word_t *left = bhv::rand();
+    word_t *right = bhv::rand();
+    word_t *codebook0[3] = {left, right, bhv::ZERO};
+    word_t *codebook1[3] = {bhv::empty(), bhv::empty(), bhv::ZERO};
+    bhv::roll_word_bits_into(left, 1, codebook1[0]); bhv::roll_word_bits_into(right, 1, codebook1[1]);
+    word_t *codebook2[3] = {bhv::empty(), bhv::empty(), bhv::ZERO};
+    bhv::roll_word_bits_into(left, 2, codebook2[0]); bhv::roll_word_bits_into(right, 2, codebook2[1]);
+    word_t *codebook3[3] = {bhv::empty(), bhv::empty(), bhv::ZERO};
+    bhv::roll_word_bits_into(left, 3, codebook3[0]); bhv::roll_word_bits_into(right, 3, codebook3[1]);
+    word_t *codebook4[3] = {bhv::empty(), bhv::empty(), bhv::ZERO};
+    bhv::roll_word_bits_into(left, 4, codebook4[0]); bhv::roll_word_bits_into(right, 4, codebook4[1]);
+
+    word_t *tree = bhv::empty();
+    word_t *a = bhv::rand(); word_t *b = bhv::rand(); word_t *c = bhv::rand(); word_t *d = bhv::rand(); word_t *e = bhv::rand(); word_t *f = bhv::rand(); word_t *g = bhv::rand();
+
+    word_t *a_path [4] = {a, codebook0[0], codebook1[0], codebook2[0]};
+    word_t *b_path [4] = {b, codebook0[0], codebook1[1], codebook2[0]};
+    word_t *c_path [4] = {c, codebook0[1], codebook1[1], codebook2[0]};
+    word_t *d_path [5] = {d, codebook0[1], codebook1[1], codebook2[1], codebook3[0]};
+    word_t *e_path [5] = {e, codebook0[1], codebook1[1], codebook2[1], codebook3[1]};
+    word_t *f_path [6] = {f, codebook0[0], codebook1[1], codebook2[1], codebook3[0], codebook4[0]};
+    word_t *g_path [6] = {g, codebook0[0], codebook1[1], codebook2[1], codebook3[0], codebook4[1]};
+    word_t *paths[7] = {bhv::empty(), bhv::empty(), bhv::empty(), bhv::empty(), bhv::empty(), bhv::empty(), bhv::empty()};
+    bhv::parity_into(a_path, 4, paths[0]); bhv::parity_into(b_path, 4, paths[1]); bhv::parity_into(c_path, 4, paths[2]);
+    bhv::parity_into(d_path, 5, paths[3]); bhv::parity_into(e_path, 5, paths[4]);
+    bhv::parity_into(f_path, 6, paths[5]); bhv::parity_into(g_path, 6, paths[6]);
+    bhv::true_majority_into(paths, 7, tree);
+
+    word_t *to_search = bhv::empty();
+
+    /*
+    int8_t *fuzzy_left = (int8_t *)malloc(BITS);
+    word_t *recover_left = bhv::empty();
+    bhv::lift_into(left, fuzzy_left);
+    bhv::drop_into(fuzzy_left, recover_left);
+    assert(bhv::eq(left, recover_left));
+
+    int8_t *auto0 = (int8_t *)malloc(BITS*BITS);
+    memset(auto0, 0, BITS*BITS);
+    bhv::automat(codebook0, 3, auto0);
+    int8_t *fuzzy_left_ = (int8_t *)malloc(BITS);
+    bhv::matvec(auto0, fuzzy_left, fuzzy_left_);
+    word_t *left_ = bhv::empty();
+    bhv::drop_into(fuzzy_left_, left_);
+    assert(bhv::eq(left, left_));
+    free(auto0);
+    free(fuzzy_left);
+    free(fuzzy_left_);
+    */
+
+    cout << "*-= CLOSEST =-*" << endl;
+    cout << "*-= TREE =-*" << endl;
+    cout << "*-= CONSTRUCTION =-*" << endl;
+
+    auto t0 = chrono::high_resolution_clock::now();
+    bhv::Resonator5 resonator(codebook0, 3, codebook1, 3, codebook2, 3, codebook3, 3, codebook4, 3);
+    auto t1 = chrono::high_resolution_clock::now();
+    cout << "4x3 codebooks " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " us" << endl;
+    cout << "*-= RUNNING =-*" << endl;
+
+    {
+        t0 = chrono::high_resolution_clock::now();
+        bhv::xor_into(tree, a, to_search);
+        auto path = resonator.run(to_search, 100);
+        std::array<size_t, 5> expect = {0, 0, 0, 2, 2};
+        assert(path == expect);
+        t1 = chrono::high_resolution_clock::now();
+        cout << "recovering path of a " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " us" << endl;
+    }
+    {
+        t0 = chrono::high_resolution_clock::now();
+        bhv::xor_into(tree, b, to_search);
+        auto path = resonator.run(to_search, 100);
+        std::array<size_t, 5> expect = {0, 1, 0, 2, 2};
+        assert(path == expect);
+        t1 = chrono::high_resolution_clock::now();
+        cout << "recovering path of b " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " us" << endl;
+    }
+    {
+        t0 = chrono::high_resolution_clock::now();
+        bhv::xor_into(tree, c, to_search);
+        auto path = resonator.run(to_search, 100);
+        std::array<size_t, 5> expect = {1, 1, 0, 2, 2};
+        assert(path == expect);
+        t1 = chrono::high_resolution_clock::now();
+        cout << "recovering path of c " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " us" << endl;
+    }
+    {
+        t0 = chrono::high_resolution_clock::now();
+        bhv::xor_into(tree, d, to_search);
+        auto path = resonator.run(to_search, 100);
+        std::array<size_t, 5> expect = {1, 1, 1, 0, 2};
+        assert(path == expect);
+        t1 = chrono::high_resolution_clock::now();
+        cout << "recovering path of d " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " us" << endl;
+    }
+    {
+        t0 = chrono::high_resolution_clock::now();
+        bhv::xor_into(tree, e, to_search);
+        auto path = resonator.run(to_search, 300); // for some reason, this path is harder to recover
+        std::array<size_t, 5> expect = {1, 1, 1, 1, 2};
+        assert(path == expect);
+        t1 = chrono::high_resolution_clock::now();
+        cout << "recovering path of e " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " us" << endl;
+    }
+    {
+        t0 = chrono::high_resolution_clock::now();
+        bhv::xor_into(tree, f, to_search);
+        auto path = resonator.run(to_search, 100);
+        std::array<size_t, 5> expect = {0, 1, 1, 0, 0};
+        assert(path == expect);
+        t1 = chrono::high_resolution_clock::now();
+        cout << "recovering path of f " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " us" << endl;
+    }
+    {
+        t0 = chrono::high_resolution_clock::now();
+        bhv::xor_into(tree, g, to_search);
+        auto path = resonator.run(to_search, 100);
+        std::array<size_t, 5> expect = {0, 1, 1, 0, 1};
+        assert(path == expect);
+        t1 = chrono::high_resolution_clock::now();
+        cout << "recovering path of g " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " us" << endl;
+    }
 #endif
 #ifdef CLOSEST
     cout << "*-= CLOSEST =-*" << endl;

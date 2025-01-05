@@ -176,5 +176,7 @@ namespace bhv {
     #include "batched_lookup.h"
 
     #include "optimization.h"
+
+    #include "resonator.h"
 }
 #endif //BHV_CORE_H
