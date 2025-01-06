@@ -211,3 +211,59 @@ struct Resonator5 {
     }
 };
 
+struct NotAResonator5 {
+    size_t n0, n1, n2, n3, n4;
+    word_t **codebook0; word_t **codebook1; word_t **codebook2; word_t **codebook3; word_t **codebook4;
+    word_t **candidates;
+
+    NotAResonator5(word_t **codebook0, size_t n0, word_t **codebook1, size_t n1, word_t **codebook2, size_t n2, word_t **codebook3, size_t n3, word_t **codebook4, size_t n4) :
+            codebook0(codebook0), codebook1(codebook1), codebook2(codebook2), codebook3(codebook3), codebook4(codebook4),
+            n0(n0), n1(n1), n2(n2), n3(n3), n4(n4) {
+        size_t n = n0*n1*n2*n3*n4;
+        candidates = (word_t**)malloc(n*sizeof(word_t*));
+        word_t *base = (word_t *)aligned_alloc(64, n*BYTES);
+        size_t i = 0;
+        word_t *bind[5] = {nullptr, nullptr, nullptr, nullptr};
+        for (size_t i0 = 0; i0 < n0; ++i0) {
+            bind[0] = codebook0[i0];
+            for (size_t i1 = 0; i1 < n1; ++i1) {
+                bind[1] = codebook1[i1];
+                for (size_t i2 = 0; i2 < n2; ++i2) {
+                    bind[2] = codebook2[i2];
+                    for (size_t i3 = 0; i3 < n3; ++i3) {
+                        bind[3] = codebook3[i3];
+                        for (size_t i4 = 0; i4 < n4; ++i4) {
+                            bind[4] = codebook4[i4];
+                            parity_into(bind, 5, base + i*WORDS);
+                            candidates[i] = base + i*WORDS;
+                            i += 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    std::array<size_t, 5> run_fuzzy(word_t *const s, size_t iter) const {
+        auto j = closest(candidates, n0*n1*n2*n3*n4, s);
+
+        size_t i0 = j / (n1*n2*n3*n4);
+        j %= (n1*n2*n3*n4);
+
+        size_t i1 = j / (n2*n3*n4);
+        j %= (n2*n3*n4);
+
+        size_t i2 = j / (n3*n4);
+        j %= (n3*n4);
+
+        size_t i3 = j / n4;
+        size_t i4 = j % n4;
+
+        return {i0, i1, i2, i3, i4};
+    }
+
+    ~NotAResonator5() {
+        free(candidates[0]);
+        free(candidates);
+    }
+};
