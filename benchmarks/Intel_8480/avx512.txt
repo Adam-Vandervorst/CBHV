@@ -1,0 +1,1457 @@
+*-= WARMUP =-*
+*-= STARTING (8661783866809963245) =-*
+*-= TERNARY =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.03135µs
+equiv v, total: 0.03908µs
+equiv v, total: 0.03203µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.27971µs
+equiv v, total: 0.04157µs
+equiv v, total: 0.03512µs
+*-= MAJ3 =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.01964µs
+equiv v, total: 0.0192µs
+equiv v, total: 0.01899µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.26198µs
+equiv v, total: 0.03804µs
+equiv v, total: 0.03785µs
+*-= SELECT =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.01969µs
+equiv v, total: 0.01912µs
+equiv v, total: 0.01926µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.25794µs
+equiv v, total: 0.0382µs
+equiv v, total: 0.03944µs
+*-= XOR =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.02078µs
+equiv v, total: 0.02225µs
+equiv v, total: 0.02209µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.25432µs
+equiv v, total: 0.03349µs
+equiv v, total: 0.03115µs
+*-= XOR =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.02158µs
+equiv v, total: 0.02254µs
+equiv v, total: 0.02258µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.25129µs
+equiv v, total: 0.03281µs
+equiv v, total: 0.03136µs
+*-= OR =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.02196µs
+equiv v, total: 0.02196µs
+equiv v, total: 0.02186µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.25928µs
+equiv v, total: 0.03178µs
+equiv v, total: 0.03191µs
+*-= AND =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.02143µs
+equiv v, total: 0.02093µs
+equiv v, total: 0.02137µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.2573µs
+equiv v, total: 0.03187µs
+equiv v, total: 0.03206µs
+*-= REHASH =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 1.83889µs
+equiv v, total: 1.83854µs
+equiv v, total: 1.83931µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 2.05686µs
+equiv v, total: 1.83843µs
+equiv v, total: 1.83992µs
+*-= SWAP_HALVES =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.0134µs
+equiv v, total: 0.01382µs
+equiv v, total: 0.01329µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.25976µs
+equiv v, total: 0.02998µs
+equiv v, total: 0.02979µs
+*-= INVERT =-*
+*-= IN CACHE TESTS =-*
+equiv v, total: 0.01846µs
+equiv v, total: 0.01866µs
+equiv v, total: 0.01846µs
+*-= OUT OF CACHE TESTS =-*
+equiv v, total: 0.31834µs
+equiv v, total: 0.03074µs
+equiv v, total: 0.02902µs
+*-= HAMMING =-*
+correct v, total: 0.02418µs
+correct v, total: 0.02496µs
+correct v, total: 0.02432µs
+*-= ACTIVE =-*
+correct v, total: 0.0107µs
+correct v, total: 0.01079µs
+correct v, total: 0.0107µs
+*-= PERMUTE =-*
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 0.808114µs, unpermuting: 0.918781µs
+correctly inverted: v, in_place: 0, permuting: 0.810483µs, unpermuting: 0.918806µs
+correctly inverted: v, in_place: 0, permuting: 0.813607µs, unpermuting: 0.923322µs
+*-= WORD PERMUTE =-*
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 0.47051µs, unpermuting: 0.547737µs
+correctly inverted: v, in_place: 0, permuting: 0.471292µs, unpermuting: 0.54838µs
+correctly inverted: v, in_place: 0, permuting: 0.468944µs, unpermuting: 0.545616µs
+*-= BYTE PERMUTE =-*
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 1.21335µs, unpermuting: 1.23181µs
+correctly inverted: v, in_place: 0, permuting: 1.16444µs, unpermuting: 1.24047µs
+correctly inverted: v, in_place: 0, permuting: 1.16326µs, unpermuting: 1.18954µs
+*-= BYTE BITS PERMUTE =-*
+*-= IN CACHE TESTS =-*
+correctly inverted: v, in_place: 1, permuting: 0.280039µs, unpermuting: 0.282113µs
+correctly inverted: v, in_place: 1, permuting: 0.279788µs, unpermuting: 0.280229µs
+correctly inverted: v, in_place: 1, permuting: 0.279916µs, unpermuting: 0.280161µs
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 0.282144µs, unpermuting: 0.281523µs
+correctly inverted: v, in_place: 0, permuting: 0.281488µs, unpermuting: 0.282037µs
+correctly inverted: v, in_place: 0, permuting: 0.284093µs, unpermuting: 0.284157µs
+*-= WORD BITS PERMUTE =-*
+*-= IN CACHE TESTS =-*
+correctly inverted: v, in_place: 1, permuting: 0.354045µs, unpermuting: 0.362788µs
+correctly inverted: v, in_place: 1, permuting: 0.353623µs, unpermuting: 0.360152µs
+correctly inverted: v, in_place: 1, permuting: 0.351446µs, unpermuting: 0.361219µs
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 0.351447µs, unpermuting: 0.365428µs
+correctly inverted: v, in_place: 0, permuting: 0.352013µs, unpermuting: 0.365123µs
+correctly inverted: v, in_place: 0, permuting: 0.352269µs, unpermuting: 0.36196µs
+*-= ROLL WORDS =-*
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 0.0240738µs, unpermuting: 0.0233475µs
+correctly inverted: v, in_place: 0, permuting: 0.0230717µs, unpermuting: 0.0239623µs
+correctly inverted: v, in_place: 0, permuting: 0.0233419µs, unpermuting: 0.023606µs
+*-= ROLL BYTES =-*
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 0.0226879µs, unpermuting: 0.0231548µs
+correctly inverted: v, in_place: 0, permuting: 0.0231394µs, unpermuting: 0.0227603µs
+correctly inverted: v, in_place: 0, permuting: 0.0227415µs, unpermuting: 0.0233758µs
+*-= ROLL WORD BITS =-*
+*-= IN CACHE TESTS =-*
+correctly inverted: v, in_place: 1, permuting: 0.0068663µs, unpermuting: 0.00685395µs
+correctly inverted: v, in_place: 1, permuting: 0.00718065µs, unpermuting: 0.00685875µs
+correctly inverted: v, in_place: 1, permuting: 0.0068562µs, unpermuting: 0.00685205µs
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 0.0209642µs, unpermuting: 0.0207806µs
+correctly inverted: v, in_place: 0, permuting: 0.0225988µs, unpermuting: 0.0219595µs
+correctly inverted: v, in_place: 0, permuting: 0.0206621µs, unpermuting: 0.0297774µs
+*-= ROLL BITS =-*
+*-= IN CACHE TESTS =-*
+correctly inverted: v, in_place: 1, permuting: 16.7095µs, unpermuting: 15.9828µs
+*-= OUT OF CACHE TESTS =-*
+correctly inverted: v, in_place: 0, permuting: 16.7329µs, unpermuting: 15.8593µs
+correctly inverted: v, in_place: 0, permuting: 0.0426499µs, unpermuting: 0.0432196µs
+*-= RAND =-*
+*-= IN CACHE TESTS =-*
+in_cache: 1, total: 0.11898µs
+in_cache: 1, total: 0.11899µs
+in_cache: 1, total: 0.13275µs
+*-= OUT OF CACHE TESTS =-*
+in_cache: 0, total: 0.11931µs
+in_cache: 0, total: 0.13287µs
+in_cache: 0, total: 0.13321µs
+*-= RAND2 =-*
+*-= IN CACHE TESTS =-*
+-16pow, observed: -16.3219, in_cache: 1, total: 3.27645µs
+-15pow, observed: -14.9434, in_cache: 1, total: 2.84435µs
+-14pow, observed: -14.3219, in_cache: 1, total: 2.62986µs
+-13pow, observed: -12.9159, in_cache: 1, total: 2.45598µs
+-12pow, observed: -12.1844, in_cache: 1, total: 2.28412µs
+-11pow, observed: -11.1203, in_cache: 1, total: 2.15594µs
+-10pow, observed: -10, in_cache: 1, total: 1.95621µs
+-9pow, observed: -8.99101, in_cache: 1, total: 1.76845µs
+-8pow, observed: -7.97497, in_cache: 1, total: 1.59069µs
+-7pow, observed: -7.01313, in_cache: 1, total: 1.41804µs
+-6pow, observed: -5.98386, in_cache: 1, total: 1.28472µs
+-5pow, observed: -5.01518, in_cache: 1, total: 1.08007µs
+-4pow, observed: -4.00797, in_cache: 1, total: 0.90963µs
+-3pow, observed: -3.0099, in_cache: 1, total: 0.73271µs
+-2pow, observed: -2.0009, in_cache: 1, total: 0.55999µs
+-1pow, observed: -0.997544, in_cache: 1, total: 0.41634µs
+0pow, observed: 0.000109192, in_cache: 1, total: 0.23506µs
+1pow, observed: 0.996278, in_cache: 1, total: 0.38185µs
+2pow, observed: 1.99547, in_cache: 1, total: 0.57307µs
+3pow, observed: 3.00237, in_cache: 1, total: 0.74278µs
+4pow, observed: 4.00265, in_cache: 1, total: 0.90583µs
+5pow, observed: 4.98197, in_cache: 1, total: 1.07026µs
+6pow, observed: 6.00271, in_cache: 1, total: 1.25236µs
+7pow, observed: 6.95779, in_cache: 1, total: 1.46382µs
+8pow, observed: 7.9635, in_cache: 1, total: 1.59648µs
+9pow, observed: 9.04394, in_cache: 1, total: 1.76213µs
+10pow, observed: 9.9928, in_cache: 1, total: 1.95739µs
+11pow, observed: 10.9574, in_cache: 1, total: 2.11581µs
+12pow, observed: 11.9434, in_cache: 1, total: 2.30754µs
+13pow, observed: 13, in_cache: 1, total: 2.47511µs
+14pow, observed: 14.1844, in_cache: 1, total: 2.6212µs
+15pow, observed: 15.6439, in_cache: 1, total: 2.80102µs
+16pow, observed: 16.0589, in_cache: 1, total: 3.06832µs
+*-= OUT OF CACHE TESTS =-*
+-16pow, observed: -16.0589, in_cache: 0, total: 3.05238µs
+-15pow, observed: -14.9434, in_cache: 0, total: 2.83432µs
+-14pow, observed: -13.9434, in_cache: 0, total: 2.66476µs
+-13pow, observed: -12.9434, in_cache: 0, total: 2.45606µs
+-12pow, observed: -12.0893, in_cache: 0, total: 2.27961µs
+-11pow, observed: -10.9856, in_cache: 0, total: 2.117µs
+-10pow, observed: -9.87237, in_cache: 0, total: 1.99397µs
+-9pow, observed: -8.98208, in_cache: 0, total: 1.7768µs
+-8pow, observed: -7.97852, in_cache: 0, total: 1.5959µs
+-7pow, observed: -6.97586, in_cache: 0, total: 1.42033µs
+-6pow, observed: -5.99797, in_cache: 0, total: 1.25374µs
+-5pow, observed: -5.01086, in_cache: 0, total: 1.08715µs
+-4pow, observed: -3.9973, in_cache: 0, total: 0.92036µs
+-3pow, observed: -2.99567, in_cache: 0, total: 0.732µs
+-2pow, observed: -2.00302, in_cache: 0, total: 0.56048µs
+-1pow, observed: -0.99703, in_cache: 0, total: 0.43665µs
+0pow, observed: -0.000979505, in_cache: 0, total: 0.24892µs
+1pow, observed: 1.00385, in_cache: 0, total: 0.38823µs
+2pow, observed: 1.99695, in_cache: 0, total: 0.5602µs
+3pow, observed: 2.99477, in_cache: 0, total: 0.7285µs
+4pow, observed: 3.9978, in_cache: 0, total: 0.91097µs
+5pow, observed: 4.96889, in_cache: 0, total: 1.075µs
+6pow, observed: 5.98989, in_cache: 0, total: 1.25988µs
+7pow, observed: 7.00995, in_cache: 0, total: 1.41639µs
+8pow, observed: 8.04116, in_cache: 0, total: 1.59087µs
+9pow, observed: 8.98564, in_cache: 0, total: 1.91142µs
+10pow, observed: 9.9964, in_cache: 0, total: 1.94809µs
+11pow, observed: 10.9714, in_cache: 0, total: 2.12758µs
+12pow, observed: 11.9434, in_cache: 0, total: 2.30673µs
+13pow, observed: 13.0893, in_cache: 0, total: 2.51594µs
+14pow, observed: 13.9434, in_cache: 0, total: 2.63681µs
+15pow, observed: 14.3219, in_cache: 0, total: 2.79024µs
+16pow, observed: 17.0589, in_cache: 0, total: 2.98973µs
+*-= RANDOM =-*
+*-= COMMON =-*
+*-= IN CACHE TESTS =-*
+0.001frac, observed error: 2.09961e-05, in_cache: 1, total: 0.3512µs
+0.01frac, observed error: 0.000251465, in_cache: 1, total: 0.84382µs
+0.04frac, observed error: 0.000351563, in_cache: 1, total: 0.91431µs
+0.2frac, observed error: 0.000550534, in_cache: 1, total: 0.91261µs
+0.26frac, observed error: 0.00038085, in_cache: 1, total: 0.81835µs
+0.48frac, observed error: 0.000123302, in_cache: 1, total: 0.71323µs
+0.5frac, observed error: 0.00110352, in_cache: 1, total: 0.1087µs
+0.52frac, observed error: 0.00138182, in_cache: 1, total: 0.69919µs
+0.74frac, observed error: 0.000213614, in_cache: 1, total: 0.7901µs
+0.8frac, observed error: 0.000858166, in_cache: 1, total: 0.88892µs
+0.95frac, observed error: 0.000356433, in_cache: 1, total: 0.8833µs
+0.99frac, observed error: 3.41702e-05, in_cache: 1, total: 0.78879µs
+0.999frac, observed error: 3.19695e-05, in_cache: 1, total: 0.34044µs
+total: 9052.96
+*-= OUT OF CACHE TESTS =-*
+0.001frac, observed error: 1.48926e-05, in_cache: 1, total: 0.33543µs
+0.01frac, observed error: 5.37107e-05, in_cache: 1, total: 0.82941µs
+0.04frac, observed error: 8.78915e-05, in_cache: 1, total: 0.8906µs
+0.2frac, observed error: 0.000305179, in_cache: 1, total: 0.88737µs
+0.26frac, observed error: 0.000522451, in_cache: 1, total: 0.79675µs
+0.48frac, observed error: 0.000489513, in_cache: 1, total: 0.69662µs
+0.5frac, observed error: 0.00123779, in_cache: 1, total: 0.1084µs
+0.52frac, observed error: 0.000366192, in_cache: 1, total: 0.69879µs
+0.74frac, observed error: 0.000379629, in_cache: 1, total: 0.79045µs
+0.8frac, observed error: 0.00010133, in_cache: 1, total: 0.88886µs
+0.95frac, observed error: 0.000418713, in_cache: 1, total: 0.88353µs
+0.99frac, observed error: 0.000400381, in_cache: 1, total: 0.79148µs
+0.999frac, observed error: 1.19758e-05, in_cache: 1, total: 0.3464µs
+total: 8944.09
+*-= SMALL =-*
+*-= IN CACHE TESTS =-*
+1e-06frac, observed error: 1e-06, in_cache: 1, total: 0.10894µs
+5e-06frac, observed error: 5e-06, in_cache: 1, total: 0.10542µs
+1e-05frac, observed error: 2.20703e-06, in_cache: 1, total: 0.10813µs
+5e-05frac, observed error: 1.17187e-06, in_cache: 1, total: 0.1136µs
+0.0001frac, observed error: 1.33301e-05, in_cache: 1, total: 0.12158µs
+0.0005frac, observed error: 1.51367e-05, in_cache: 1, total: 0.2489µs
+0.001frac, observed error: 1.36719e-05, in_cache: 1, total: 0.3326µs
+0.005frac, observed error: 1.09864e-05, in_cache: 1, total: 1.37836µs
+0.01frac, observed error: 0.000284424, in_cache: 1, total: 0.79968µs
+total: 3317.21
+*-= OUT OF CACHE TESTS =-*
+1e-06frac, observed error: 1e-06, in_cache: 0, total: 0.10201µs
+5e-06frac, observed error: 1.17187e-07, in_cache: 0, total: 0.10625µs
+1e-05frac, observed error: 6.33789e-06, in_cache: 0, total: 0.10299µs
+5e-05frac, observed error: 2.49024e-06, in_cache: 0, total: 0.12679µs
+0.0001frac, observed error: 1.08887e-05, in_cache: 0, total: 0.12µs
+0.0005frac, observed error: 1.14746e-05, in_cache: 0, total: 0.21224µs
+0.001frac, observed error: 2.83204e-05, in_cache: 0, total: 0.32816µs
+0.005frac, observed error: 6.10363e-06, in_cache: 0, total: 1.38218µs
+0.01frac, observed error: 0.000579834, in_cache: 0, total: 0.80151µs
+total: 3282.13
+*-= PERCENTAGES =-*
+*-= IN CACHE TESTS =-*
+0.01frac, observed error: 0.000218506, in_cache: 0, total: 0.80274µs
+0.02frac, observed error: 0.000344238, in_cache: 0, total: 0.70642µs
+0.03frac, observed error: 0.000267335, in_cache: 0, total: 0.89554µs
+0.04frac, observed error: 0.000115966, in_cache: 0, total: 0.92425µs
+0.05frac, observed error: 5.24873e-05, in_cache: 0, total: 0.89413µs
+0.06frac, observed error: 0.000650633, in_cache: 0, total: 0.89314µs
+0.07frac, observed error: 0.00031128, in_cache: 0, total: 0.61575µs
+0.08frac, observed error: 0.000168455, in_cache: 0, total: 0.80935µs
+0.09frac, observed error: 8.91075e-05, in_cache: 0, total: 0.70676µs
+0.1frac, observed error: 0.000106207, in_cache: 0, total: 0.80171µs
+0.11frac, observed error: 0.000515137, in_cache: 0, total: 0.8963µs
+0.12frac, observed error: 0.000364993, in_cache: 0, total: 0.8942µs
+0.13frac, observed error: 0.000471196, in_cache: 0, total: 0.89423µs
+0.14frac, observed error: 0.000112305, in_cache: 0, total: 0.89557µs
+0.15frac, observed error: 0.000369882, in_cache: 0, total: 0.80227µs
+0.16frac, observed error: 0.00104126, in_cache: 0, total: 0.73766µs
+0.17frac, observed error: 0.000776365, in_cache: 0, total: 0.80089µs
+0.18frac, observed error: 3.65436e-06, in_cache: 0, total: 0.61325µs
+0.19frac, observed error: 0.000284426, in_cache: 0, total: 0.89409µs
+0.2frac, observed error: 8.66818e-05, in_cache: 0, total: 0.89263µs
+0.21frac, observed error: 0.000288079, in_cache: 0, total: 0.89496µs
+0.22frac, observed error: 0.00021118, in_cache: 0, total: 0.89447µs
+0.23frac, observed error: 8.79014e-05, in_cache: 0, total: 0.70305µs
+0.24frac, observed error: 0.000450445, in_cache: 0, total: 0.80251µs
+0.25frac, observed error: 0.000441895, in_cache: 0, total: 0.19698µs
+0.26frac, observed error: 0.000355215, in_cache: 0, total: 0.80276µs
+0.27frac, observed error: 0.000494366, in_cache: 0, total: 0.70606µs
+0.28frac, observed error: 0.000399169, in_cache: 0, total: 0.92237µs
+0.29frac, observed error: 1.34361e-05, in_cache: 0, total: 0.89335µs
+0.3frac, observed error: 0.000266095, in_cache: 0, total: 0.89459µs
+0.31frac, observed error: 0.000385745, in_cache: 0, total: 0.89408µs
+0.32frac, observed error: 0.000347908, in_cache: 0, total: 0.61572µs
+0.33frac, observed error: 0.00080446, in_cache: 0, total: 0.80795µs
+0.34frac, observed error: 0.000242916, in_cache: 0, total: 0.7077µs
+0.35frac, observed error: 0.000206293, in_cache: 0, total: 0.80283µs
+0.36frac, observed error: 0.000225846, in_cache: 0, total: 0.89509µs
+0.37frac, observed error: 0.00051147, in_cache: 0, total: 0.89397µs
+0.38frac, observed error: 7.32899e-06, in_cache: 0, total: 0.89419µs
+0.39frac, observed error: 5.86081e-05, in_cache: 0, total: 0.9839µs
+0.4frac, observed error: 0.000135522, in_cache: 0, total: 0.80278µs
+0.41frac, observed error: 0.000415043, in_cache: 0, total: 0.70177µs
+0.42frac, observed error: 1.83237e-05, in_cache: 0, total: 0.80063µs
+0.43frac, observed error: 0.0013574, in_cache: 0, total: 0.61595µs
+0.44frac, observed error: 0.0012085, in_cache: 0, total: 0.89364µs
+0.45frac, observed error: 0.000953357, in_cache: 0, total: 0.893µs
+0.46frac, observed error: 0.000300272, in_cache: 0, total: 0.89391µs
+0.47frac, observed error: 0.000218505, in_cache: 0, total: 0.89367µs
+0.48frac, observed error: 0.00109986, in_cache: 0, total: 0.7024µs
+0.49frac, observed error: 0.0009033, in_cache: 0, total: 0.80158µs
+0.5frac, observed error: 0.000716553, in_cache: 0, total: 0.11146µs
+0.51frac, observed error: 0.000640879, in_cache: 0, total: 0.80165µs
+0.52frac, observed error: 0.00102293, in_cache: 0, total: 0.74188µs
+0.53frac, observed error: 0.000407743, in_cache: 0, total: 0.89521µs
+0.54frac, observed error: 0.00048336, in_cache: 0, total: 0.89394µs
+0.55frac, observed error: 0.000577404, in_cache: 0, total: 0.89455µs
+0.56frac, observed error: 0.00136719, in_cache: 0, total: 0.89397µs
+0.57frac, observed error: 0.000694587, in_cache: 0, total: 0.61411µs
+0.58frac, observed error: 0.000474837, in_cache: 0, total: 0.80321µs
+0.59frac, observed error: 0.000499241, in_cache: 0, total: 0.70489µs
+0.6frac, observed error: 0.00155514, in_cache: 0, total: 0.80274µs
+0.61frac, observed error: 0.00113524, in_cache: 0, total: 0.89527µs
+0.62frac, observed error: 0.000718999, in_cache: 0, total: 0.89429µs
+0.63frac, observed error: 0.00061646, in_cache: 0, total: 1.0127µs
+0.64frac, observed error: 0.000347886, in_cache: 0, total: 0.89229µs
+0.65frac, observed error: 0.000683618, in_cache: 0, total: 0.79904µs
+0.66frac, observed error: 0.000531039, in_cache: 0, total: 0.70047µs
+0.67frac, observed error: 0.000147748, in_cache: 0, total: 0.79298µs
+0.68frac, observed error: 0.00100465, in_cache: 0, total: 0.6143µs
+0.69frac, observed error: 5.24926e-05, in_cache: 0, total: 0.89209µs
+0.7frac, observed error: 0.000188, in_cache: 0, total: 0.88976µs
+0.71frac, observed error: 0.000820291, in_cache: 0, total: 0.89297µs
+0.72frac, observed error: 2.0721e-05, in_cache: 0, total: 0.89198µs
+0.73frac, observed error: 0.0002087, in_cache: 0, total: 0.70083µs
+0.74frac, observed error: 6.10447e-05, in_cache: 0, total: 0.82751µs
+0.75frac, observed error: 0.000539551, in_cache: 0, total: 0.19802µs
+0.76frac, observed error: 0.000509024, in_cache: 0, total: 0.80124µs
+0.77frac, observed error: 0.000714092, in_cache: 0, total: 0.70269µs
+0.78frac, observed error: 0.000563993, in_cache: 0, total: 0.89382µs
+0.79frac, observed error: 0.000636024, in_cache: 0, total: 0.8941µs
+0.8frac, observed error: 0.000369825, in_cache: 0, total: 0.89375µs
+0.81frac, observed error: 0.000382082, in_cache: 0, total: 0.89134µs
+0.82frac, observed error: 0.000308845, in_cache: 0, total: 0.6139µs
+0.83frac, observed error: 4.75907e-05, in_cache: 0, total: 0.80196µs
+0.84frac, observed error: 0.000256321, in_cache: 0, total: 0.70409µs
+0.85frac, observed error: 0.000797083, in_cache: 0, total: 0.80234µs
+0.86frac, observed error: 0.000832565, in_cache: 0, total: 0.8946µs
+0.87frac, observed error: 7.20167e-05, in_cache: 0, total: 0.9268µs
+0.88frac, observed error: 9.76086e-06, in_cache: 0, total: 0.89278µs
+0.89frac, observed error: 0.000401597, in_cache: 0, total: 0.89043µs
+0.9frac, observed error: 0.000463891, in_cache: 0, total: 0.79801µs
+0.91frac, observed error: 0.000596957, in_cache: 0, total: 0.6997µs
+0.92frac, observed error: 0.000352826, in_cache: 0, total: 0.79131µs
+0.93frac, observed error: 0.000417473, in_cache: 0, total: 0.6125µs
+0.94frac, observed error: 8.66723e-05, in_cache: 0, total: 0.89063µs
+0.95frac, observed error: 7.08127e-05, in_cache: 0, total: 0.88869µs
+0.96frac, observed error: 0.000158713, in_cache: 0, total: 0.89073µs
+0.97frac, observed error: 3.05486e-05, in_cache: 0, total: 0.89215µs
+0.98frac, observed error: 0.000634806, in_cache: 0, total: 0.74078µs
+0.99frac, observed error: 0.000228322, in_cache: 0, total: 0.79869µs
+total: 79235.9
+*-= OUT OF CACHE TESTS =-*
+0.01frac, observed error: 0.000406494, in_cache: 0, total: 0.8016µs
+0.02frac, observed error: 0.000341796, in_cache: 0, total: 0.70696µs
+0.03frac, observed error: 0.000145264, in_cache: 0, total: 0.89421µs
+0.04frac, observed error: 0.000388184, in_cache: 0, total: 0.8937µs
+0.05frac, observed error: 0.000303952, in_cache: 0, total: 0.89321µs
+0.06frac, observed error: 0.000545653, in_cache: 0, total: 0.89274µs
+0.07frac, observed error: 0.000447998, in_cache: 0, total: 0.61485µs
+0.08frac, observed error: 0.000283205, in_cache: 0, total: 0.8087µs
+0.09frac, observed error: 0.000213627, in_cache: 0, total: 0.70729µs
+0.1frac, observed error: 0.000587152, in_cache: 0, total: 0.80232µs
+0.11frac, observed error: 0.00074463, in_cache: 0, total: 0.89488µs
+0.12frac, observed error: 2.92942e-05, in_cache: 0, total: 0.89368µs
+0.13frac, observed error: 1.9536e-05, in_cache: 0, total: 0.8938µs
+0.14frac, observed error: 0.000533448, in_cache: 0, total: 0.89537µs
+0.15frac, observed error: 6.46883e-05, in_cache: 0, total: 0.80315µs
+0.16frac, observed error: 0.000202633, in_cache: 0, total: 0.70192µs
+0.17frac, observed error: 0.000694582, in_cache: 0, total: 0.79913µs
+0.18frac, observed error: 7.32344e-05, in_cache: 0, total: 0.61316µs
+0.19frac, observed error: 0.000189211, in_cache: 0, total: 0.8937µs
+0.2frac, observed error: 0.000126941, in_cache: 0, total: 0.89251µs
+0.21frac, observed error: 4.63802e-05, in_cache: 0, total: 0.89382µs
+0.22frac, observed error: 0.000180663, in_cache: 0, total: 0.9267µs
+0.23frac, observed error: 0.000474864, in_cache: 0, total: 0.70224µs
+0.24frac, observed error: 0.00025268, in_cache: 0, total: 0.80341µs
+0.25frac, observed error: 0.00110596, in_cache: 0, total: 0.19687µs
+0.26frac, observed error: 0.000128183, in_cache: 0, total: 0.80267µs
+0.27frac, observed error: 0.000246601, in_cache: 0, total: 0.70515µs
+0.28frac, observed error: 0.000567626, in_cache: 0, total: 0.89516µs
+0.29frac, observed error: 0.000205086, in_cache: 0, total: 0.89438µs
+0.3frac, observed error: 0.00053465, in_cache: 0, total: 0.89382µs
+0.31frac, observed error: 0.000587161, in_cache: 0, total: 0.89308µs
+0.32frac, observed error: 0.000424798, in_cache: 0, total: 0.61513µs
+0.33frac, observed error: 0.000782487, in_cache: 0, total: 0.80896µs
+0.34frac, observed error: 0.000389408, in_cache: 0, total: 0.74589µs
+0.35frac, observed error: 0.000881342, in_cache: 0, total: 0.80229µs
+0.36frac, observed error: 3.78573e-05, in_cache: 0, total: 0.89501µs
+0.37frac, observed error: 0.000406489, in_cache: 0, total: 0.89404µs
+0.38frac, observed error: 0.000485845, in_cache: 0, total: 0.89324µs
+0.39frac, observed error: 0.000930161, in_cache: 0, total: 0.89456µs
+0.4frac, observed error: 0.000418725, in_cache: 0, total: 0.80231µs
+0.41frac, observed error: 0.000305172, in_cache: 0, total: 0.70169µs
+0.42frac, observed error: 0.00031737, in_cache: 0, total: 0.7986µs
+0.43frac, observed error: 0.00107542, in_cache: 0, total: 0.61356µs
+0.44frac, observed error: 0.00075928, in_cache: 0, total: 0.89429µs
+0.45frac, observed error: 0.000271008, in_cache: 0, total: 0.93137µs
+0.46frac, observed error: 0.0010803, in_cache: 0, total: 0.89543µs
+0.47frac, observed error: 0.000582277, in_cache: 0, total: 0.89417µs
+0.48frac, observed error: 0.00113282, in_cache: 0, total: 0.70199µs
+0.49frac, observed error: 0.000161153, in_cache: 0, total: 0.80079µs
+0.5frac, observed error: 1.83105e-05, in_cache: 0, total: 0.11151µs
+0.51frac, observed error: 0.000463858, in_cache: 0, total: 0.80085µs
+0.52frac, observed error: 0.00011961, in_cache: 0, total: 0.70473µs
+0.53frac, observed error: 0.000393038, in_cache: 0, total: 0.89395µs
+0.54frac, observed error: 5.49698e-05, in_cache: 0, total: 0.89386µs
+0.55frac, observed error: 7.93338e-05, in_cache: 0, total: 0.89479µs
+0.56frac, observed error: 7.69019e-05, in_cache: 0, total: 0.89388µs
+0.57frac, observed error: 0.000444343, in_cache: 0, total: 0.6144µs
+0.58frac, observed error: 0.000577376, in_cache: 0, total: 0.84659µs
+0.59frac, observed error: 0.000595729, in_cache: 0, total: 0.70293µs
+0.6frac, observed error: 0.000393031, in_cache: 0, total: 0.80284µs
+0.61frac, observed error: 0.000134263, in_cache: 0, total: 0.89493µs
+0.62frac, observed error: 0.000491948, in_cache: 0, total: 0.89411µs
+0.63frac, observed error: 0.000822749, in_cache: 0, total: 0.89343µs
+0.64frac, observed error: 0.000125718, in_cache: 0, total: 0.89225µs
+0.65frac, observed error: 0.000140357, in_cache: 0, total: 0.79581µs
+0.66frac, observed error: 0.000242887, in_cache: 0, total: 0.70035µs
+0.67frac, observed error: 4.29153e-08, in_cache: 0, total: 0.79147µs
+0.68frac, observed error: 7.33137e-06, in_cache: 0, total: 0.61324µs
+0.69frac, observed error: 0.000279539, in_cache: 0, total: 0.95589µs
+0.7frac, observed error: 0.000476062, in_cache: 0, total: 0.89029µs
+0.71frac, observed error: 0.000173318, in_cache: 0, total: 0.89149µs
+0.72frac, observed error: 0.000801971, in_cache: 0, total: 0.89229µs
+0.73frac, observed error: 0.000448039, in_cache: 0, total: 0.70008µs
+0.74frac, observed error: 0.000842276, in_cache: 0, total: 0.79744µs
+0.75frac, observed error: 0.000233154, in_cache: 0, total: 0.19728µs
+0.76frac, observed error: 7.44534e-05, in_cache: 0, total: 0.79992µs
+0.77frac, observed error: 0.000902081, in_cache: 0, total: 0.70451µs
+0.78frac, observed error: 0.000244169, in_cache: 0, total: 0.89183µs
+0.79frac, observed error: 0.000527306, in_cache: 0, total: 0.89394µs
+0.8frac, observed error: 0.000494337, in_cache: 0, total: 0.89329µs
+0.81frac, observed error: 0.00032593, in_cache: 0, total: 0.93809µs
+0.82frac, observed error: 0.00075074, in_cache: 0, total: 0.61368µs
+0.83frac, observed error: 0.00103639, in_cache: 0, total: 0.80252µs
+0.84frac, observed error: 0.000716527, in_cache: 0, total: 0.70355µs
+0.85frac, observed error: 0.000693324, in_cache: 0, total: 0.80211µs
+0.86frac, observed error: 0.000559127, in_cache: 0, total: 0.89453µs
+0.87frac, observed error: 0.000301518, in_cache: 0, total: 0.89306µs
+0.88frac, observed error: 0.00033814, in_cache: 0, total: 0.89172µs
+0.89frac, observed error: 0.00033937, in_cache: 0, total: 0.89221µs
+0.9frac, observed error: 0.000584741, in_cache: 0, total: 0.79927µs
+0.91frac, observed error: 0.000201449, in_cache: 0, total: 0.69994µs
+0.92frac, observed error: 0.000368609, in_cache: 0, total: 0.79078µs
+0.93frac, observed error: 0.000539558, in_cache: 0, total: 0.61339µs
+0.94frac, observed error: 0.000629885, in_cache: 0, total: 0.89065µs
+0.95frac, observed error: 0.000249035, in_cache: 0, total: 0.88905µs
+0.96frac, observed error: 0.000109885, in_cache: 0, total: 0.89061µs
+0.97frac, observed error: 0.000380828, in_cache: 0, total: 0.89234µs
+0.98frac, observed error: 0.000784953, in_cache: 0, total: 0.69937µs
+0.99frac, observed error: 0.000127003, in_cache: 0, total: 0.7976µs
+total: 79026.1
+*-= PARITY =-*
+*-= IN CACHE TESTS =-*
+3 hypervectors, in_cache: 1, total: 0.0157983µs, normalized: 5.26609ns/vec
+5 hypervectors, in_cache: 1, total: 0.0370562µs, normalized: 7.41123ns/vec
+7 hypervectors, in_cache: 1, total: 0.0387885µs, normalized: 5.54121ns/vec
+9 hypervectors, in_cache: 1, total: 0.0490734µs, normalized: 5.4526ns/vec
+11 hypervectors, in_cache: 1, total: 0.0584479µs, normalized: 5.31345ns/vec
+15 hypervectors, in_cache: 1, total: 0.0866266µs, normalized: 5.77511ns/vec
+17 hypervectors, in_cache: 1, total: 0.0921519µs, normalized: 5.4207ns/vec
+19 hypervectors, in_cache: 1, total: 0.106411µs, normalized: 5.60055ns/vec
+21 hypervectors, in_cache: 1, total: 0.113309µs, normalized: 5.39569ns/vec
+23 hypervectors, in_cache: 1, total: 0.120291µs, normalized: 5.23005ns/vec
+25 hypervectors, in_cache: 1, total: 0.129473µs, normalized: 5.17894ns/vec
+27 hypervectors, in_cache: 1, total: 0.140913µs, normalized: 5.21898ns/vec
+39 hypervectors, in_cache: 1, total: 0.196891µs, normalized: 5.0485ns/vec
+47 hypervectors, in_cache: 1, total: 0.25507µs, normalized: 5.42702ns/vec
+55 hypervectors, in_cache: 1, total: 0.328278µs, normalized: 5.96869ns/vec
+63 hypervectors, in_cache: 1, total: 0.41972µs, normalized: 6.66222ns/vec
+73 hypervectors, in_cache: 1, total: 0.512857µs, normalized: 7.02544ns/vec
+77 hypervectors, in_cache: 1, total: 0.542787µs, normalized: 7.04918ns/vec
+79 hypervectors, in_cache: 1, total: 0.584237µs, normalized: 7.39541ns/vec
+81 hypervectors, in_cache: 1, total: 0.572151µs, normalized: 7.06359ns/vec
+85 hypervectors, in_cache: 1, total: 0.617498µs, normalized: 7.26468ns/vec
+89 hypervectors, in_cache: 1, total: 0.669063µs, normalized: 7.51757ns/vec
+91 hypervectors, in_cache: 1, total: 0.723767µs, normalized: 7.95348ns/vec
+109 hypervectors, in_cache: 1, total: 0.848445µs, normalized: 7.7839ns/vec
+175 hypervectors, in_cache: 1, total: 1.52856µs, normalized: 8.73466ns/vec
+201 hypervectors, in_cache: 1, total: 1.75652µs, normalized: 8.73891ns/vec
+255 hypervectors, in_cache: 1, total: 2.2456µs, normalized: 8.80627ns/vec
+257 hypervectors, in_cache: 1, total: 2.31441µs, normalized: 9.0055ns/vec
+385 hypervectors, in_cache: 1, total: 3.36306µs, normalized: 8.73521ns/vec
+511 hypervectors, in_cache: 1, total: 4.40135µs, normalized: 8.61321ns/vec
+667 hypervectors, in_cache: 1, total: 5.82611µs, normalized: 8.7348ns/vec
+881 hypervectors, in_cache: 1, total: 7.85764µs, normalized: 8.919ns/vec
+945 hypervectors, in_cache: 1, total: 8.44254µs, normalized: 8.93391ns/vec
+1021 hypervectors, in_cache: 1, total: 9.41756µs, normalized: 9.22386ns/vec
+2001 hypervectors, in_cache: 1, total: 32.0616µs, normalized: 16.0228ns/vec
+5001 hypervectors, in_cache: 1, total: 208.14µs, normalized: 41.6196ns/vec
+9999 hypervectors, in_cache: 1, total: 421.845µs, normalized: 42.1887ns/vec
+10003 hypervectors, in_cache: 1, total: 431.204µs, normalized: 43.1074ns/vec
+20001 hypervectors, in_cache: 1, total: 841.667µs, normalized: 42.0812ns/vec
+200001 hypervectors, in_cache: 1, total: 25706.4µs, normalized: 128.532ns/vec
+1000001 hypervectors, in_cache: 1, total: 99171.8µs, normalized: 99.1717ns/vec
+*-= OUT OF CACHE TESTS =-*
+3 hypervectors, in_cache: 0, total: 0.58476µs, normalized: 194.92ns/vec
+5 hypervectors, in_cache: 0, total: 0.725478µs, normalized: 145.096ns/vec
+7 hypervectors, in_cache: 0, total: 0.907584µs, normalized: 129.655ns/vec
+9 hypervectors, in_cache: 0, total: 1.07008µs, normalized: 118.898ns/vec
+11 hypervectors, in_cache: 0, total: 1.25867µs, normalized: 114.425ns/vec
+27 hypervectors, in_cache: 0, total: 2.51685µs, normalized: 93.2167ns/vec
+39 hypervectors, in_cache: 0, total: 3.28389µs, normalized: 84.2023ns/vec
+47 hypervectors, in_cache: 0, total: 3.87158µs, normalized: 82.374ns/vec
+55 hypervectors, in_cache: 0, total: 4.43526µs, normalized: 80.6411ns/vec
+63 hypervectors, in_cache: 0, total: 5.15938µs, normalized: 81.8949ns/vec
+73 hypervectors, in_cache: 0, total: 5.86515µs, normalized: 80.3445ns/vec
+77 hypervectors, in_cache: 0, total: 6.12909µs, normalized: 79.5985ns/vec
+79 hypervectors, in_cache: 0, total: 6.30386µs, normalized: 79.7957ns/vec
+81 hypervectors, in_cache: 0, total: 6.67818µs, normalized: 82.4466ns/vec
+85 hypervectors, in_cache: 0, total: 6.72933µs, normalized: 79.1686ns/vec
+89 hypervectors, in_cache: 0, total: 6.96994µs, normalized: 78.314ns/vec
+91 hypervectors, in_cache: 0, total: 7.63008µs, normalized: 83.8471ns/vec
+109 hypervectors, in_cache: 0, total: 8.60357µs, normalized: 78.9318ns/vec
+175 hypervectors, in_cache: 0, total: 13.9152µs, normalized: 79.5155ns/vec
+201 hypervectors, in_cache: 0, total: 17.3935µs, normalized: 86.5349ns/vec
+255 hypervectors, in_cache: 0, total: 28.1484µs, normalized: 110.386ns/vec
+257 hypervectors, in_cache: 0, total: 30.9809µs, normalized: 120.548ns/vec
+313 hypervectors, in_cache: 0, total: 41.9177µs, normalized: 133.923ns/vec
+385 hypervectors, in_cache: 0, total: 53.1104µs, normalized: 137.949ns/vec
+511 hypervectors, in_cache: 0, total: 67.222µs, normalized: 131.55ns/vec
+667 hypervectors, in_cache: 0, total: 142.351µs, normalized: 213.419ns/vec
+881 hypervectors, in_cache: 0, total: 130.052µs, normalized: 147.619ns/vec
+945 hypervectors, in_cache: 0, total: 127.952µs, normalized: 135.399ns/vec
+1021 hypervectors, in_cache: 0, total: 137.103µs, normalized: 134.283ns/vec
+2001 hypervectors, in_cache: 0, total: 267.162µs, normalized: 133.514ns/vec
+5001 hypervectors, in_cache: 0, total: 661.056µs, normalized: 132.185ns/vec
+9999 hypervectors, in_cache: 0, total: 1347.49µs, normalized: 134.762ns/vec
+10003 hypervectors, in_cache: 0, total: 2136.26µs, normalized: 213.561ns/vec
+20001 hypervectors, in_cache: 0, total: 2707.09µs, normalized: 135.348ns/vec
+200001 hypervectors, in_cache: 0, total: 28052µs, normalized: 140.259ns/vec
+1000001 hypervectors, in_cache: 0, total: 95049.5µs, normalized: 95.0494ns/vec
+*-= MAJ =-*
+*-= IN CACHE TESTS =-*
+3 hypervectors, in_cache: 1, total: 0.0112612µs, normalized: 3.75374ns/vec
+5 hypervectors, in_cache: 1, total: 0.0245532µs, normalized: 4.91065ns/vec
+7 hypervectors, in_cache: 1, total: 0.0390429µs, normalized: 5.57756ns/vec
+9 hypervectors, in_cache: 1, total: 0.0559937µs, normalized: 6.22152ns/vec
+11 hypervectors, in_cache: 1, total: 0.0771305µs, normalized: 7.01187ns/vec
+15 hypervectors, in_cache: 1, total: 0.338095µs, normalized: 22.5396ns/vec
+17 hypervectors, in_cache: 1, total: 0.402176µs, normalized: 23.6574ns/vec
+19 hypervectors, in_cache: 1, total: 0.491313µs, normalized: 25.8586ns/vec
+21 hypervectors, in_cache: 1, total: 0.650008µs, normalized: 30.9528ns/vec
+23 hypervectors, in_cache: 1, total: 0.700927µs, normalized: 30.4751ns/vec
+25 hypervectors, in_cache: 1, total: 0.743435µs, normalized: 29.7374ns/vec
+27 hypervectors, in_cache: 1, total: 0.739043µs, normalized: 27.372ns/vec
+39 hypervectors, in_cache: 1, total: 1.02873µs, normalized: 26.3776ns/vec
+47 hypervectors, in_cache: 1, total: 1.24645µs, normalized: 26.5201ns/vec
+55 hypervectors, in_cache: 1, total: 1.42178µs, normalized: 25.8505ns/vec
+63 hypervectors, in_cache: 1, total: 1.5225µs, normalized: 24.1666ns/vec
+73 hypervectors, in_cache: 1, total: 1.74987µs, normalized: 23.9708ns/vec
+77 hypervectors, in_cache: 1, total: 1.85094µs, normalized: 24.0382ns/vec
+79 hypervectors, in_cache: 1, total: 1.88206µs, normalized: 23.8235ns/vec
+81 hypervectors, in_cache: 1, total: 1.89478µs, normalized: 23.3923ns/vec
+85 hypervectors, in_cache: 1, total: 1.98982µs, normalized: 23.4096ns/vec
+89 hypervectors, in_cache: 1, total: 2.05177µs, normalized: 23.0536ns/vec
+91 hypervectors, in_cache: 1, total: 2.16859µs, normalized: 23.8307ns/vec
+109 hypervectors, in_cache: 1, total: 2.51549µs, normalized: 23.0779ns/vec
+175 hypervectors, in_cache: 1, total: 3.90548µs, normalized: 22.317ns/vec
+201 hypervectors, in_cache: 1, total: 4.53848µs, normalized: 22.5795ns/vec
+255 hypervectors, in_cache: 1, total: 5.54765µs, normalized: 21.7555ns/vec
+257 hypervectors, in_cache: 1, total: 6.28667µs, normalized: 24.4618ns/vec
+385 hypervectors, in_cache: 1, total: 8.9941µs, normalized: 23.3613ns/vec
+511 hypervectors, in_cache: 1, total: 11.9692µs, normalized: 23.423ns/vec
+667 hypervectors, in_cache: 1, total: 15.2219µs, normalized: 22.8214ns/vec
+881 hypervectors, in_cache: 1, total: 20.226µs, normalized: 22.958ns/vec
+945 hypervectors, in_cache: 1, total: 23.6758µs, normalized: 25.0538ns/vec
+1021 hypervectors, in_cache: 1, total: 24.3526µs, normalized: 23.8517ns/vec
+2001 hypervectors, in_cache: 1, total: 90.1542µs, normalized: 45.0546ns/vec
+5001 hypervectors, in_cache: 1, total: 309.651µs, normalized: 61.9177ns/vec
+9999 hypervectors, in_cache: 1, total: 595.595µs, normalized: 59.5654ns/vec
+10003 hypervectors, in_cache: 1, total: 595.599µs, normalized: 59.542ns/vec
+20001 hypervectors, in_cache: 1, total: 1155.63µs, normalized: 57.7785ns/vec
+200001 hypervectors, in_cache: 1, total: 31768.2µs, normalized: 158.84ns/vec
+1000001 hypervectors, in_cache: 1, total: 165529µs, normalized: 165.529ns/vec
+*-= OUT OF CACHE TESTS =-*
+3 hypervectors, in_cache: 0, total: 0.581203µs, normalized: 193.734ns/vec
+5 hypervectors, in_cache: 0, total: 0.727448µs, normalized: 145.49ns/vec
+7 hypervectors, in_cache: 0, total: 0.922327µs, normalized: 131.761ns/vec
+9 hypervectors, in_cache: 0, total: 1.09626µs, normalized: 121.806ns/vec
+11 hypervectors, in_cache: 0, total: 1.30151µs, normalized: 118.319ns/vec
+27 hypervectors, in_cache: 0, total: 4.02369µs, normalized: 149.026ns/vec
+39 hypervectors, in_cache: 0, total: 5.42787µs, normalized: 139.176ns/vec
+47 hypervectors, in_cache: 0, total: 6.27991µs, normalized: 133.615ns/vec
+55 hypervectors, in_cache: 0, total: 6.99368µs, normalized: 127.158ns/vec
+63 hypervectors, in_cache: 0, total: 8.01577µs, normalized: 127.235ns/vec
+73 hypervectors, in_cache: 0, total: 8.70365µs, normalized: 119.228ns/vec
+77 hypervectors, in_cache: 0, total: 9.25686µs, normalized: 120.219ns/vec
+79 hypervectors, in_cache: 0, total: 9.63614µs, normalized: 121.976ns/vec
+81 hypervectors, in_cache: 0, total: 9.74726µs, normalized: 120.337ns/vec
+85 hypervectors, in_cache: 0, total: 10.4365µs, normalized: 122.782ns/vec
+89 hypervectors, in_cache: 0, total: 10.4961µs, normalized: 117.934ns/vec
+91 hypervectors, in_cache: 0, total: 11.8034µs, normalized: 129.708ns/vec
+109 hypervectors, in_cache: 0, total: 12.5975µs, normalized: 115.574ns/vec
+175 hypervectors, in_cache: 0, total: 19.6699µs, normalized: 112.399ns/vec
+201 hypervectors, in_cache: 0, total: 23.2405µs, normalized: 115.625ns/vec
+255 hypervectors, in_cache: 0, total: 43.6078µs, normalized: 171.011ns/vec
+257 hypervectors, in_cache: 0, total: 45.4767µs, normalized: 176.952ns/vec
+313 hypervectors, in_cache: 0, total: 51.388µs, normalized: 164.179ns/vec
+385 hypervectors, in_cache: 0, total: 58.5214µs, normalized: 152.004ns/vec
+511 hypervectors, in_cache: 0, total: 88.519µs, normalized: 173.227ns/vec
+667 hypervectors, in_cache: 0, total: 136.89µs, normalized: 205.233ns/vec
+881 hypervectors, in_cache: 0, total: 148.79µs, normalized: 168.888ns/vec
+945 hypervectors, in_cache: 0, total: 151.295µs, normalized: 160.101ns/vec
+1021 hypervectors, in_cache: 0, total: 178.529µs, normalized: 174.857ns/vec
+2001 hypervectors, in_cache: 0, total: 331.882µs, normalized: 165.858ns/vec
+5001 hypervectors, in_cache: 0, total: 871.048µs, normalized: 174.175ns/vec
+9999 hypervectors, in_cache: 0, total: 1798.89µs, normalized: 179.907ns/vec
+10003 hypervectors, in_cache: 0, total: 2401.77µs, normalized: 240.105ns/vec
+20001 hypervectors, in_cache: 0, total: 3411.9µs, normalized: 170.586ns/vec
+200001 hypervectors, in_cache: 0, total: 34492.3µs, normalized: 172.461ns/vec
+1000001 hypervectors, in_cache: 0, total: 174008µs, normalized: 174.008ns/vec
+*-= WEIGHTED_THRESHOLD =-*
+*-= FACTORS =-*
+*-= IN CACHE TESTS =-*
+*-= DISTRIBUTION =-*
+*-= IN CACHE TESTS =-*
+3 hypervectors, in_cache: 1, total: 7.85484µs, normalized: 2618.28ns/vec
+3 hypervectors, in_cache: 1, total: 0.66615µs, normalized: 222.05ns/vec
+10 hypervectors, in_cache: 1, total: 14.2746µs, normalized: 1427.46ns/vec
+10 hypervectors, in_cache: 1, total: 1.83804µs, normalized: 183.804ns/vec
+20 hypervectors, in_cache: 1, total: 23.6168µs, normalized: 1180.84ns/vec
+20 hypervectors, in_cache: 1, total: 3.41221µs, normalized: 170.611ns/vec
+100 hypervectors, in_cache: 1, total: 100.584µs, normalized: 1005.84ns/vec
+100 hypervectors, in_cache: 1, total: 16.0654µs, normalized: 160.654ns/vec
+1000 hypervectors, in_cache: 1, total: 947.896µs, normalized: 947.896ns/vec
+1000 hypervectors, in_cache: 1, total: 160.908µs, normalized: 160.908ns/vec
+10000 hypervectors, in_cache: 1, total: 9646.5µs, normalized: 964.65ns/vec
+10000 hypervectors, in_cache: 1, total: 1737.68µs, normalized: 173.768ns/vec
+*-= THRESHOLD =-*
+*-= IN CACHE TESTS =-*
+3 hypervectors, 0 threshold, in_cache: 1, total: 0.338653µs, normalized: 112.884ns/vec
+10 hypervectors, 2 threshold, in_cache: 1, total: 0.419764µs, normalized: 41.9764ns/vec
+30 hypervectors, 20 threshold, in_cache: 1, total: 0.814056µs, normalized: 27.1352ns/vec
+100 hypervectors, 48 threshold, in_cache: 1, total: 2.29742µs, normalized: 22.9742ns/vec
+200 hypervectors, 50 threshold, in_cache: 1, total: 4.50459µs, normalized: 22.5229ns/vec
+3000 hypervectors, 1502 threshold, in_cache: 1, total: 186.161µs, normalized: 62.0535ns/vec
+4000 hypervectors, 1000 threshold, in_cache: 1, total: 261.85µs, normalized: 65.4626ns/vec
+200001 hypervectors, 0 threshold, in_cache: 1, total: 34071.9µs, normalized: 170.359ns/vec
+200001 hypervectors, 200000 threshold, in_cache: 1, total: 32825.5µs, normalized: 164.127ns/vec
+1000001 hypervectors, 498384 threshold, in_cache: 1, total: 186483µs, normalized: 186.483ns/vec
+*-= OUT OF CACHE TESTS =-*
+3 hypervectors, 0 threshold, in_cache: 0, total: 0.888124µs, normalized: 296.041ns/vec
+10 hypervectors, 2 threshold, in_cache: 0, total: 2.06862µs, normalized: 206.862ns/vec
+30 hypervectors, 20 threshold, in_cache: 0, total: 4.10368µs, normalized: 136.789ns/vec
+100 hypervectors, 48 threshold, in_cache: 0, total: 12.0349µs, normalized: 120.349ns/vec
+200 hypervectors, 50 threshold, in_cache: 0, total: 22.6083µs, normalized: 113.042ns/vec
+3000 hypervectors, 1502 threshold, in_cache: 0, total: 504.621µs, normalized: 168.207ns/vec
+4000 hypervectors, 1000 threshold, in_cache: 0, total: 688.193µs, normalized: 172.048ns/vec
+200001 hypervectors, 0 threshold, in_cache: 0, total: 35839µs, normalized: 179.194ns/vec
+200001 hypervectors, 200000 threshold, in_cache: 0, total: 34984.3µs, normalized: 174.92ns/vec
+1000001 hypervectors, 498384 threshold, in_cache: 0, total: 171740µs, normalized: 171.74ns/vec
+*-= CART =-*
+1 hypervectors, 0 threshold, in_cache: 1, total: 0.33859µs, normalized: 338.59ns/vec
+2 hypervectors, 0 threshold, in_cache: 1, total: 0.335206µs, normalized: 167.603ns/vec
+2 hypervectors, 1 threshold, in_cache: 1, total: 0.335993µs, normalized: 167.997ns/vec
+3 hypervectors, 0 threshold, in_cache: 1, total: 0.337796µs, normalized: 112.599ns/vec
+3 hypervectors, 1 threshold, in_cache: 1, total: 0.33796µs, normalized: 112.653ns/vec
+3 hypervectors, 2 threshold, in_cache: 1, total: 0.338296µs, normalized: 112.765ns/vec
+4 hypervectors, 0 threshold, in_cache: 1, total: 0.362728µs, normalized: 90.682ns/vec
+4 hypervectors, 1 threshold, in_cache: 1, total: 0.357955µs, normalized: 89.4888ns/vec
+4 hypervectors, 2 threshold, in_cache: 1, total: 0.364291µs, normalized: 91.0726ns/vec
+4 hypervectors, 3 threshold, in_cache: 1, total: 0.364105µs, normalized: 91.0263ns/vec
+5 hypervectors, 0 threshold, in_cache: 1, total: 0.375897µs, normalized: 75.1795ns/vec
+5 hypervectors, 1 threshold, in_cache: 1, total: 0.378763µs, normalized: 75.7526ns/vec
+5 hypervectors, 2 threshold, in_cache: 1, total: 0.371954µs, normalized: 74.3909ns/vec
+5 hypervectors, 3 threshold, in_cache: 1, total: 0.382054µs, normalized: 76.4108ns/vec
+5 hypervectors, 4 threshold, in_cache: 1, total: 0.3743µs, normalized: 74.86ns/vec
+6 hypervectors, 0 threshold, in_cache: 1, total: 0.369551µs, normalized: 61.5918ns/vec
+6 hypervectors, 1 threshold, in_cache: 1, total: 0.370447µs, normalized: 61.7411ns/vec
+6 hypervectors, 2 threshold, in_cache: 1, total: 0.368499µs, normalized: 61.4166ns/vec
+6 hypervectors, 3 threshold, in_cache: 1, total: 0.36923µs, normalized: 61.5383ns/vec
+6 hypervectors, 4 threshold, in_cache: 1, total: 0.370044µs, normalized: 61.674ns/vec
+6 hypervectors, 5 threshold, in_cache: 1, total: 0.36864µs, normalized: 61.44ns/vec
+7 hypervectors, 0 threshold, in_cache: 1, total: 0.39321µs, normalized: 56.1728ns/vec
+7 hypervectors, 1 threshold, in_cache: 1, total: 0.392942µs, normalized: 56.1345ns/vec
+7 hypervectors, 2 threshold, in_cache: 1, total: 0.3909µs, normalized: 55.8428ns/vec
+7 hypervectors, 3 threshold, in_cache: 1, total: 0.391165µs, normalized: 55.8807ns/vec
+7 hypervectors, 4 threshold, in_cache: 1, total: 0.392299µs, normalized: 56.0426ns/vec
+7 hypervectors, 5 threshold, in_cache: 1, total: 0.392783µs, normalized: 56.1119ns/vec
+7 hypervectors, 6 threshold, in_cache: 1, total: 0.391142µs, normalized: 55.8774ns/vec
+8 hypervectors, 0 threshold, in_cache: 1, total: 0.397711µs, normalized: 49.7139ns/vec
+8 hypervectors, 1 threshold, in_cache: 1, total: 0.39894µs, normalized: 49.8675ns/vec
+8 hypervectors, 2 threshold, in_cache: 1, total: 0.402834µs, normalized: 50.3543ns/vec
+8 hypervectors, 3 threshold, in_cache: 1, total: 0.399623µs, normalized: 49.9529ns/vec
+8 hypervectors, 4 threshold, in_cache: 1, total: 0.397609µs, normalized: 49.7011ns/vec
+8 hypervectors, 5 threshold, in_cache: 1, total: 0.398834µs, normalized: 49.8542ns/vec
+8 hypervectors, 6 threshold, in_cache: 1, total: 0.399994µs, normalized: 49.9992ns/vec
+8 hypervectors, 7 threshold, in_cache: 1, total: 0.398172µs, normalized: 49.7715ns/vec
+9 hypervectors, 0 threshold, in_cache: 1, total: 0.393225µs, normalized: 43.6917ns/vec
+9 hypervectors, 1 threshold, in_cache: 1, total: 0.394857µs, normalized: 43.873ns/vec
+9 hypervectors, 2 threshold, in_cache: 1, total: 0.393831µs, normalized: 43.759ns/vec
+9 hypervectors, 3 threshold, in_cache: 1, total: 0.39589µs, normalized: 43.9878ns/vec
+9 hypervectors, 4 threshold, in_cache: 1, total: 0.393219µs, normalized: 43.691ns/vec
+9 hypervectors, 5 threshold, in_cache: 1, total: 0.393857µs, normalized: 43.7619ns/vec
+9 hypervectors, 6 threshold, in_cache: 1, total: 0.406704µs, normalized: 45.1894ns/vec
+9 hypervectors, 7 threshold, in_cache: 1, total: 0.39628µs, normalized: 44.0311ns/vec
+9 hypervectors, 8 threshold, in_cache: 1, total: 0.393907µs, normalized: 43.7674ns/vec
+10 hypervectors, 0 threshold, in_cache: 1, total: 0.42089µs, normalized: 42.089ns/vec
+10 hypervectors, 1 threshold, in_cache: 1, total: 0.437381µs, normalized: 43.7381ns/vec
+10 hypervectors, 2 threshold, in_cache: 1, total: 0.420448µs, normalized: 42.0448ns/vec
+10 hypervectors, 3 threshold, in_cache: 1, total: 0.422746µs, normalized: 42.2746ns/vec
+10 hypervectors, 4 threshold, in_cache: 1, total: 0.435753µs, normalized: 43.5753ns/vec
+10 hypervectors, 5 threshold, in_cache: 1, total: 0.422565µs, normalized: 42.2565ns/vec
+10 hypervectors, 6 threshold, in_cache: 1, total: 0.422892µs, normalized: 42.2892ns/vec
+10 hypervectors, 7 threshold, in_cache: 1, total: 0.43486µs, normalized: 43.486ns/vec
+10 hypervectors, 8 threshold, in_cache: 1, total: 0.425075µs, normalized: 42.5075ns/vec
+10 hypervectors, 9 threshold, in_cache: 1, total: 0.42101µs, normalized: 42.101ns/vec
+11 hypervectors, 0 threshold, in_cache: 1, total: 0.442624µs, normalized: 40.2386ns/vec
+11 hypervectors, 1 threshold, in_cache: 1, total: 0.463637µs, normalized: 42.1488ns/vec
+11 hypervectors, 2 threshold, in_cache: 1, total: 0.443606µs, normalized: 40.3278ns/vec
+11 hypervectors, 3 threshold, in_cache: 1, total: 0.445159µs, normalized: 40.469ns/vec
+11 hypervectors, 4 threshold, in_cache: 1, total: 0.444507µs, normalized: 40.4097ns/vec
+11 hypervectors, 5 threshold, in_cache: 1, total: 0.44274µs, normalized: 40.2491ns/vec
+11 hypervectors, 6 threshold, in_cache: 1, total: 0.444718µs, normalized: 40.4289ns/vec
+11 hypervectors, 7 threshold, in_cache: 1, total: 0.44274µs, normalized: 40.2491ns/vec
+11 hypervectors, 8 threshold, in_cache: 1, total: 0.445665µs, normalized: 40.515ns/vec
+11 hypervectors, 9 threshold, in_cache: 1, total: 0.442496µs, normalized: 40.2269ns/vec
+11 hypervectors, 10 threshold, in_cache: 1, total: 0.442442µs, normalized: 40.222ns/vec
+*-= REPRESENTATIVE =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, in_cache: 1, total: 0.0132148µs, normalized: 13.2148ns/vec
+2 hypervectors, in_cache: 1, total: 0.107865µs, normalized: 53.9325ns/vec
+3 hypervectors, in_cache: 1, total: 1.08186µs, normalized: 360.62ns/vec
+4 hypervectors, in_cache: 1, total: 0.228326µs, normalized: 57.0815ns/vec
+5 hypervectors, in_cache: 1, total: 1.20033µs, normalized: 240.067ns/vec
+6 hypervectors, in_cache: 1, total: 1.21055µs, normalized: 201.758ns/vec
+7 hypervectors, in_cache: 1, total: 2.10514µs, normalized: 300.734ns/vec
+8 hypervectors, in_cache: 1, total: 0.368712µs, normalized: 46.089ns/vec
+9 hypervectors, in_cache: 1, total: 1.26945µs, normalized: 141.05ns/vec
+10 hypervectors, in_cache: 1, total: 1.36354µs, normalized: 136.354ns/vec
+11 hypervectors, in_cache: 1, total: 2.28536µs, normalized: 207.76ns/vec
+12 hypervectors, in_cache: 1, total: 1.37461µs, normalized: 114.551ns/vec
+13 hypervectors, in_cache: 1, total: 2.19624µs, normalized: 168.941ns/vec
+14 hypervectors, in_cache: 1, total: 2.27285µs, normalized: 162.346ns/vec
+15 hypervectors, in_cache: 1, total: 3.08488µs, normalized: 205.658ns/vec
+16 hypervectors, in_cache: 1, total: 0.570376µs, normalized: 35.6485ns/vec
+17 hypervectors, in_cache: 1, total: 1.40045µs, normalized: 82.3793ns/vec
+18 hypervectors, in_cache: 1, total: 1.509µs, normalized: 83.8333ns/vec
+19 hypervectors, in_cache: 1, total: 2.37306µs, normalized: 124.898ns/vec
+21 hypervectors, in_cache: 1, total: 2.2977µs, normalized: 109.414ns/vec
+23 hypervectors, in_cache: 1, total: 3.13222µs, normalized: 136.183ns/vec
+25 hypervectors, in_cache: 1, total: 2.45488µs, normalized: 98.1951ns/vec
+27 hypervectors, in_cache: 1, total: 3.48731µs, normalized: 129.16ns/vec
+29 hypervectors, in_cache: 1, total: 3.47987µs, normalized: 119.996ns/vec
+32 hypervectors, in_cache: 1, total: 1.0628µs, normalized: 33.2125ns/vec
+35 hypervectors, in_cache: 1, total: 7.8886µs, normalized: 225.388ns/vec
+38 hypervectors, in_cache: 1, total: 7.81318µs, normalized: 205.61ns/vec
+42 hypervectors, in_cache: 1, total: 7.76235µs, normalized: 184.818ns/vec
+46 hypervectors, in_cache: 1, total: 7.80688µs, normalized: 169.715ns/vec
+51 hypervectors, in_cache: 1, total: 7.77349µs, normalized: 152.421ns/vec
+56 hypervectors, in_cache: 1, total: 7.77739µs, normalized: 138.882ns/vec
+62 hypervectors, in_cache: 1, total: 7.8227µs, normalized: 126.173ns/vec
+68 hypervectors, in_cache: 1, total: 7.82699µs, normalized: 115.103ns/vec
+75 hypervectors, in_cache: 1, total: 7.7961µs, normalized: 103.948ns/vec
+83 hypervectors, in_cache: 1, total: 7.82083µs, normalized: 94.2269ns/vec
+92 hypervectors, in_cache: 1, total: 7.91053µs, normalized: 85.984ns/vec
+102 hypervectors, in_cache: 1, total: 7.86149µs, normalized: 77.0735ns/vec
+113 hypervectors, in_cache: 1, total: 7.84549µs, normalized: 69.4291ns/vec
+125 hypervectors, in_cache: 1, total: 7.85928µs, normalized: 62.8742ns/vec
+138 hypervectors, in_cache: 1, total: 7.86089µs, normalized: 56.9629ns/vec
+153 hypervectors, in_cache: 1, total: 8.08512µs, normalized: 52.8439ns/vec
+169 hypervectors, in_cache: 1, total: 7.90748µs, normalized: 46.7898ns/vec
+187 hypervectors, in_cache: 1, total: 7.91026µs, normalized: 42.3009ns/vec
+207 hypervectors, in_cache: 1, total: 8.20688µs, normalized: 39.6468ns/vec
+229 hypervectors, in_cache: 1, total: 8.04804µs, normalized: 35.1443ns/vec
+254 hypervectors, in_cache: 1, total: 7.98994µs, normalized: 31.4565ns/vec
+282 hypervectors, in_cache: 1, total: 8.17903µs, normalized: 29.0036ns/vec
+313 hypervectors, in_cache: 1, total: 8.10744µs, normalized: 25.9024ns/vec
+347 hypervectors, in_cache: 1, total: 8.70672µs, normalized: 25.0914ns/vec
+385 hypervectors, in_cache: 1, total: 8.20683µs, normalized: 21.3165ns/vec
+427 hypervectors, in_cache: 1, total: 8.28931µs, normalized: 19.4129ns/vec
+474 hypervectors, in_cache: 1, total: 8.31639µs, normalized: 17.5451ns/vec
+526 hypervectors, in_cache: 1, total: 8.38115µs, normalized: 15.9337ns/vec
+584 hypervectors, in_cache: 1, total: 8.49408µs, normalized: 14.5447ns/vec
+648 hypervectors, in_cache: 1, total: 8.44814µs, normalized: 13.0373ns/vec
+719 hypervectors, in_cache: 1, total: 8.43474µs, normalized: 11.7312ns/vec
+798 hypervectors, in_cache: 1, total: 8.48736µs, normalized: 10.6358ns/vec
+886 hypervectors, in_cache: 1, total: 8.49329µs, normalized: 9.58611ns/vec
+984 hypervectors, in_cache: 1, total: 10.0146µs, normalized: 10.1774ns/vec
+1093 hypervectors, in_cache: 1, total: 9.33963µs, normalized: 8.54495ns/vec
+1214 hypervectors, in_cache: 1, total: 8.98234µs, normalized: 7.39896ns/vec
+1348 hypervectors, in_cache: 1, total: 8.94926µs, normalized: 6.63891ns/vec
+1497 hypervectors, in_cache: 1, total: 9.32066µs, normalized: 6.22623ns/vec
+1663 hypervectors, in_cache: 1, total: 9.49644µs, normalized: 5.71043ns/vec
+1847 hypervectors, in_cache: 1, total: 9.99652µs, normalized: 5.4123ns/vec
+2052 hypervectors, in_cache: 1, total: 10.3613µs, normalized: 5.04938ns/vec
+2279 hypervectors, in_cache: 1, total: 10.7922µs, normalized: 4.73548ns/vec
+2531 hypervectors, in_cache: 1, total: 11.1875µs, normalized: 4.4202ns/vec
+2811 hypervectors, in_cache: 1, total: 11.7672µs, normalized: 4.18613ns/vec
+3123 hypervectors, in_cache: 1, total: 12.5242µs, normalized: 4.01032ns/vec
+3469 hypervectors, in_cache: 1, total: 13.4868µs, normalized: 3.88781ns/vec
+3854 hypervectors, in_cache: 1, total: 14.4991µs, normalized: 3.76208ns/vec
+4281 hypervectors, in_cache: 1, total: 15.5322µs, normalized: 3.62818ns/vec
+4756 hypervectors, in_cache: 1, total: 16.5022µs, normalized: 3.46976ns/vec
+5283 hypervectors, in_cache: 1, total: 17.4832µs, normalized: 3.30933ns/vec
+5869 hypervectors, in_cache: 1, total: 18.2905µs, normalized: 3.11645ns/vec
+6520 hypervectors, in_cache: 1, total: 19.0501µs, normalized: 2.9218ns/vec
+7243 hypervectors, in_cache: 1, total: 19.7932µs, normalized: 2.73273ns/vec
+8046 hypervectors, in_cache: 1, total: 20.4954µs, normalized: 2.54728ns/vec
+8939 hypervectors, in_cache: 1, total: 21.0771µs, normalized: 2.35789ns/vec
+9931 hypervectors, in_cache: 1, total: 21.7593µs, normalized: 2.19105ns/vec
+11033 hypervectors, in_cache: 1, total: 22.2748µs, normalized: 2.01892ns/vec
+12257 hypervectors, in_cache: 1, total: 22.8526µs, normalized: 1.86445ns/vec
+13617 hypervectors, in_cache: 1, total: 23.5476µs, normalized: 1.72928ns/vec
+15128 hypervectors, in_cache: 1, total: 23.7163µs, normalized: 1.56771ns/vec
+16807 hypervectors, in_cache: 1, total: 24.7769µs, normalized: 1.4742ns/vec
+18672 hypervectors, in_cache: 1, total: 25.6324µs, normalized: 1.37277ns/vec
+20744 hypervectors, in_cache: 1, total: 25.7688µs, normalized: 1.24223ns/vec
+23046 hypervectors, in_cache: 1, total: 27.4575µs, normalized: 1.19142ns/vec
+25604 hypervectors, in_cache: 1, total: 25.9505µs, normalized: 1.01353ns/vec
+28446 hypervectors, in_cache: 1, total: 29.1568µs, normalized: 1.02499ns/vec
+31603 hypervectors, in_cache: 1, total: 27.6757µs, normalized: 0.87573ns/vec
+35110 hypervectors, in_cache: 1, total: 28.34µs, normalized: 0.807176ns/vec
+39007 hypervectors, in_cache: 1, total: 29.4922µs, normalized: 0.756076ns/vec
+43336 hypervectors, in_cache: 1, total: 32.9136µs, normalized: 0.759497ns/vec
+48146 hypervectors, in_cache: 1, total: 30.6792µs, normalized: 0.637212ns/vec
+53490 hypervectors, in_cache: 1, total: 32.8267µs, normalized: 0.613699ns/vec
+59427 hypervectors, in_cache: 1, total: 34.1613µs, normalized: 0.574845ns/vec
+66023 hypervectors, in_cache: 1, total: 35.2115µs, normalized: 0.533321ns/vec
+73351 hypervectors, in_cache: 1, total: 36.3738µs, normalized: 0.495887ns/vec
+81492 hypervectors, in_cache: 1, total: 37.761µs, normalized: 0.463371ns/vec
+90537 hypervectors, in_cache: 1, total: 40.8277µs, normalized: 0.450951ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, in_cache: 0, total: 0.407238µs, normalized: 407.238ns/vec
+2 hypervectors, in_cache: 0, total: 0.68063µs, normalized: 340.315ns/vec
+3 hypervectors, in_cache: 0, total: 1.74292µs, normalized: 580.974ns/vec
+4 hypervectors, in_cache: 0, total: 0.961842µs, normalized: 240.461ns/vec
+5 hypervectors, in_cache: 0, total: 2.01676µs, normalized: 403.351ns/vec
+6 hypervectors, in_cache: 0, total: 2.1157µs, normalized: 352.616ns/vec
+7 hypervectors, in_cache: 0, total: 3.13035µs, normalized: 447.193ns/vec
+8 hypervectors, in_cache: 0, total: 1.51811µs, normalized: 189.764ns/vec
+9 hypervectors, in_cache: 0, total: 2.46274µs, normalized: 273.638ns/vec
+10 hypervectors, in_cache: 0, total: 2.60483µs, normalized: 260.483ns/vec
+11 hypervectors, in_cache: 0, total: 3.60338µs, normalized: 327.58ns/vec
+12 hypervectors, in_cache: 0, total: 2.86654µs, normalized: 238.878ns/vec
+13 hypervectors, in_cache: 0, total: 3.72151µs, normalized: 286.27ns/vec
+14 hypervectors, in_cache: 0, total: 3.88502µs, normalized: 277.502ns/vec
+15 hypervectors, in_cache: 0, total: 4.80162µs, normalized: 320.108ns/vec
+16 hypervectors, in_cache: 0, total: 2.27281µs, normalized: 142.05ns/vec
+17 hypervectors, in_cache: 0, total: 3.22693µs, normalized: 189.82ns/vec
+18 hypervectors, in_cache: 0, total: 3.5031µs, normalized: 194.616ns/vec
+19 hypervectors, in_cache: 0, total: 4.43759µs, normalized: 233.557ns/vec
+21 hypervectors, in_cache: 0, total: 4.56183µs, normalized: 217.23ns/vec
+23 hypervectors, in_cache: 0, total: 5.48112µs, normalized: 238.31ns/vec
+25 hypervectors, in_cache: 0, total: 4.94133µs, normalized: 197.653ns/vec
+27 hypervectors, in_cache: 0, total: 6.23369µs, normalized: 230.877ns/vec
+29 hypervectors, in_cache: 0, total: 6.4495µs, normalized: 222.397ns/vec
+32 hypervectors, in_cache: 0, total: 3.97581µs, normalized: 124.244ns/vec
+35 hypervectors, in_cache: 0, total: 12.0047µs, normalized: 342.991ns/vec
+38 hypervectors, in_cache: 0, total: 12.4033µs, normalized: 326.403ns/vec
+42 hypervectors, in_cache: 0, total: 12.8407µs, normalized: 305.73ns/vec
+46 hypervectors, in_cache: 0, total: 13.3609µs, normalized: 290.455ns/vec
+51 hypervectors, in_cache: 0, total: 14.0224µs, normalized: 274.95ns/vec
+56 hypervectors, in_cache: 0, total: 14.8079µs, normalized: 264.427ns/vec
+62 hypervectors, in_cache: 0, total: 15.2038µs, normalized: 245.223ns/vec
+68 hypervectors, in_cache: 0, total: 15.9644µs, normalized: 234.77ns/vec
+75 hypervectors, in_cache: 0, total: 17.3757µs, normalized: 231.675ns/vec
+83 hypervectors, in_cache: 0, total: 18.3914µs, normalized: 221.584ns/vec
+92 hypervectors, in_cache: 0, total: 19.1698µs, normalized: 208.368ns/vec
+102 hypervectors, in_cache: 0, total: 20.1276µs, normalized: 197.329ns/vec
+113 hypervectors, in_cache: 0, total: 21.3572µs, normalized: 189.002ns/vec
+125 hypervectors, in_cache: 0, total: 22.4212µs, normalized: 179.369ns/vec
+138 hypervectors, in_cache: 0, total: 25.0517µs, normalized: 181.534ns/vec
+153 hypervectors, in_cache: 0, total: 25.6814µs, normalized: 167.852ns/vec
+169 hypervectors, in_cache: 0, total: 25.9395µs, normalized: 153.488ns/vec
+187 hypervectors, in_cache: 0, total: 27.8463µs, normalized: 148.911ns/vec
+207 hypervectors, in_cache: 0, total: 28.3197µs, normalized: 136.81ns/vec
+229 hypervectors, in_cache: 0, total: 30.12µs, normalized: 131.528ns/vec
+254 hypervectors, in_cache: 0, total: 32.8237µs, normalized: 129.227ns/vec
+282 hypervectors, in_cache: 0, total: 57.0696µs, normalized: 202.374ns/vec
+313 hypervectors, in_cache: 0, total: 44.2374µs, normalized: 141.334ns/vec
+347 hypervectors, in_cache: 0, total: 58.8562µs, normalized: 169.614ns/vec
+385 hypervectors, in_cache: 0, total: 47.5933µs, normalized: 123.619ns/vec
+427 hypervectors, in_cache: 0, total: 64.4759µs, normalized: 150.998ns/vec
+474 hypervectors, in_cache: 0, total: 73.3824µs, normalized: 154.815ns/vec
+526 hypervectors, in_cache: 0, total: 57.1617µs, normalized: 108.672ns/vec
+584 hypervectors, in_cache: 0, total: 51.3932µs, normalized: 88.002ns/vec
+648 hypervectors, in_cache: 0, total: 53.816µs, normalized: 83.0494ns/vec
+719 hypervectors, in_cache: 0, total: 56.2805µs, normalized: 78.276ns/vec
+798 hypervectors, in_cache: 0, total: 57.8638µs, normalized: 72.511ns/vec
+886 hypervectors, in_cache: 0, total: 58.4953µs, normalized: 66.0217ns/vec
+984 hypervectors, in_cache: 0, total: 64.1231µs, normalized: 65.1658ns/vec
+1093 hypervectors, in_cache: 0, total: 60.0593µs, normalized: 54.9491ns/vec
+1214 hypervectors, in_cache: 0, total: 63.3008µs, normalized: 52.1424ns/vec
+1348 hypervectors, in_cache: 0, total: 64.4344µs, normalized: 47.8ns/vec
+1497 hypervectors, in_cache: 0, total: 64.0541µs, normalized: 42.7883ns/vec
+1663 hypervectors, in_cache: 0, total: 65.7053µs, normalized: 39.5101ns/vec
+1847 hypervectors, in_cache: 0, total: 69.2951µs, normalized: 37.5177ns/vec
+2052 hypervectors, in_cache: 0, total: 68.0266µs, normalized: 33.1513ns/vec
+2279 hypervectors, in_cache: 0, total: 69.1479µs, normalized: 30.3413ns/vec
+2531 hypervectors, in_cache: 0, total: 100.356µs, normalized: 39.6506ns/vec
+2811 hypervectors, in_cache: 0, total: 105.529µs, normalized: 37.5416ns/vec
+3123 hypervectors, in_cache: 0, total: 99.562µs, normalized: 31.8803ns/vec
+3469 hypervectors, in_cache: 0, total: 73.753µs, normalized: 21.2606ns/vec
+3854 hypervectors, in_cache: 0, total: 75.0685µs, normalized: 19.4781ns/vec
+4281 hypervectors, in_cache: 0, total: 77.0005µs, normalized: 17.9866ns/vec
+4756 hypervectors, in_cache: 0, total: 85.3292µs, normalized: 17.9414ns/vec
+5283 hypervectors, in_cache: 0, total: 108.578µs, normalized: 20.5524ns/vec
+5869 hypervectors, in_cache: 0, total: 92.8271µs, normalized: 15.8165ns/vec
+6520 hypervectors, in_cache: 0, total: 83.2752µs, normalized: 12.7723ns/vec
+7243 hypervectors, in_cache: 0, total: 118.702µs, normalized: 16.3885ns/vec
+8046 hypervectors, in_cache: 0, total: 86.4739µs, normalized: 10.7474ns/vec
+8939 hypervectors, in_cache: 0, total: 117.865µs, normalized: 13.1855ns/vec
+9931 hypervectors, in_cache: 0, total: 117.091µs, normalized: 11.7904ns/vec
+11033 hypervectors, in_cache: 0, total: 106.688µs, normalized: 9.66992ns/vec
+12257 hypervectors, in_cache: 0, total: 91.7131µs, normalized: 7.4825ns/vec
+13617 hypervectors, in_cache: 0, total: 93.1016µs, normalized: 6.83716ns/vec
+15128 hypervectors, in_cache: 0, total: 112.211µs, normalized: 7.41741ns/vec
+16807 hypervectors, in_cache: 0, total: 115.503µs, normalized: 6.87233ns/vec
+18672 hypervectors, in_cache: 0, total: 101.172µs, normalized: 5.41841ns/vec
+20744 hypervectors, in_cache: 0, total: 103.448µs, normalized: 4.98688ns/vec
+23046 hypervectors, in_cache: 0, total: 124.698µs, normalized: 5.41083ns/vec
+25604 hypervectors, in_cache: 0, total: 128.168µs, normalized: 5.00578ns/vec
+28446 hypervectors, in_cache: 0, total: 113.567µs, normalized: 3.99236ns/vec
+31603 hypervectors, in_cache: 0, total: 151.379µs, normalized: 4.79002ns/vec
+35110 hypervectors, in_cache: 0, total: 119.463µs, normalized: 3.40254ns/vec
+39007 hypervectors, in_cache: 0, total: 122.852µs, normalized: 3.1495ns/vec
+43336 hypervectors, in_cache: 0, total: 126.077µs, normalized: 2.9093ns/vec
+48146 hypervectors, in_cache: 0, total: 160.968µs, normalized: 3.34334ns/vec
+53490 hypervectors, in_cache: 0, total: 164.535µs, normalized: 3.076ns/vec
+59427 hypervectors, in_cache: 0, total: 168.506µs, normalized: 2.83552ns/vec
+66023 hypervectors, in_cache: 0, total: 139.99µs, normalized: 2.12032ns/vec
+73351 hypervectors, in_cache: 0, total: 143.864µs, normalized: 1.96131ns/vec
+81492 hypervectors, in_cache: 0, total: 144.856µs, normalized: 1.77754ns/vec
+90537 hypervectors, in_cache: 0, total: 149.137µs, normalized: 1.64725ns/vec
+*-= WEIGHTED_REPRESENTATIVE =-*
+*-= UNIFORM =-*
+*-= IN CACHE TESTS =-*
+3 hypervectors, in_cache: 1, total: 8.00627µs, normalized: 2668.76ns/vec
+4 hypervectors, in_cache: 1, total: 8.41789µs, normalized: 2104.47ns/vec
+5 hypervectors, in_cache: 1, total: 8.66258µs, normalized: 1732.52ns/vec
+6 hypervectors, in_cache: 1, total: 9.18739µs, normalized: 1531.23ns/vec
+7 hypervectors, in_cache: 1, total: 9.41523µs, normalized: 1345.03ns/vec
+8 hypervectors, in_cache: 1, total: 9.82316µs, normalized: 1227.9ns/vec
+9 hypervectors, in_cache: 1, total: 10.1609µs, normalized: 1128.99ns/vec
+10 hypervectors, in_cache: 1, total: 10.741µs, normalized: 1074.1ns/vec
+11 hypervectors, in_cache: 1, total: 10.9073µs, normalized: 991.575ns/vec
+12 hypervectors, in_cache: 1, total: 11.1744µs, normalized: 931.204ns/vec
+13 hypervectors, in_cache: 1, total: 11.4424µs, normalized: 880.182ns/vec
+14 hypervectors, in_cache: 1, total: 11.8625µs, normalized: 847.318ns/vec
+15 hypervectors, in_cache: 1, total: 12.073µs, normalized: 804.869ns/vec
+16 hypervectors, in_cache: 1, total: 12.5866µs, normalized: 786.662ns/vec
+17 hypervectors, in_cache: 1, total: 12.7817µs, normalized: 751.864ns/vec
+18 hypervectors, in_cache: 1, total: 13.2688µs, normalized: 737.154ns/vec
+19 hypervectors, in_cache: 1, total: 13.355µs, normalized: 702.896ns/vec
+21 hypervectors, in_cache: 1, total: 14.1786µs, normalized: 675.169ns/vec
+23 hypervectors, in_cache: 1, total: 14.7452µs, normalized: 641.097ns/vec
+25 hypervectors, in_cache: 1, total: 15.5059µs, normalized: 620.237ns/vec
+27 hypervectors, in_cache: 1, total: 16.1557µs, normalized: 598.361ns/vec
+29 hypervectors, in_cache: 1, total: 16.8036µs, normalized: 579.433ns/vec
+32 hypervectors, in_cache: 1, total: 17.9723µs, normalized: 561.634ns/vec
+35 hypervectors, in_cache: 1, total: 18.9144µs, normalized: 540.413ns/vec
+38 hypervectors, in_cache: 1, total: 20.0364µs, normalized: 527.273ns/vec
+42 hypervectors, in_cache: 1, total: 21.4159µs, normalized: 509.901ns/vec
+46 hypervectors, in_cache: 1, total: 22.8103µs, normalized: 495.875ns/vec
+51 hypervectors, in_cache: 1, total: 24.3091µs, normalized: 476.648ns/vec
+56 hypervectors, in_cache: 1, total: 26.1251µs, normalized: 466.52ns/vec
+62 hypervectors, in_cache: 1, total: 28.0868µs, normalized: 453.013ns/vec
+68 hypervectors, in_cache: 1, total: 30.2159µs, normalized: 444.351ns/vec
+75 hypervectors, in_cache: 1, total: 32.375µs, normalized: 431.667ns/vec
+83 hypervectors, in_cache: 1, total: 35.1792µs, normalized: 423.846ns/vec
+92 hypervectors, in_cache: 1, total: 38.3031µs, normalized: 416.338ns/vec
+102 hypervectors, in_cache: 1, total: 41.7396µs, normalized: 409.211ns/vec
+113 hypervectors, in_cache: 1, total: 45.4644µs, normalized: 402.34ns/vec
+125 hypervectors, in_cache: 1, total: 49.3781µs, normalized: 395.025ns/vec
+138 hypervectors, in_cache: 1, total: 53.9242µs, normalized: 390.755ns/vec
+153 hypervectors, in_cache: 1, total: 58.914µs, normalized: 385.059ns/vec
+169 hypervectors, in_cache: 1, total: 64.2585µs, normalized: 380.228ns/vec
+187 hypervectors, in_cache: 1, total: 70.6968µs, normalized: 378.058ns/vec
+207 hypervectors, in_cache: 1, total: 77.0465µs, normalized: 372.205ns/vec
+229 hypervectors, in_cache: 1, total: 84.4365µs, normalized: 368.718ns/vec
+254 hypervectors, in_cache: 1, total: 93.0958µs, normalized: 366.519ns/vec
+282 hypervectors, in_cache: 1, total: 103.367µs, normalized: 366.548ns/vec
+313 hypervectors, in_cache: 1, total: 114.171µs, normalized: 364.762ns/vec
+347 hypervectors, in_cache: 1, total: 124.167µs, normalized: 357.829ns/vec
+385 hypervectors, in_cache: 1, total: 137.644µs, normalized: 357.518ns/vec
+427 hypervectors, in_cache: 1, total: 152.828µs, normalized: 357.912ns/vec
+474 hypervectors, in_cache: 1, total: 168.97µs, normalized: 356.478ns/vec
+526 hypervectors, in_cache: 1, total: 184.556µs, normalized: 350.868ns/vec
+584 hypervectors, in_cache: 1, total: 203.774µs, normalized: 348.927ns/vec
+648 hypervectors, in_cache: 1, total: 228.505µs, normalized: 352.631ns/vec
+719 hypervectors, in_cache: 1, total: 252.328µs, normalized: 350.943ns/vec
+798 hypervectors, in_cache: 1, total: 278.324µs, normalized: 348.776ns/vec
+886 hypervectors, in_cache: 1, total: 309.128µs, normalized: 348.903ns/vec
+984 hypervectors, in_cache: 1, total: 345.207µs, normalized: 350.82ns/vec
+1093 hypervectors, in_cache: 1, total: 382.167µs, normalized: 349.649ns/vec
+1214 hypervectors, in_cache: 1, total: 424.024µs, normalized: 349.278ns/vec
+1348 hypervectors, in_cache: 1, total: 479.888µs, normalized: 356ns/vec
+1497 hypervectors, in_cache: 1, total: 537.915µs, normalized: 359.328ns/vec
+1663 hypervectors, in_cache: 1, total: 597.423µs, normalized: 359.244ns/vec
+1847 hypervectors, in_cache: 1, total: 661.407µs, normalized: 358.098ns/vec
+2052 hypervectors, in_cache: 1, total: 730.438µs, normalized: 355.964ns/vec
+2279 hypervectors, in_cache: 1, total: 816.053µs, normalized: 358.075ns/vec
+2531 hypervectors, in_cache: 1, total: 902.616µs, normalized: 356.624ns/vec
+2811 hypervectors, in_cache: 1, total: 994.925µs, normalized: 353.94ns/vec
+3123 hypervectors, in_cache: 1, total: 1119.37µs, normalized: 358.428ns/vec
+3469 hypervectors, in_cache: 1, total: 1248.57µs, normalized: 359.923ns/vec
+3854 hypervectors, in_cache: 1, total: 1393.02µs, normalized: 361.448ns/vec
+4281 hypervectors, in_cache: 1, total: 1526.65µs, normalized: 356.61ns/vec
+4756 hypervectors, in_cache: 1, total: 1684.87µs, normalized: 354.263ns/vec
+5283 hypervectors, in_cache: 1, total: 1885.23µs, normalized: 356.849ns/vec
+5869 hypervectors, in_cache: 1, total: 2078.67µs, normalized: 354.178ns/vec
+6520 hypervectors, in_cache: 1, total: 2300.37µs, normalized: 352.818ns/vec
+7243 hypervectors, in_cache: 1, total: 2559.15µs, normalized: 353.328ns/vec
+8046 hypervectors, in_cache: 1, total: 2851.78µs, normalized: 354.434ns/vec
+8939 hypervectors, in_cache: 1, total: 3152.39µs, normalized: 352.656ns/vec
+9931 hypervectors, in_cache: 1, total: 3489.49µs, normalized: 351.373ns/vec
+11033 hypervectors, in_cache: 1, total: 3867.81µs, normalized: 350.567ns/vec
+12257 hypervectors, in_cache: 1, total: 4316.29µs, normalized: 352.149ns/vec
+13617 hypervectors, in_cache: 1, total: 4767.38µs, normalized: 350.105ns/vec
+15128 hypervectors, in_cache: 1, total: 5277.3µs, normalized: 348.843ns/vec
+16807 hypervectors, in_cache: 1, total: 5835.28µs, normalized: 347.194ns/vec
+18672 hypervectors, in_cache: 1, total: 6538.67µs, normalized: 350.186ns/vec
+20744 hypervectors, in_cache: 1, total: 7270.52µs, normalized: 350.488ns/vec
+23046 hypervectors, in_cache: 1, total: 8062.29µs, normalized: 349.835ns/vec
+25604 hypervectors, in_cache: 1, total: 9048.32µs, normalized: 353.395ns/vec
+28446 hypervectors, in_cache: 1, total: 9904.8µs, normalized: 348.197ns/vec
+31603 hypervectors, in_cache: 1, total: 10913.2µs, normalized: 345.322ns/vec
+35110 hypervectors, in_cache: 1, total: 12087.5µs, normalized: 344.276ns/vec
+39007 hypervectors, in_cache: 1, total: 13494.2µs, normalized: 345.943ns/vec
+43336 hypervectors, in_cache: 1, total: 15006.6µs, normalized: 346.285ns/vec
+48146 hypervectors, in_cache: 1, total: 16550.1µs, normalized: 343.747ns/vec
+53490 hypervectors, in_cache: 1, total: 18572.4µs, normalized: 347.213ns/vec
+59427 hypervectors, in_cache: 1, total: 20715.1µs, normalized: 348.581ns/vec
+66023 hypervectors, in_cache: 1, total: 22918.7µs, normalized: 347.132ns/vec
+73351 hypervectors, in_cache: 1, total: 25304.8µs, normalized: 344.983ns/vec
+81492 hypervectors, in_cache: 1, total: 28280.9µs, normalized: 347.039ns/vec
+90537 hypervectors, in_cache: 1, total: 32246.9µs, normalized: 356.173ns/vec
+*-= OUT OF CACHE TESTS =-*
+3 hypervectors, in_cache: 0, total: 8.45662µs, normalized: 2818.87ns/vec
+4 hypervectors, in_cache: 0, total: 8.93166µs, normalized: 2232.91ns/vec
+5 hypervectors, in_cache: 0, total: 9.16836µs, normalized: 1833.67ns/vec
+6 hypervectors, in_cache: 0, total: 9.71149µs, normalized: 1618.58ns/vec
+7 hypervectors, in_cache: 0, total: 9.95436µs, normalized: 1422.05ns/vec
+8 hypervectors, in_cache: 0, total: 10.5774µs, normalized: 1322.17ns/vec
+9 hypervectors, in_cache: 0, total: 10.7028µs, normalized: 1189.2ns/vec
+10 hypervectors, in_cache: 0, total: 11.2383µs, normalized: 1123.83ns/vec
+11 hypervectors, in_cache: 0, total: 11.7317µs, normalized: 1066.52ns/vec
+12 hypervectors, in_cache: 0, total: 12.0428µs, normalized: 1003.57ns/vec
+13 hypervectors, in_cache: 0, total: 12.3241µs, normalized: 948.007ns/vec
+14 hypervectors, in_cache: 0, total: 12.6497µs, normalized: 903.553ns/vec
+15 hypervectors, in_cache: 0, total: 13.1108µs, normalized: 874.052ns/vec
+16 hypervectors, in_cache: 0, total: 13.5072µs, normalized: 844.201ns/vec
+17 hypervectors, in_cache: 0, total: 14.0248µs, normalized: 824.989ns/vec
+18 hypervectors, in_cache: 0, total: 14.0892µs, normalized: 782.731ns/vec
+19 hypervectors, in_cache: 0, total: 14.3213µs, normalized: 753.752ns/vec
+21 hypervectors, in_cache: 0, total: 15.1076µs, normalized: 719.41ns/vec
+23 hypervectors, in_cache: 0, total: 15.6539µs, normalized: 680.606ns/vec
+25 hypervectors, in_cache: 0, total: 16.4276µs, normalized: 657.103ns/vec
+27 hypervectors, in_cache: 0, total: 17.7479µs, normalized: 657.33ns/vec
+29 hypervectors, in_cache: 0, total: 18.3835µs, normalized: 633.915ns/vec
+32 hypervectors, in_cache: 0, total: 19.061µs, normalized: 595.656ns/vec
+35 hypervectors, in_cache: 0, total: 21.0641µs, normalized: 601.831ns/vec
+38 hypervectors, in_cache: 0, total: 21.4408µs, normalized: 564.232ns/vec
+42 hypervectors, in_cache: 0, total: 22.7243µs, normalized: 541.054ns/vec
+46 hypervectors, in_cache: 0, total: 24.7637µs, normalized: 538.341ns/vec
+51 hypervectors, in_cache: 0, total: 26.3258µs, normalized: 516.192ns/vec
+56 hypervectors, in_cache: 0, total: 28.2245µs, normalized: 504.009ns/vec
+62 hypervectors, in_cache: 0, total: 30.0792µs, normalized: 485.149ns/vec
+68 hypervectors, in_cache: 0, total: 33.3412µs, normalized: 490.312ns/vec
+75 hypervectors, in_cache: 0, total: 35.1127µs, normalized: 468.17ns/vec
+83 hypervectors, in_cache: 0, total: 37.9352µs, normalized: 457.051ns/vec
+92 hypervectors, in_cache: 0, total: 42.7981µs, normalized: 465.197ns/vec
+102 hypervectors, in_cache: 0, total: 47.7752µs, normalized: 468.385ns/vec
+113 hypervectors, in_cache: 0, total: 47.9998µs, normalized: 424.777ns/vec
+125 hypervectors, in_cache: 0, total: 52.6812µs, normalized: 421.45ns/vec
+138 hypervectors, in_cache: 0, total: 58.6828µs, normalized: 425.237ns/vec
+153 hypervectors, in_cache: 0, total: 63.845µs, normalized: 417.287ns/vec
+169 hypervectors, in_cache: 0, total: 69.2661µs, normalized: 409.859ns/vec
+187 hypervectors, in_cache: 0, total: 75.9181µs, normalized: 405.979ns/vec
+207 hypervectors, in_cache: 0, total: 84.5608µs, normalized: 408.506ns/vec
+229 hypervectors, in_cache: 0, total: 94.573µs, normalized: 412.983ns/vec
+254 hypervectors, in_cache: 0, total: 100.835µs, normalized: 396.99ns/vec
+282 hypervectors, in_cache: 0, total: 120.301µs, normalized: 426.599ns/vec
+313 hypervectors, in_cache: 0, total: 123.236µs, normalized: 393.725ns/vec
+347 hypervectors, in_cache: 0, total: 136.598µs, normalized: 393.655ns/vec
+385 hypervectors, in_cache: 0, total: 148.03µs, normalized: 384.495ns/vec
+427 hypervectors, in_cache: 0, total: 163.441µs, normalized: 382.765ns/vec
+474 hypervectors, in_cache: 0, total: 180.483µs, normalized: 380.765ns/vec
+526 hypervectors, in_cache: 0, total: 206.801µs, normalized: 393.157ns/vec
+584 hypervectors, in_cache: 0, total: 229.595µs, normalized: 393.142ns/vec
+648 hypervectors, in_cache: 0, total: 240.46µs, normalized: 371.081ns/vec
+719 hypervectors, in_cache: 0, total: 265.532µs, normalized: 369.307ns/vec
+798 hypervectors, in_cache: 0, total: 308.337µs, normalized: 386.388ns/vec
+886 hypervectors, in_cache: 0, total: 330.398µs, normalized: 372.91ns/vec
+984 hypervectors, in_cache: 0, total: 363.55µs, normalized: 369.461ns/vec
+1093 hypervectors, in_cache: 0, total: 399.881µs, normalized: 365.856ns/vec
+1214 hypervectors, in_cache: 0, total: 444.565µs, normalized: 366.198ns/vec
+1348 hypervectors, in_cache: 0, total: 511.874µs, normalized: 379.729ns/vec
+1497 hypervectors, in_cache: 0, total: 544.202µs, normalized: 363.528ns/vec
+1663 hypervectors, in_cache: 0, total: 608.92µs, normalized: 366.158ns/vec
+1847 hypervectors, in_cache: 0, total: 667.94µs, normalized: 361.635ns/vec
+2052 hypervectors, in_cache: 0, total: 757.701µs, normalized: 369.25ns/vec
+2279 hypervectors, in_cache: 0, total: 841.344µs, normalized: 369.172ns/vec
+2531 hypervectors, in_cache: 0, total: 929.211µs, normalized: 367.132ns/vec
+2811 hypervectors, in_cache: 0, total: 1032.57µs, normalized: 367.334ns/vec
+3123 hypervectors, in_cache: 0, total: 1142.79µs, normalized: 365.928ns/vec
+3469 hypervectors, in_cache: 0, total: 1318.05µs, normalized: 379.952ns/vec
+3854 hypervectors, in_cache: 0, total: 1401.36µs, normalized: 363.612ns/vec
+4281 hypervectors, in_cache: 0, total: 1551.01µs, normalized: 362.302ns/vec
+4756 hypervectors, in_cache: 0, total: 1713.66µs, normalized: 360.316ns/vec
+5283 hypervectors, in_cache: 0, total: 1944.18µs, normalized: 368.006ns/vec
+5869 hypervectors, in_cache: 0, total: 2153.39µs, normalized: 366.91ns/vec
+6520 hypervectors, in_cache: 0, total: 2357.39µs, normalized: 361.563ns/vec
+7243 hypervectors, in_cache: 0, total: 2646.13µs, normalized: 365.336ns/vec
+8046 hypervectors, in_cache: 0, total: 2918.78µs, normalized: 362.762ns/vec
+8939 hypervectors, in_cache: 0, total: 3330.02µs, normalized: 372.527ns/vec
+9931 hypervectors, in_cache: 0, total: 3633.33µs, normalized: 365.858ns/vec
+11033 hypervectors, in_cache: 0, total: 3997.82µs, normalized: 362.351ns/vec
+12257 hypervectors, in_cache: 0, total: 4395.48µs, normalized: 358.61ns/vec
+13617 hypervectors, in_cache: 0, total: 5129.7µs, normalized: 376.713ns/vec
+15128 hypervectors, in_cache: 0, total: 5879.23µs, normalized: 388.632ns/vec
+16807 hypervectors, in_cache: 0, total: 6106.26µs, normalized: 363.316ns/vec
+18672 hypervectors, in_cache: 0, total: 6740.46µs, normalized: 360.993ns/vec
+20744 hypervectors, in_cache: 0, total: 7499.05µs, normalized: 361.505ns/vec
+23046 hypervectors, in_cache: 0, total: 8569.28µs, normalized: 371.834ns/vec
+25604 hypervectors, in_cache: 0, total: 9845.75µs, normalized: 384.539ns/vec
+28446 hypervectors, in_cache: 0, total: 10276.1µs, normalized: 361.248ns/vec
+31603 hypervectors, in_cache: 0, total: 11427.8µs, normalized: 361.605ns/vec
+35110 hypervectors, in_cache: 0, total: 13028.9µs, normalized: 371.089ns/vec
+39007 hypervectors, in_cache: 0, total: 14153.3µs, normalized: 362.839ns/vec
+43336 hypervectors, in_cache: 0, total: 15554.6µs, normalized: 358.93ns/vec
+48146 hypervectors, in_cache: 0, total: 17533.9µs, normalized: 364.182ns/vec
+53490 hypervectors, in_cache: 0, total: 19896.7µs, normalized: 371.971ns/vec
+59427 hypervectors, in_cache: 0, total: 21744.6µs, normalized: 365.904ns/vec
+66023 hypervectors, in_cache: 0, total: 23897.2µs, normalized: 361.953ns/vec
+73351 hypervectors, in_cache: 0, total: 26453.9µs, normalized: 360.648ns/vec
+81492 hypervectors, in_cache: 0, total: 29102.8µs, normalized: 357.125ns/vec
+90537 hypervectors, in_cache: 0, total: 32563.2µs, normalized: 359.667ns/vec
+*-= IOTA =-*
+*-= IN CACHE TESTS =-*
+3 hypervectors, in_cache: 1, total: 7.91777µs, normalized: 2639.26ns/vec
+4 hypervectors, in_cache: 1, total: 8.38838µs, normalized: 2097.1ns/vec
+5 hypervectors, in_cache: 1, total: 8.65685µs, normalized: 1731.37ns/vec
+6 hypervectors, in_cache: 1, total: 9.22608µs, normalized: 1537.68ns/vec
+7 hypervectors, in_cache: 1, total: 9.39437µs, normalized: 1342.05ns/vec
+8 hypervectors, in_cache: 1, total: 9.82548µs, normalized: 1228.19ns/vec
+9 hypervectors, in_cache: 1, total: 10.1123µs, normalized: 1123.59ns/vec
+10 hypervectors, in_cache: 1, total: 10.6389µs, normalized: 1063.89ns/vec
+11 hypervectors, in_cache: 1, total: 10.8356µs, normalized: 985.054ns/vec
+12 hypervectors, in_cache: 1, total: 11.1212µs, normalized: 926.763ns/vec
+13 hypervectors, in_cache: 1, total: 11.5337µs, normalized: 887.21ns/vec
+14 hypervectors, in_cache: 1, total: 11.7914µs, normalized: 842.243ns/vec
+15 hypervectors, in_cache: 1, total: 12.1174µs, normalized: 807.825ns/vec
+16 hypervectors, in_cache: 1, total: 12.4324µs, normalized: 777.024ns/vec
+17 hypervectors, in_cache: 1, total: 12.8244µs, normalized: 754.377ns/vec
+18 hypervectors, in_cache: 1, total: 13.1333µs, normalized: 729.628ns/vec
+19 hypervectors, in_cache: 1, total: 13.3642µs, normalized: 703.381ns/vec
+21 hypervectors, in_cache: 1, total: 14.1586µs, normalized: 674.221ns/vec
+23 hypervectors, in_cache: 1, total: 14.791µs, normalized: 643.088ns/vec
+25 hypervectors, in_cache: 1, total: 15.459µs, normalized: 618.361ns/vec
+27 hypervectors, in_cache: 1, total: 16.1281µs, normalized: 597.337ns/vec
+29 hypervectors, in_cache: 1, total: 16.8006µs, normalized: 579.332ns/vec
+32 hypervectors, in_cache: 1, total: 17.948µs, normalized: 560.875ns/vec
+35 hypervectors, in_cache: 1, total: 18.9793µs, normalized: 542.266ns/vec
+38 hypervectors, in_cache: 1, total: 19.9839µs, normalized: 525.891ns/vec
+42 hypervectors, in_cache: 1, total: 21.457µs, normalized: 510.881ns/vec
+46 hypervectors, in_cache: 1, total: 22.7362µs, normalized: 494.265ns/vec
+51 hypervectors, in_cache: 1, total: 24.236µs, normalized: 475.215ns/vec
+56 hypervectors, in_cache: 1, total: 26.1379µs, normalized: 466.748ns/vec
+62 hypervectors, in_cache: 1, total: 27.9749µs, normalized: 451.208ns/vec
+68 hypervectors, in_cache: 1, total: 30.2781µs, normalized: 445.267ns/vec
+75 hypervectors, in_cache: 1, total: 32.4754µs, normalized: 433.005ns/vec
+83 hypervectors, in_cache: 1, total: 35.0348µs, normalized: 422.106ns/vec
+92 hypervectors, in_cache: 1, total: 38.3443µs, normalized: 416.786ns/vec
+102 hypervectors, in_cache: 1, total: 42.107µs, normalized: 412.814ns/vec
+113 hypervectors, in_cache: 1, total: 45.3853µs, normalized: 401.639ns/vec
+125 hypervectors, in_cache: 1, total: 49.3001µs, normalized: 394.401ns/vec
+138 hypervectors, in_cache: 1, total: 53.6195µs, normalized: 388.547ns/vec
+153 hypervectors, in_cache: 1, total: 58.5892µs, normalized: 382.936ns/vec
+169 hypervectors, in_cache: 1, total: 64.4649µs, normalized: 381.449ns/vec
+187 hypervectors, in_cache: 1, total: 69.8248µs, normalized: 373.395ns/vec
+207 hypervectors, in_cache: 1, total: 76.8569µs, normalized: 371.289ns/vec
+229 hypervectors, in_cache: 1, total: 85.0989µs, normalized: 371.611ns/vec
+254 hypervectors, in_cache: 1, total: 92.8187µs, normalized: 365.428ns/vec
+282 hypervectors, in_cache: 1, total: 102.33µs, normalized: 362.874ns/vec
+313 hypervectors, in_cache: 1, total: 113.791µs, normalized: 363.549ns/vec
+347 hypervectors, in_cache: 1, total: 124.166µs, normalized: 357.827ns/vec
+385 hypervectors, in_cache: 1, total: 136.681µs, normalized: 355.015ns/vec
+427 hypervectors, in_cache: 1, total: 152.418µs, normalized: 356.952ns/vec
+474 hypervectors, in_cache: 1, total: 168.055µs, normalized: 354.547ns/vec
+526 hypervectors, in_cache: 1, total: 185.146µs, normalized: 351.988ns/vec
+584 hypervectors, in_cache: 1, total: 206.529µs, normalized: 353.646ns/vec
+648 hypervectors, in_cache: 1, total: 225.007µs, normalized: 347.233ns/vec
+719 hypervectors, in_cache: 1, total: 252.035µs, normalized: 350.535ns/vec
+798 hypervectors, in_cache: 1, total: 279.039µs, normalized: 349.673ns/vec
+886 hypervectors, in_cache: 1, total: 305.02µs, normalized: 344.267ns/vec
+984 hypervectors, in_cache: 1, total: 345.583µs, normalized: 351.202ns/vec
+1093 hypervectors, in_cache: 1, total: 380.122µs, normalized: 347.779ns/vec
+1214 hypervectors, in_cache: 1, total: 423.464µs, normalized: 348.817ns/vec
+1348 hypervectors, in_cache: 1, total: 478.364µs, normalized: 354.869ns/vec
+1497 hypervectors, in_cache: 1, total: 527.812µs, normalized: 352.58ns/vec
+1663 hypervectors, in_cache: 1, total: 595.647µs, normalized: 358.176ns/vec
+1847 hypervectors, in_cache: 1, total: 667.911µs, normalized: 361.619ns/vec
+2052 hypervectors, in_cache: 1, total: 730.406µs, normalized: 355.949ns/vec
+2279 hypervectors, in_cache: 1, total: 809.241µs, normalized: 355.086ns/vec
+2531 hypervectors, in_cache: 1, total: 903.029µs, normalized: 356.788ns/vec
+2811 hypervectors, in_cache: 1, total: 993.974µs, normalized: 353.602ns/vec
+3123 hypervectors, in_cache: 1, total: 1107.63µs, normalized: 354.669ns/vec
+3469 hypervectors, in_cache: 1, total: 1239.13µs, normalized: 357.201ns/vec
+3854 hypervectors, in_cache: 1, total: 1380.84µs, normalized: 358.286ns/vec
+4281 hypervectors, in_cache: 1, total: 1554.72µs, normalized: 363.168ns/vec
+4756 hypervectors, in_cache: 1, total: 1700.42µs, normalized: 357.532ns/vec
+5283 hypervectors, in_cache: 1, total: 1863.9µs, normalized: 352.811ns/vec
+5869 hypervectors, in_cache: 1, total: 2088.01µs, normalized: 355.77ns/vec
+6520 hypervectors, in_cache: 1, total: 2304.13µs, normalized: 353.394ns/vec
+7243 hypervectors, in_cache: 1, total: 2546.25µs, normalized: 351.546ns/vec
+8046 hypervectors, in_cache: 1, total: 2901.66µs, normalized: 360.634ns/vec
+8939 hypervectors, in_cache: 1, total: 3199.25µs, normalized: 357.898ns/vec
+9931 hypervectors, in_cache: 1, total: 3486.46µs, normalized: 351.069ns/vec
+11033 hypervectors, in_cache: 1, total: 3907.27µs, normalized: 354.144ns/vec
+12257 hypervectors, in_cache: 1, total: 4279.2µs, normalized: 349.123ns/vec
+13617 hypervectors, in_cache: 1, total: 4769.8µs, normalized: 350.283ns/vec
+15128 hypervectors, in_cache: 1, total: 5325.4µs, normalized: 352.023ns/vec
+16807 hypervectors, in_cache: 1, total: 5839.62µs, normalized: 347.452ns/vec
+18672 hypervectors, in_cache: 1, total: 6500.01µs, normalized: 348.115ns/vec
+20744 hypervectors, in_cache: 1, total: 7286.68µs, normalized: 351.267ns/vec
+23046 hypervectors, in_cache: 1, total: 8006.08µs, normalized: 347.396ns/vec
+25604 hypervectors, in_cache: 1, total: 8956.53µs, normalized: 349.81ns/vec
+28446 hypervectors, in_cache: 1, total: 9929.86µs, normalized: 349.078ns/vec
+31603 hypervectors, in_cache: 1, total: 10874.9µs, normalized: 344.111ns/vec
+35110 hypervectors, in_cache: 1, total: 12289.8µs, normalized: 350.037ns/vec
+39007 hypervectors, in_cache: 1, total: 13396.2µs, normalized: 343.431ns/vec
+43336 hypervectors, in_cache: 1, total: 14969.5µs, normalized: 345.429ns/vec
+48146 hypervectors, in_cache: 1, total: 16745.3µs, normalized: 347.803ns/vec
+53490 hypervectors, in_cache: 1, total: 19067.5µs, normalized: 356.469ns/vec
+59427 hypervectors, in_cache: 1, total: 20505.3µs, normalized: 345.051ns/vec
+66023 hypervectors, in_cache: 1, total: 22930.3µs, normalized: 347.308ns/vec
+73351 hypervectors, in_cache: 1, total: 25160.4µs, normalized: 343.013ns/vec
+81492 hypervectors, in_cache: 1, total: 28328.2µs, normalized: 347.62ns/vec
+90537 hypervectors, in_cache: 1, total: 31405.2µs, normalized: 346.877ns/vec
+*-= OUT OF CACHE TESTS =-*
+3 hypervectors, in_cache: 0, total: 8.50898µs, normalized: 2836.33ns/vec
+4 hypervectors, in_cache: 0, total: 8.91963µs, normalized: 2229.91ns/vec
+5 hypervectors, in_cache: 0, total: 9.23302µs, normalized: 1846.6ns/vec
+6 hypervectors, in_cache: 0, total: 9.65699µs, normalized: 1609.5ns/vec
+7 hypervectors, in_cache: 0, total: 9.95319µs, normalized: 1421.88ns/vec
+8 hypervectors, in_cache: 0, total: 10.3957µs, normalized: 1299.47ns/vec
+9 hypervectors, in_cache: 0, total: 10.7361µs, normalized: 1192.9ns/vec
+10 hypervectors, in_cache: 0, total: 11.4891µs, normalized: 1148.91ns/vec
+11 hypervectors, in_cache: 0, total: 11.489µs, normalized: 1044.46ns/vec
+12 hypervectors, in_cache: 0, total: 12.0494µs, normalized: 1004.11ns/vec
+13 hypervectors, in_cache: 0, total: 12.2334µs, normalized: 941.031ns/vec
+14 hypervectors, in_cache: 0, total: 12.5986µs, normalized: 899.899ns/vec
+15 hypervectors, in_cache: 0, total: 13.3091µs, normalized: 887.272ns/vec
+16 hypervectors, in_cache: 0, total: 13.3098µs, normalized: 831.863ns/vec
+17 hypervectors, in_cache: 0, total: 13.89µs, normalized: 817.06ns/vec
+18 hypervectors, in_cache: 0, total: 14.4173µs, normalized: 800.961ns/vec
+19 hypervectors, in_cache: 0, total: 14.408µs, normalized: 758.318ns/vec
+21 hypervectors, in_cache: 0, total: 15.2839µs, normalized: 727.807ns/vec
+23 hypervectors, in_cache: 0, total: 15.6887µs, normalized: 682.118ns/vec
+25 hypervectors, in_cache: 0, total: 16.4313µs, normalized: 657.252ns/vec
+27 hypervectors, in_cache: 0, total: 17.5073µs, normalized: 648.418ns/vec
+29 hypervectors, in_cache: 0, total: 17.9448µs, normalized: 618.787ns/vec
+32 hypervectors, in_cache: 0, total: 19.0234µs, normalized: 594.482ns/vec
+35 hypervectors, in_cache: 0, total: 21.0142µs, normalized: 600.405ns/vec
+38 hypervectors, in_cache: 0, total: 21.3943µs, normalized: 563.009ns/vec
+42 hypervectors, in_cache: 0, total: 22.8199µs, normalized: 543.331ns/vec
+46 hypervectors, in_cache: 0, total: 24.6401µs, normalized: 535.654ns/vec
+51 hypervectors, in_cache: 0, total: 26.0898µs, normalized: 511.566ns/vec
+56 hypervectors, in_cache: 0, total: 27.8497µs, normalized: 497.315ns/vec
+62 hypervectors, in_cache: 0, total: 29.748µs, normalized: 479.807ns/vec
+68 hypervectors, in_cache: 0, total: 33.6982µs, normalized: 495.561ns/vec
+75 hypervectors, in_cache: 0, total: 34.7113µs, normalized: 462.817ns/vec
+83 hypervectors, in_cache: 0, total: 38.5288µs, normalized: 464.202ns/vec
+92 hypervectors, in_cache: 0, total: 40.939µs, normalized: 444.989ns/vec
+102 hypervectors, in_cache: 0, total: 46.7513µs, normalized: 458.346ns/vec
+113 hypervectors, in_cache: 0, total: 48.2049µs, normalized: 426.592ns/vec
+125 hypervectors, in_cache: 0, total: 52.864µs, normalized: 422.912ns/vec
+138 hypervectors, in_cache: 0, total: 57.9903µs, normalized: 420.219ns/vec
+153 hypervectors, in_cache: 0, total: 65.567µs, normalized: 428.543ns/vec
+169 hypervectors, in_cache: 0, total: 72.1576µs, normalized: 426.968ns/vec
+187 hypervectors, in_cache: 0, total: 74.4921µs, normalized: 398.354ns/vec
+207 hypervectors, in_cache: 0, total: 83.1869µs, normalized: 401.869ns/vec
+229 hypervectors, in_cache: 0, total: 89.5135µs, normalized: 390.889ns/vec
+254 hypervectors, in_cache: 0, total: 100.738µs, normalized: 396.606ns/vec
+282 hypervectors, in_cache: 0, total: 109.749µs, normalized: 389.18ns/vec
+313 hypervectors, in_cache: 0, total: 120.339µs, normalized: 384.47ns/vec
+347 hypervectors, in_cache: 0, total: 138.88µs, normalized: 400.23ns/vec
+385 hypervectors, in_cache: 0, total: 152.853µs, normalized: 397.021ns/vec
+427 hypervectors, in_cache: 0, total: 177.103µs, normalized: 414.76ns/vec
+474 hypervectors, in_cache: 0, total: 181.832µs, normalized: 383.612ns/vec
+526 hypervectors, in_cache: 0, total: 198.213µs, normalized: 376.832ns/vec
+584 hypervectors, in_cache: 0, total: 217.002µs, normalized: 371.578ns/vec
+648 hypervectors, in_cache: 0, total: 240.198µs, normalized: 370.676ns/vec
+719 hypervectors, in_cache: 0, total: 266.76µs, normalized: 371.015ns/vec
+798 hypervectors, in_cache: 0, total: 296.235µs, normalized: 371.222ns/vec
+886 hypervectors, in_cache: 0, total: 332.06µs, normalized: 374.785ns/vec
+984 hypervectors, in_cache: 0, total: 363.911µs, normalized: 369.828ns/vec
+1093 hypervectors, in_cache: 0, total: 399.296µs, normalized: 365.321ns/vec
+1214 hypervectors, in_cache: 0, total: 445.898µs, normalized: 367.296ns/vec
+1348 hypervectors, in_cache: 0, total: 494.071µs, normalized: 366.521ns/vec
+1497 hypervectors, in_cache: 0, total: 569.274µs, normalized: 380.276ns/vec
+1663 hypervectors, in_cache: 0, total: 604.977µs, normalized: 363.787ns/vec
+1847 hypervectors, in_cache: 0, total: 673.895µs, normalized: 364.859ns/vec
+2052 hypervectors, in_cache: 0, total: 787.724µs, normalized: 383.881ns/vec
+2279 hypervectors, in_cache: 0, total: 868.909µs, normalized: 381.267ns/vec
+2531 hypervectors, in_cache: 0, total: 931.782µs, normalized: 368.148ns/vec
+2811 hypervectors, in_cache: 0, total: 1122.02µs, normalized: 399.152ns/vec
+3123 hypervectors, in_cache: 0, total: 1142.54µs, normalized: 365.847ns/vec
+3469 hypervectors, in_cache: 0, total: 1260.01µs, normalized: 363.22ns/vec
+3854 hypervectors, in_cache: 0, total: 1395.79µs, normalized: 362.166ns/vec
+4281 hypervectors, in_cache: 0, total: 1554.17µs, normalized: 363.039ns/vec
+4756 hypervectors, in_cache: 0, total: 1732.83µs, normalized: 364.345ns/vec
+5283 hypervectors, in_cache: 0, total: 2070.49µs, normalized: 391.916ns/vec
+5869 hypervectors, in_cache: 0, total: 2264.08µs, normalized: 385.769ns/vec
+6520 hypervectors, in_cache: 0, total: 2341.53µs, normalized: 359.131ns/vec
+7243 hypervectors, in_cache: 0, total: 2627.66µs, normalized: 362.786ns/vec
+8046 hypervectors, in_cache: 0, total: 2908.88µs, normalized: 361.531ns/vec
+8939 hypervectors, in_cache: 0, total: 3244.39µs, normalized: 362.947ns/vec
+9931 hypervectors, in_cache: 0, total: 3623.61µs, normalized: 364.879ns/vec
+11033 hypervectors, in_cache: 0, total: 4000.47µs, normalized: 362.591ns/vec
+12257 hypervectors, in_cache: 0, total: 4407.01µs, normalized: 359.551ns/vec
+13617 hypervectors, in_cache: 0, total: 5078.72µs, normalized: 372.969ns/vec
+15128 hypervectors, in_cache: 0, total: 5475.87µs, normalized: 361.969ns/vec
+16807 hypervectors, in_cache: 0, total: 6081.4µs, normalized: 361.838ns/vec
+18672 hypervectors, in_cache: 0, total: 6755.51µs, normalized: 361.799ns/vec
+20744 hypervectors, in_cache: 0, total: 7439.47µs, normalized: 358.632ns/vec
+23046 hypervectors, in_cache: 0, total: 8278.44µs, normalized: 359.214ns/vec
+25604 hypervectors, in_cache: 0, total: 9300.89µs, normalized: 363.259ns/vec
+28446 hypervectors, in_cache: 0, total: 10313.9µs, normalized: 362.579ns/vec
+31603 hypervectors, in_cache: 0, total: 11494.1µs, normalized: 363.704ns/vec
+35110 hypervectors, in_cache: 0, total: 13628.8µs, normalized: 388.174ns/vec
+39007 hypervectors, in_cache: 0, total: 14323.3µs, normalized: 367.199ns/vec
+43336 hypervectors, in_cache: 0, total: 15557.6µs, normalized: 358.998ns/vec
+48146 hypervectors, in_cache: 0, total: 17820.4µs, normalized: 370.133ns/vec
+53490 hypervectors, in_cache: 0, total: 19452.4µs, normalized: 363.664ns/vec
+59427 hypervectors, in_cache: 0, total: 21961µs, normalized: 369.546ns/vec
+66023 hypervectors, in_cache: 0, total: 24107.7µs, normalized: 365.141ns/vec
+73351 hypervectors, in_cache: 0, total: 27472µs, normalized: 374.527ns/vec
+81492 hypervectors, in_cache: 0, total: 31755µs, normalized: 389.67ns/vec
+90537 hypervectors, in_cache: 0, total: 33004.5µs, normalized: 364.541ns/vec
+*-= CLOSEST =-*
+*-= SERIAL =-*
+*-= IN CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 1, total: 0.0074617µs, normalized: 7.4617ns/vec
+10 hypervectors, correct: v, in_cache: 1, total: 0.0734928µs, normalized: 7.34928ns/vec
+100 hypervectors, correct: v, in_cache: 1, total: 0.822432µs, normalized: 8.22432ns/vec
+1000 hypervectors, correct: v, in_cache: 1, total: 9.352µs, normalized: 9.352ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 352.892µs, normalized: 35.2892ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 4195.53µs, normalized: 41.9553ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 81126.1µs, normalized: 81.1261ns/vec
+*-= OUT OF CACHE TESTS =-*
+1 hypervectors, correct: v, in_cache: 0, total: 0.0919918µs, normalized: 91.9918ns/vec
+10 hypervectors, correct: v, in_cache: 0, total: 0.959684µs, normalized: 95.9684ns/vec
+100 hypervectors, correct: v, in_cache: 0, total: 8.77759µs, normalized: 87.7759ns/vec
+1000 hypervectors, correct: v, in_cache: 0, total: 84.9793µs, normalized: 84.9793ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 825.532µs, normalized: 82.5532ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 8458.08µs, normalized: 84.5808ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 86094.1µs, normalized: 86.0941ns/vec
+*-= PARALLEL =-*
+*-= IN CACHE TESTS =-*
+1000 hypervectors, correct: v, in_cache: 1, total: 3023.02µs, normalized: 3023.02ns/vec
+10000 hypervectors, correct: v, in_cache: 1, total: 3645.01µs, normalized: 364.501ns/vec
+100000 hypervectors, correct: v, in_cache: 1, total: 7932.83µs, normalized: 79.3283ns/vec
+1000000 hypervectors, correct: v, in_cache: 1, total: 8905.19µs, normalized: 8.90519ns/vec
+*-= OUT OF CACHE TESTS =-*
+1000 hypervectors, correct: v, in_cache: 0, total: 1321.87µs, normalized: 1321.87ns/vec
+10000 hypervectors, correct: v, in_cache: 0, total: 6421.28µs, normalized: 642.128ns/vec
+100000 hypervectors, correct: v, in_cache: 0, total: 8787.45µs, normalized: 87.8745ns/vec
+1000000 hypervectors, correct: v, in_cache: 0, total: 15591.2µs, normalized: 15.5912ns/vec
+*-= TOP =-*
+*-= SERIAL =-*
+*-= IN CACHE TESTS =-*
+10 hypervectors, correct: v, k: 5 , in_cache: 1, total: 0.183661µs, normalized: 18.3661ns/vec
+100 hypervectors, correct: v, k: 5 , in_cache: 1, total: 1.32179µs, normalized: 13.2179ns/vec
+1000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 11.9849µs, normalized: 11.9849ns/vec
+10000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 360.785µs, normalized: 36.0785ns/vec
+100000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 5068.28µs, normalized: 50.6828ns/vec
+1000000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 94243.4µs, normalized: 94.2434ns/vec
+*-= OUT OF CACHE TESTS =-*
+10 hypervectors, correct: v, k: 5 , in_cache: 0, total: 2.20154µs, normalized: 220.154ns/vec
+100 hypervectors, correct: v, k: 5 , in_cache: 0, total: 15.5843µs, normalized: 155.843ns/vec
+1000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 109.941µs, normalized: 109.941ns/vec
+10000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 968.858µs, normalized: 96.8858ns/vec
+100000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 10873µs, normalized: 108.73ns/vec
+1000000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 111069µs, normalized: 111.069ns/vec
+*-= PARALLEL =-*
+*-= IN CACHE TESTS =-*
+1000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 2110.64µs, normalized: 2110.64ns/vec
+10000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 222.469µs, normalized: 22.2469ns/vec
+100000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 242.535µs, normalized: 2.42535ns/vec
+1000000 hypervectors, correct: v, k: 5 , in_cache: 1, total: 4478.28µs, normalized: 4.47828ns/vec
+*-= OUT OF CACHE TESTS =-*
+1000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 2045.56µs, normalized: 2045.56ns/vec
+10000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 11416µs, normalized: 1141.6ns/vec
+100000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 20732.4µs, normalized: 207.324ns/vec
+1000000 hypervectors, correct: v, k: 5 , in_cache: 0, total: 24129µs, normalized: 24.129ns/vec
+*-= WITHIN =-*
+*-= SERIAL =-*
+*-= IN CACHE TESTS =-*
+100 hypervectors, correct: v, k: 50, in_cache: 1, total: 1.11649µs, normalized: 11.1649ns/vec
+1000 hypervectors, correct: v, k: 50, in_cache: 1, total: 11.669µs, normalized: 11.669ns/vec
+10000 hypervectors, correct: v, k: 50, in_cache: 1, total: 362.665µs, normalized: 36.2665ns/vec
+100000 hypervectors, correct: v, k: 50, in_cache: 1, total: 4697.39µs, normalized: 46.9739ns/vec
+1000000 hypervectors, correct: v, k: 50, in_cache: 1, total: 101524µs, normalized: 101.524ns/vec
+*-= OUT OF CACHE TESTS =-*
+100 hypervectors, correct: v, k: 50, in_cache: 0, total: 11.0845µs, normalized: 110.845ns/vec
+1000 hypervectors, correct: v, k: 50, in_cache: 0, total: 98.9591µs, normalized: 98.9591ns/vec
+10000 hypervectors, correct: v, k: 50, in_cache: 0, total: 975.793µs, normalized: 97.5793ns/vec
+100000 hypervectors, correct: v, k: 50, in_cache: 0, total: 10432.2µs, normalized: 104.322ns/vec
+1000000 hypervectors, correct: v, k: 50, in_cache: 0, total: 103550µs, normalized: 103.55ns/vec
+*-= PARALLEL =-*
+*-= IN CACHE TESTS =-*
+1000 hypervectors, correct: v, k: 50, in_cache: 1, total: 2546.18µs, normalized: 2546.18ns/vec
+10000 hypervectors, correct: v, k: 50, in_cache: 1, total: 186.079µs, normalized: 18.6079ns/vec
+100000 hypervectors, correct: v, k: 50, in_cache: 1, total: 151.337µs, normalized: 1.51337ns/vec
+1000000 hypervectors, correct: v, k: 50, in_cache: 1, total: 3705.53µs, normalized: 3.70553ns/vec
+*-= OUT OF CACHE TESTS =-*
+1000 hypervectors, correct: v, k: 50, in_cache: 0, total: 2054.79µs, normalized: 2054.79ns/vec
+10000 hypervectors, correct: v, k: 50, in_cache: 0, total: 260.544µs, normalized: 26.0544ns/vec
+100000 hypervectors, correct: v, k: 50, in_cache: 0, total: 8698.49µs, normalized: 86.9849ns/vec
+1000000 hypervectors, correct: v, k: 50, in_cache: 0, total: 23177.1µs, normalized: 23.1771ns/vec
+
